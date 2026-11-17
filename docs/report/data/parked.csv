@@ -1,0 +1,7 @@
+run,build,scenario,config,work_ms,vs_prev_pct,se,wheeled_asleep_pct,physx_ms_per_s,source
+phys_b12,b12,300 idle LightStrikers tight grid,prev,3.39,,,7,133,NIGHT1.md 6.3
+phys_b12,b12,300 idle LightStrikers tight grid,parked,2.12,-31.3,0.4,98,30,NIGHT1.md 6.3
+b20_parked_spaced,b20,300 spaced lots mean 11-13 deg,prev,2.71,,,44,91.6,RESULTS_LOG.md b20_parked_spaced
+b20_parked_spaced,b20,300 spaced lots mean 11-13 deg,parked,2.01,-27.2,19.8,99,22.7,RESULTS_LOG.md b20_parked_spaced
+b20_parked_spaced,b20,300 spaced slope lots mean 10-11 deg,prev,2.95,,,14,118.0,RESULTS_LOG.md b20_parked_spaced
+b20_parked_spaced,b20,300 spaced slope lots mean 10-11 deg,parked,2.24,-21.6,5.0,95,35.7,RESULTS_LOG.md b20_parked_spaced

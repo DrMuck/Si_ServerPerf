@@ -1,0 +1,308 @@
+## 1. Summary
+
+**What the mod is.** Si_ServerPerf is a MelonLoader mod for the Silica dedicated server (1.0.17, headless). It removes main-thread work a server without a screen does not need and does some necessary work more cheaply. It consists of more than fifty separately switchable patches (**items**) in six modules. Most items are **exact**: the game reaches the same result as without the mod. Version **0.2.0 (build b21)** switches on by default the items measured to be exact and worth having, plus one change players can see: corpses and wrecks are removed after **5 s instead of 15 s**.
+
+**Headline.** In the hardest lab test, a dense three-team fight with damage at about 522 living units (terms in section 3), the configuration closest to the 0.2.0 defaults ran at **40.1 fps** where the same server run with the mod switched off ran at 15.6 fps: 62 % less main-thread work per frame.
+
+::cap Table 1. Dense three-team fight with damage. fps per configuration and paired frame-work change against "mod off", each measured inside one running server. Two runs are given as "run a / run b".
+| Configuration | 450 plateau (~425 lab units) | 550 plateau (~522 lab units) | Frame work vs mod off (450 / 550) |
+|---|---:|---:|---:|
+| **Run b15_best_plat (build b15)** | | | |
+| Mod off | 44.9 | 15.6 | |
+| Previous defaults (b10) | 59.9 | 20.7 | -26.7 % / -30.6 % |
+| + new invisible items | 66.0 | 27.3 | -35.6 % / -50.1 % |
+| **+ 5 s wreck removal (closest to 0.2.0 defaults)** | **75.4** | **40.1** | **-41.8 % / -62.2 %** |
+| **Runs b20_best / b20_best2 (build b20)** | | | |
+| Mod off | 35.3 / 32.6 | 11.9 / 11.3 | |
+| Previous defaults (b10) | 54.7 / 50.7 | 15.6 / 15.5 | -36.8 % / -27.1 % (two-run mean) |
+| + new invisible items | 63.8 / 57.1 | 21.2 / 24.6 | -47.9 % / -51.4 % (two-run mean) |
+| + worker-thread scans (opt-in big-battle set) | 68.7 / 68.8 | 31.3 / 32.1 | -52.6 % / -65.4 % (two-run mean) |
+
+!fig headline 150 | Figure 1. At ~522 living units the closest measured equivalent of the 0.2.0 defaults runs 2.6 times as fast as mod off (left); the invisible items alone roughly double fps, the opt-in worker-thread set reaches 2.6 to 2.8 times (right, two runs). Compare bars only within a panel: separate server starts differ by about 15 %.
+
+**Proven in the lab.** All comparisons were made inside one running server. No exception and no failed item in any configuration of any night-1 run. The new scan items matched the original code in 83 479 self-checks each, the worker-thread scans in 23 452. In a four-front layout closer to a real late-round fight the new items cut frame work by 40 to 52 % against mod off. At low unit counts the server holds its 120 fps cap anyway; there the mod gives spare time (-15 to -17 % frame work at 200 to 300 units).
+
+**Not proven.** Nothing ran with players connected; nobody has seen the 5 s removal from a client. Real AI rounds above 320 units could not be produced on 1.0.17. Two rarely used code branches have few or no in-game self-checks (section 6). Build b21 itself was not measured; all numbers come from builds b4 to b20.
+
+---pagebreak---
+
+## 2. What was implemented
+
+### 2.1 Where the work list came from
+
+The earlier performance investigation of Silica 1.0.15 (the developer report of 3 November 2026) found that the server is limited by one thread: as units are added, the Unity main thread fills up while the other cores wait. It listed where a server frame goes at about 500 units and ranked thirteen server changes, S1 to S13, by gain per effort. Si_ServerPerf implements those recommendations as patches applied from outside, without changing the game's files. The overnight measurements added a finding the report did not have: **dead units cost about as much as living ones** for the 15 s they stay in the world, because their AI keeps scanning for targets and their bodies stay physically awake. Two of the three new default changes come from that finding.
+
+::cap Table 2. Recommendations of the 1.0.15 report and what Si_ServerPerf 0.2.0 does with them.
+| Rec. | Recommended change | Module and items | State in 0.2.0 |
+|---|---|---|---|
+| S1 | Run idle objects less often instead of every frame | UpdateTiers: `Tier_Structures`, `Tier_HealDecay`, `Tier_OrderProcessors`, `Tier_IdleSoldiers`, `Tier_StaticNetTransforms` | on (approximate) |
+| S2 | Spatial index for target queries; cheaper ranking | Targeting: `DetectedGrid` and five `*_Grid` items, `Rank_Sort`; new: `CollectEnemies_Snapshot`, `_SnapshotScore`, `_FastAdd` | on (exact) |
+| S3 | Fewer awake physics bodies; consider a 20 Hz physics step | Physics: parked-vehicle set, `FixedStep_Override`; dead units: `DeadAgentHalt`, `DeadDisposeEarly` | dead-unit items on; parked set and 20 Hz off until a client test |
+| S4, S4b | Budget the construction-placement searches | not built (Si_RTS_AI 0.94.13 and later already budgets its own searches) | - |
+| S5 | Skip presentation work on a headless server | Headless: fog display, animators, particles, structure lights, mesh combiner, scene LOD, vehicle vents and creaking, construction warning UI, creature attack effects | on (presentation only) |
+| S6 | Use the index dictionaries the game already has | Headless: `Fog_DetectedTargetLookup`; Services: `Detected_IndexLookups` | on (exact) |
+| S7 | Sensor pipeline at a fixed rate | MultiCore: `SensorPipeline_Rate` (approximate), `SensorTeamMaps_Job` | off |
+| S8 | Poll A* navmesh cuts less often | Services: `Astar_CutPollInterval`, `Astar_ProbeFlushDebounce` | on; debounce off (not measured) |
+| S9 | Cheaper commander AI | Services: `CommanderAI_ClusterRebuild` (exact), `CommanderAI_SkipOwnedTeams`, `CommanderAI_ThinkStats` | on |
+| S10 | Networking | Services: `Net_SkipUpdatesNoClients` (acts only while no player is connected); the rest of S10 not built | on |
+| S11 | O(1) update registration | UpdateTiers: `Register_O1` | on (exact) |
+| S12 | Move work to the idle cores | MultiCore: `ParallelScan`, `ParallelScan_Prefiltered` (target scans on worker threads) | opt-in (exact) |
+| S13 | Small wins and fixes | Headless: `SteamDetails_1Hz`, `PlayerBans_1Hz`; Physics: `CatchUpCap`; Services: `TerrainMaterial_Cache`, `DestroyedDisposal_EveryN`; UpdateTiers: `FixedLate_StepDt` | on; FixedLate_StepDt off (not measured) |
+
+### 2.2 How the mod is built
+
+* **Items and switches.** Every item has its own on/off value in the config file and its own runtime switch. An admin (or a test script) can flip items while the server runs, through a small file the mod reads every second or through the console and chat command `perf`. Items that are off at startup are not patched at all.
+* **Fail-open.** If an item throws an exception, it switches itself off for the rest of the session, logs the error once and lets the original game code run. In the measurements no item ever did this.
+* **Self-checks.** The exact items that replace calculations (target scans, friendly-fire checks, registration, look-ups) can run the original code on a sample of calls and compare the answers bit for bit. The counts are in section 6.
+* **Startup report.** At start the mod logs every item with its state and how many of its patch targets it found in this game build, so a game update that renames a method shows up as "absent" instead of silently doing nothing.
+* **Coexistence.** All measurements ran next to Si_ServerOptimizer 0.7.1, as the community server does. The one item that would overlap with it (`LightGrid_Skip`) stays off automatically. All gains in this report come on top of Si_ServerOptimizer.
+
+### 2.3 The items that matter for 0.2.0
+
+"Exact" means the game state is the same as without the mod. "Approximate" means the result can differ on purpose (timing, staleness). "Visible" means players could notice it.
+
+::cap Table 3. Main items and groups in 0.2.0. Diagnostic items (counters, probes) are left out.
+| Item or group | What it does | Exact? | Default in 0.2.0 | Visible to players |
+|---|---|---|---|---|
+| Headless presentation skips (S5) | Skip fog display, animators, particles, lights and visual effects on the headless server | exact for game state | on | no (presentation only) |
+| UpdateTiers rate tiers (S1) | Idle structures, heal/decay timers, idle order processors, idle AI soldiers and static network transforms run every 4th or 5th call with the accumulated time step | approximate | on | no |
+| `Register_O1` (S11) | Update-list registration through an index instead of a list scan | exact | on | no |
+| Targeting grid items, `Rank_Sort` (S2) | Target and friendly-fire queries visit only nearby grid cells; insertion sort for ranking | exact | on | no |
+| **`CollectEnemies_Snapshot`, `_SnapshotScore`, `_FastAdd`** | The AI's full target scan works on a per-frame snapshot of the enemy list, replays the scoring on it and keeps its best-24 list cheaply: same answer, less work per entry | exact | **on (new)** | no |
+| `FriendlyFire_StaleGuard` | Skips targets destroyed since the last grid update instead of throwing (a race in the original code) | exact | on | no |
+| Services items (S6, S8, S9, S10, S13) | Index look-ups, A* cut polling twice per second, faster commander-AI clustering, no network serialization with zero players, terrain material cache, disposal walk every 4th frame | exact, except A* polling and the disposal walk | on | no |
+| `CatchUpCap` (S13) | At most 2 physics steps per frame | approximate | on | only below 12.5 fps: game time slows (0.8x at 10 fps); the original game slows below 10 fps |
+| **`DeadAgentHalt`** | A dead unit's AI stops 1 s after death instead of scanning for targets until removal; its last aim is kept | exact for the living units (guarded, section 6) | **on (new)** | no |
+| **`DeadDisposeEarly`** | Corpses and wrecks of units are removed after a fixed 5 s instead of 15 s (structures unaffected) | approximate | **on (new), fixed 5 s** | **yes**: corpses and wrecks vanish sooner |
+| `CollectPreFiltered_Snapshot` | Same snapshot technique for the shorter re-evaluation scans | exact | opt-in (big battles) | no |
+| `ParallelScan`, `ParallelScan_Prefiltered` (S12) | Target scans computed on Unity's worker threads and handed to the game when it asks; anything that changed meanwhile is redone on the main thread | exact | opt-in (big battles) | no |
+| Parked-vehicle set: `IdleForceSleep`, `AvoidanceSkipOntoResting`, `AvoidanceNoIdleDetour`, `ParkedWheelHold` | Lets parked AI vehicles fall asleep and stay asleep | approximate | off, waiting for a client test | slightly: parked AI groups stop jostling |
+| `FixedStep_Override` | Physics at 20 Hz instead of 25 Hz | approximate | off, waiting for a client test | yes (vehicle and physics feel) |
+| Approximate set: `LosTopK`, `FriendlyFire_Cache`, `SensorPipeline_Rate` | Fewer line-of-sight queries, a 0.15 s friendly-fire cache, sensors at a fixed 20 Hz | approximate | off | possibly |
+
+
+
+## 3. How it was measured
+
+### 3.1 The lab and the words used
+
+All numbers come from a lab copy of the dedicated server: Silica 1.0.17, headless, **no players connected**, frame rate capped at 120 fps, on an 8-core Ryzen 7 9800X3D. The same mods ran in every configuration: Si_AdminMod, Si_RTS_AI, Si_ServerFpsCap, Si_ServerOptimizer 0.7.1, and two lab tools, Si_PerfLab (spawns and drives the test scenarios) and Si_PerfProbe (profiler). There were two sessions: **wave 1** (16 November, builds b1 to b9) and **night 1** (16 to 17 November, builds b10 to b20).
+
+* **Lab units**: living units spawned by the test tool. **World units** additionally count the 41 to 45 base and starter units and, in fights with damage, the dead bodies still waiting for removal.
+* **Frame work**: main-thread CPU time per frame in ms, without the time spent waiting for the frame cap. Lower is better. Once the main thread is full (from about 330 lab units in the dense fight), fps = 1000 / frame work, so a 33 % cut in frame work means about +50 % fps, a 50 % cut about +100 %, a 65 % cut about +185 %.
+* **Configurations** (the switch settings compared):
+  * **Mod off**: the mod is loaded but every item is switched off at runtime; only the exception counter and one startup-only particle item stay on. Wave 1 showed that "loaded, all off" costs the same as no mod.
+  * **Previous defaults (b10)**: the default set before 0.2.0: Headless, UpdateTiers without `Tier_IdleAgents`, the exact Targeting grid items, Services, Physics census and catch-up cap.
+  * **+ new invisible items**: previous defaults + the three exact target-scan items + `DeadAgentHalt` (aim kept). This is 0.2.0 without the 5 s removal.
+  * **+ 5 s wreck removal**: the above + `DeadDisposeEarly` removing every dead unit after 5 s. This is the closest measured equivalent of the **0.2.0 defaults**; it was measured once, in run b15_best_plat.
+  * **+ prefiltered replay**: new invisible items + `CollectPreFiltered_Snapshot`.
+  * **+ worker-thread scans (big-battle set)**: the above + `ParallelScan` + `ParallelScan_Prefiltered`. This is the opt-in set of 0.2.0, measured without the 5 s removal.
+  * **Previous defaults + approximate set**: + `LosTopK`, `FriendlyFire_Cache`, `SensorPipeline_Rate` (wave 1 and early night 1 only).
+  * **Parked-vehicle set**: previous defaults + `IdleForceSleep`, `AvoidanceSkipOntoResting`, `AvoidanceNoIdleDetour`, `ParkedWheelHold`.
+
+### 3.2 Scenarios
+
+::cap Table 4. Scenario types.
+| Scenario | Layout | Damage | What it stands for |
+|---|---|---|---|
+| Dense three-team fight | All three teams in one 45 m circle at the map centre; dead units replaced after 2 s. Held at a target count (**plateau**: 450 or 550 targets, which actually hold ~425 or ~522 lab units) or grown by about one unit per second until fps falls below 10 (**trickle ramp**) | on | Worst case: everyone sees everyone, many deaths at once |
+| Spread four-front battle | Four separate fronts; 20 % of units in the bases, 15 % in transit, 65 % at the fronts; dead units replaced | on | A hard but realistic stand-in for a big late-round fight |
+| God-mode battles (wave 1) | A three-way fight at the centre plus three two-way fronts ~350 m apart, 10 % of each team patrolling, 28 structures per team | off: units target, aim and fire, nobody dies | Battle load without deaths, held at fixed counts |
+| Parked vehicles | 300 AI vehicles standing still: a tight grid, four prefab grids, or spaced lots on slopes; a moving-vehicle guard and a move-order timing probe | - | Bases full of parked AI vehicles |
+| Small lab scenarios (wave 1) | Idle and moving soldiers or vehicles, built structures, a mixed late-game set | - | Per-object costs below the fps cap |
+
+How the lab relates to real rounds: the 1.0.15 AI rounds on the live server fell to 31 fps at 600 units. The no-death lab layouts follow those rounds closely (counting all living units, the four-front god-mode ramp ran 65 fps at 530 units against 65 in the rounds at 500, and 21 fps at 726 against 21 at 700), and the dense fight without deaths falls below 30 fps at 607 lab units. With damage the same dense fight falls below 30 fps at 431 to 447 lab units. So the dense fight with damage is a worst case, and a real round behaves like a battle with few deaths at a time. Lab AI rounds on 1.0.17 stopped growing at 180 to 320 units, with and without the mod, so no real round above that count was measured.
+
+### 3.3 Switching configurations inside one running server
+
+Each comparison ran in **one server process**. A script rewrote the mod's runtime switch file every 30 or 60 s so that the configurations took turns at the same unit count; the first 5 to 30 s after each switch were dropped. Every block of a configuration is compared with the neighbouring blocks of the reference configuration ("paired"); the **s.e.** given with a percentage is the standard error over those pairs. An effect is clear when it is well above two to three s.e.
+
+**Why only in-run comparisons count.** Separate starts of the same scenario differ much more than many of the effects being measured, because a fight never repeats in detail (which units die where). The "new invisible items" configuration at the 550 plateau ran at 21.2, 24.6, 26.9, 27.3 and 29.5 fps in five separate starts; mod off ran at 11.9 in one start and 15.6 in another. Typical start-to-start differences are about 15 %, the worst pairs 25 to 30 %. This report therefore never compares a configuration in one run with a configuration in another run.
+
+
+
+## 4. Results
+
+### 4.1 Dense fight: the two plateaus, both runs
+
+!fig dense 170 | Figure 2. Dense fight, fps by configuration at both plateaus in the two build-b20 runs. At ~522 lab units each step adds fps in both runs except the prefiltered replay; at ~425 the second run gains more from the worker-thread scans than the first. Dashed line: 30 fps.
+
+At ~522 lab units the two runs agree within a few points: worker-thread set against mod off -65.5 / -65.2 %, previous defaults -27.0 / -27.1 %. The new invisible items differ by eight points between the runs (-47.5 / -55.3 %). At ~425 the runs disagree more than their in-run s.e. suggests, by up to about ten points: the worker-thread set against mod off -49.4 / -55.8 %, the prefiltered replay against mod off -45.6 / -36.7 %, and the worker-thread set against the new items -7.9 % (s.e. 7.8) in one run but -19.2 % (s.e. 1.2) in the other. The main thread was saturated in every configuration (973 to 1051 ms of work per second in run b20_best), so the savings appear directly as fps.
+
+### 4.2 What each step contributes
+
+!fig steps 170 | Figure 3. Frame work at the 550 plateau as items are added, three runs. After the previous defaults, the new invisible items remove the largest block; the 5 s removal (top) and the worker-thread scans (middle, bottom) each remove another quarter to a third of what is left. The prefiltered replay on its own changes nothing measurable.
+
+* **Target-scan items.** Measured one stage at a time against the previous defaults (run b13_snap, ~521 lab units): stage 1 alone +2.7 % (s.e. 6.0, no effect), stages 1 and 2 -12.8 % (s.e. 0.1), all three items **-23.0 % (s.e. 2.8)**, fps 22.1 to 29.6. At ~424 lab units all three gave -6.9 % (s.e. 3.0).
+* **`DeadAgentHalt`.** Three independent runs against the previous defaults: -4.9 % and -15.7 % (b14_dead, ~424 / ~521 lab units), -10.3 % (b15_halt_guard1, ~424), -19.2 % and -12.7 % (b15_eveh, ~427 / ~523). The saving comes from the dead units' target scans (scan calls -27 %) and agent updates; physics is unchanged.
+* **Worker-thread scans.** At ~522 lab units -30.9 % and -25.1 % against the new items (the two b20 runs) and -30.4 % in a third run (b19_pscan). They serve 94 to 96 % of full scans from worker threads. A control that computed the same scans on the main thread gained nothing (-2.7 %, s.e. 4.5): the gain is the work moved to other cores.
+
+::cap Table 5. Run b20_best, 550 plateau (~523 lab units): main-thread time of the targeting chain per configuration, ms per second.
+| Method | Mod off | Previous defaults | + new items | + prefiltered replay | + worker-thread scans |
+|---|---:|---:|---:|---:|---:|
+| `RequestScan` (whole scan chain) | 205.0 | 206.7 | 126.4 | 113.9 | 24.9 |
+| `CollectDetectedEnemies` (full scans) | 120.5 | 126.2 | 76.4 | 78.8 | 9.4 |
+| `CollectPreFilteredEnemies` (re-evaluation scans) | 75.0 | 71.0 | 42.2 | 27.1 | 3.8 |
+| `OrderedUpdateAllAgents` (all AI agents) | 231.9 | 232.1 | 150.5 | 138.6 | 60.3 |
+
+### 4.3 Spread four-front battle
+
+!fig spread 160 | Figure 4. Spread four-front battle with damage (run b19_spread): the new invisible items raise fps at every count; the worker-thread scans add little here, because fewer units at each front see each other. Dashed line: 30 fps.
+
+::cap Table 6. Spread four-front battle: fps and paired frame-work change (s.e.). One run, build b20.
+| Lab units | Mod off | Previous defaults | + new items | + worker-thread scans | New items vs mod off | Worker set vs new items |
+|---:|---:|---:|---:|---:|---:|---:|
+| ~422 | 50.3 | 67.2 | 77.0 | 76.4 | -40.0 % (2.0) | +1.9 % (2.5) |
+| ~518 | 19.3 | 33.2 | 38.6 | 43.3 | -52.3 % (1.6) | -5.1 % (7.1) |
+| ~614 | 10.6 | 13.9 | 17.8 | 19.0 | -41.1 % (1.6) | -8.1 % (2.5) |
+
+Against the previous defaults the new items cut frame work by 17.1 %, 15.5 % and 20.7 % at the three counts. The worker-thread scans are a dense-battle item: only the ~614 value is outside the noise. Dead bodies were 24 to 27 % of the world units in every configuration (no wreck removal was on), and 90 to 96 % of them were physically awake.
+
+### 4.4 Where each configuration drops below 30, 20 and 10 fps
+
+!fig crossings 170 | Figure 5. Dense-fight trickle ramp: lab units at which each configuration first falls below 30, 20 and 10 fps (large markers: run b15_best_qc). The new invisible items move the 30 fps point by about 60 units and the 20 fps point by about 90 units against mod off, and never fell below 10 fps before the ramp ended. Diamonds: the same crossings in the earlier runs qc1 and qc2.
+
+::cap Table 7. Lab units at the first drop below each fps level (trickle ramp, 25-unit bins in b15_best_qc).
+| Run (build) | Configuration | < 30 fps | < 20 fps | < 10 fps |
+|---|---|---:|---:|---:|
+| b15_best_qc (b15), damage | Mod off | 447 | 461 | 608 |
+| | Previous defaults | 478 | 535 | 683 |
+| | + new invisible items | 505 | 550 | not reached (12 fps at 675-699, where the climb ended) |
+| qc1 / qc2 (b10), damage | Mod off | 434 / 431 | 457 / 474 | 570 / 558 |
+| | Previous defaults | 469 / 492 | 509 / 523 | not reached |
+| | Previous defaults + approximate set | 484 / 483 | 521 / 525 | not reached |
+| qcgod1 (b10), no damage | Mod off | 607 | 665 | 812 |
+| | Previous defaults | 668 | 743 | not reached |
+| | Previous defaults + approximate set | 688 | 743 | not reached |
+
+The previous defaults' 30 fps point was 469, 492 and 478 in qc1, qc2 and b15_best_qc, and 516 in a fourth start (qc_fixed20). Without deaths (qcgod1) the same fight holds 30 fps up to 607 lab units with the mod off: deaths, replacements and the bodies waiting for removal cost about 165 units.
+
+### 4.5 Frame work against unit count
+
+!fig trickle 170 | Figure 6. Frame work rises steeply between ~400 and ~550 lab units in every configuration (log scale). Left: the new invisible items stay below mod off and the previous defaults through most of the climb. Right: two repeat runs (qc1 solid, qc2 dashed) of mod off, previous defaults and the approximate set agree in shape; single 50-unit bins scatter.
+
+Fits over the whole climb give the same picture as the plateaus: at 500 lab units the previous defaults need 30 % / 34 % less frame work than mod off (qc1 / qc2), and the new invisible items 39 % less (b15_best_qc). Single bins are noisy because the configurations sit 10 to 30 units apart inside each bin.
+
+### 4.6 First measurements: god-mode battles and small scenarios (wave 1)
+
+!fig god 155 | Figure 7. Wave-1 god-mode battles (no deaths, build b9): the previous defaults keep 60 fps at ~617 world units where mod off has 39; the approximate set adds a few fps on top. Nobody dies in these battles, so the dead-unit items would have nothing to act on.
+
+::cap Table 8. Wave-1 god-mode battles: median fps and paired frame-work change against mod off (s.e. 2 to 8 % of each effect).
+| World units | Mod off | Previous defaults | Defaults + approximate set | Defaults vs off | Approximate set vs off |
+|---:|---:|---:|---:|---:|---:|
+| 329 | 108 | 112 | 114 | -14 % | -24 % |
+| 477 | 78 | 90 | 92 | -27 % | -29 % |
+| 617 | 39 | 60 | 63 | -37 % | -39 % |
+| 800 | 15 | 22 | 25 | -37 % | -41 % |
+
+Below the fps cap the gain is spare time. In wave 1's small scenarios (paired, build b4) the previous defaults cut frame work by 38 % for 600 idle soldiers, 31 % for a mixed late-game set, 20 % for 30 built structures, 15 % for moving soldiers and 5 % for moving vehicles; idle vehicles gained nothing. In a lab AI round at ~280 units the main thread's load fell from 619 to 492 ms per second (-20.5 %), while fps stayed at the cap.
+
+### 4.7 Faster removal of dead units
+
+In the original game a dead unit stays in the world for 15 s. Clients have no timer of their own: a wreck disappears on every client at the moment the server removes it. Removing sooner is therefore the only server-side way to cut the number of bodies, and it is visible. 0.2.0 uses the fixed form: every dead unit is removed after 5 s. Night 1 also tested a form in which the removal time follows the server's fps (15 s at 45 fps and above, falling to 5 s at 25 fps and below).
+
+!fig wreck 170 | Figure 8. fps without and with faster removal of dead units. The gain is large when the server is overloaded (21 to 30 fps at ~592 lab units, 27 to 40 fps with the fixed 5 s at the 550 plateau) and small or absent once the other items have restored fps.
+
+::cap Table 9. Faster removal of dead units: all measured cases. "Worker set" = new items + prefiltered replay + worker-thread scans.
+| Run (build) | Scenario | Form | Added to | fps without / with | Frame work change (s.e., blocks) | Dead bodies |
+|---|---|---|---|---|---|---|
+| b14_dead (b14) | dense fight ~424-430 / ~521-528 | fixed 5 s | previous defaults | not reported | -24.1 % (0.4) / -41.5 % (1.9) | - |
+| b15_best_plat (b15) | dense fight, 450 / 550 plateau | fixed 5 s | new items | 66.0 / 75.4 and 27.3 / 40.1 | 15.0 to 12.9 ms and 37.1 to 25.4 ms (block means, not paired) | - |
+| b20_dispose_paired (b20) | dense fight ~514 | fps-following | worker set | 34.5 / 41.7 | -10.5 % (1.3, 2; blocks not interleaved) | 28.1 % to 21.4 % of world units |
+| b20_dispose_paired (b20) | spread ~518 | fps-following | worker set | 47.4 / 47.6 | -2.2 % (7.9, 3): noise | 26.9 % to 23.6 % |
+| b20_dispose_paired2 (b20) | dense fight ~592 | fps-following | worker set | 21.1 / 30.0 | **-31.6 % (5.0, 4)** | 161 to 79 bodies (20.0 % to 11.1 %) |
+
+In the overloaded case the fps-following form removed bodies after 6.2 s on average (5.0 to 7.1 s). Shots per unit and the share of units with a target did not change; deaths, kills and hits per second rose by 6 to 13 % at the higher fps. A third control form (5 s while fps is below 30, back to 15 s above 35) oscillated about twice a minute and made wrecks vanish in bursts; it was removed. The fixed 5 s form of 0.2.0 was measured in b14_dead and b15_best_plat; the fps-following form, which the measurement session had suggested, in b17 and b20.
+
+### 4.8 Parked vehicles (opt-in, waiting for a client test)
+
+Parked AI vehicles never fall asleep in the original game: the game rewrites the steering wheels' joint settings every physics step, which wakes the vehicle again, and the avoidance code makes idle vehicles drive small detours. The parked-vehicle set addresses both.
+
+!fig parked 170 | Figure 9. 300 parked AI vehicles: with the parked-vehicle set 95 to 99 % of their wheeled bodies sleep instead of 7 to 44 %, and physics time falls by 70 to 77 %. The server stayed at its 120 fps cap in these scenarios, so the saving is spare main-thread time.
+
+::cap Table 10. Parked vehicles: previous defaults, then previous defaults + parked-vehicle set.
+| Scenario (run) | Frame work, ms | Change (s.e.) | Wheeled bodies asleep | Physics, ms per second |
+|---|---|---|---|---|
+| 300 idle LightStrikers, tight grid (phys_b12) | 3.39 to 2.12 | -31.3 % (0.4) | 7 % to 98 % | 133 to 30 |
+| 300 vehicles of four types, tight grids (phys_b12) | 2.55 with the set | -37.9 % (1 pair) | 83 % with the set | 56 with the set |
+| 300 vehicles on spaced lots, mean slope 11-13° (b20_parked_spaced) | 2.71 to 2.01 | -27.2 % (19.8) | 44 % to 99 % | 91.6 to 22.7 |
+| 300 vehicles on spaced slope lots, mean 10-11° (b20_parked_spaced) | 2.95 to 2.24 | -21.6 % (5.0) | 14 % to 95 % | 118.0 to 35.7 |
+| 300 moving vehicles, guard (phys_b12) | 5.27 to 5.20 | -1.6 % (1 pair) | 0-1 % | 221-226 |
+
+Held vehicles crept at most 4.4 cm on the tight grid and at most 6 mm on the slope lots; parked vehicles in the original game shuffle about 1 m per 10 s on slopes. In a move-order probe (100 Sol and 60 Centauri vehicles, four 30 m move orders) the time to move 2 m stayed in the same range as without the set, with 0 failed orders; moving vehicles stay awake.
+
+### 4.9 20 Hz physics step (information only)
+
+Running physics at 20 instead of 25 steps per second (run qc_fixed20, previous defaults with and without the item) moved the 30 fps point from 516 to 548 lab units and the 20 fps point from 577 to 620, and cut frame work by 24 to 28 % between 400 and 599 lab units (-15 % at 500 and -10 % at 800 by fit). Deaths, kills, shots and hits stayed within ±3 %. The step rate changes game logic tied to the step count (soldier ground checks, avoidance, wheel joints), so it needs a test with real players driving vehicles first.
+
+
+
+## 5. Why big battles are slow
+
+**Most server work is paid per second of game time, not per frame.** Physics runs 25 steps per second, every AI agent runs its behaviour tree twice per second, creature AI runs every 0.2 s, projectiles fly in game time. Call that time-driven work T' (ms per second). What is left of each second is spent on frames, each costing a roughly fixed amount F, so **fps = (1000 - T') / F**. When T' approaches 1000 ms the budget for frames collapses, and a small growth in T' halves fps. This model reproduces the measured fps of the dense fight (40, 21, 10-11 and 7 predicted against 42, 17, 10.3 and 8.3 measured).
+
+!fig knee 160 | Figure 10. Dense fight with the mod off (run qc1): time-driven work grows only from 79 % to 88 % of each second between ~405 and ~473 lab units, but that halves the time left for frames, and fps falls from 42 to 17.
+
+* **Dead units are the largest single cost.** In the original game a dead unit stays 15 s, its AI keeps scanning for targets, and its bodies stay awake (87 to 96 % of them). In the dense fight 18 to 19 % of world units are dead bodies, in the spread battle 24 to 27 %. Without deaths, the dense fight holds 30 fps up to 607 lab units; with deaths, up to 431 to 447.
+* **Target scans are the one cost that grows faster than the unit count.** Each AI scan walks the team's whole list of detected enemies (about 400 entries in the dense fight), and in a dense fight a spatial grid cannot shorten that list because everything is in range.
+* **What the mod removes.** The previous defaults mostly removed per-frame work (presentation, idle updates). The new items remove time-driven work: dead agents' AI (`DeadAgentHalt`), the cost per scanned entry (the three scan items), dead bodies (5 s removal) and, opt-in, the scans themselves from the main thread (worker-thread scans). Near saturation every saved millisecond is leveraged: at ~13 fps each 10 ms per second removed is worth about 1.8 fps.
+* **What is left.** The largest remaining block is the PhysX physics step, about a third of the main thread in a big fight. No item moves it, and lowering the vehicles' physics solver iterations did not change it. Turret, creature, projectile and behaviour-tree work calls Unity objects that can only be used from the main thread, so it cannot be moved to other cores the way the target scans were.
+
+## 6. Correctness
+
+Exact items were checked against the original game code while the server ran: on a sample of calls the original method was run on the same input and the answers were compared (count, order and score bits for target scans).
+
+::cap Table 11. In-game self-checks. None found a mismatch.
+| Item | Run (build) | Checks | Mismatches |
+|---|---|---:|---:|
+| `CollectEnemies_Snapshot`, `_SnapshotScore`, `_FastAdd` | b18_check (b20) | 83 479 each | 0 |
+| same items, earlier builds | b13_snap_check2, b14_snap_check3, b15_snap_check4 (b13-b15) | at least ~800; 3 591 / 4 427; 10 670 (lower bounds) | 0 |
+| `CollectPreFiltered_Snapshot` | b18_check (b20) | 19 274 | 0 |
+| `ParallelScan`, `ParallelScan_Prefiltered` | b19_pscan_check (b20) | 13 649 full + 9 803 prefiltered | 0 |
+| `ParallelScan`, first version | b17_pscan_check2 (b17) | 19 571 | 0 |
+| `FriendlyFire_Grid` | b18_check (b20); wave 1 (b4, b7) | 59 960; 3 066 + 5 418 | 0 |
+| `Rank_Sort` | b18_check (b20); wave 1 (b4, b7) | 88 935; 254 + 735 | 0 |
+| `FriendlyFire_Flat` (not in 0.2.0) | b20_ff_check (b20) | 2 000 812 | 0 |
+| `Detected_IndexLookups` | wave 1 correctness pass (b4) | 407 281 | 0 |
+| `TerrainMaterial_Cache` | wave 1 correctness pass (b4) | 255 109 | 0 |
+| `Register_O1` | wave 1 (b4); AI segment (b5) | 85 251 + 443 | 0 |
+| `CommanderAI_ClusterRebuild` | AI segment (b5) | 660 rebuilds (28 ms in total against 84 ms for the original) | 0 |
+| `SensorTeamMaps_Job` (not in 0.2.0) | wave 1 (b5) | 1 134 + 3 336 team-frames | 0 different (3 "stale" by definition) |
+
+* **Exceptions.** Night 1: 0 exceptions in every configuration of every run, and no item FAILED or NOT APPLIED (builds b10 to b20). Wave 1: one burst of four exceptions in the original friendly-fire check on a destroyed target (a race in the game's own code, which led to `FriendlyFire_StaleGuard`), and one exception caused by Si_RTS_AI; neither came from a Si_ServerPerf item.
+* **Behaviour guard for `DeadAgentHalt`** (aim kept; 5 and 6 blocks of 60 s at ~424 lab units, against the previous defaults): deaths -2.1 % (t -0.9), kills -1.9 % (t -0.7), shots per unit +0.6 % (t +0.2), hits +0.8 % (t +0.3), share of units with a target -0.1 % (t -0.2); fps +12.6 %. The variant that also clears the dead unit's aim lowered shots by 7.0 % and hits by 4.7 %, so it stays off.
+* **Faster servers fight faster.** In the faster configurations deaths and hits per second rise (for example +12 % deaths and +9 % hits for the worker-thread set against mod off at ~523 lab units), while the share of units with a target stays the same. This looks like more simulation per second rather than changed behaviour, but a look from a client is advisable.
+
+**Two known coverage gaps.** (1) The grid-pruned scan path, used when targets are spread out and only nearby grid cells are visited, takes only 4.2 to 6.0 % of scans even at 800 units. It has an estimated ~500 or more self-checks, likely a lower bound because builds b13 to b17 displayed the check counter wrongly. (2) One branch of the worker-thread scans (an emulation of the game's 32-entry score cache) never occurred in a game; it is verified only by offline tests.
+
+## 7. What did not pay
+
+These items were built, verified where exact, and measured; they stay off.
+
+::cap Table 12. Built, measured, left off.
+| Item | Exact? | What was measured | Why it stays off |
+|---|---|---|---|
+| `Tier_IdleAgents` | approximate | no gain in the lab; +3.3 ms per second in an AI round (skips only 9 %) | costs more than it saves |
+| `SensorTeamMaps_Job` | exact | 3.4 ms per second of main-thread preparation to move 2.8 ms per second to a worker | no net gain |
+| `DeadSettle` | approximate | +0.8 % / +8.6 % frame work: live units keep shoving the bodies awake | costs |
+| `DeadNoUnitContact` | approximate, visible (units pass through corpses) | with DeadSettle: +18.2 % / -1.8 % against DeadAgentHalt alone | no gain |
+| `WheelJointWriteGuard` | exact | skips 31 000 to 60 000 native writes per second, no measurable saving | the skipped call is too cheap |
+| `VehicleSolverIterations` | approximate (experiment) | physics time unchanged (12.96 vs 12.84 ms per step) | no effect |
+| `FriendlyFire_Flat` | exact (2 000 812 checks) | +1.4 % / +3.6 %, noise | the original check was already cheap (4.1-4.9 µs per call) |
+| `AvoidanceIdlePairSkip`, `RestWriteGuards`, `HitZonePoseGuard` | approximate | active, no measurable time effect | no gain |
+| `DeadAgentHaltClearAim` = true | changes combat | shots -7.0 %, hits -4.7 % | behaviour change |
+| `DeadDisposeEarly` on/off valve | visible | about two open/close cycles per minute, wrecks vanish in bursts | removed in b17 |
+| `CollectPreFiltered_Snapshot` alone | exact | its own method one third cheaper (4-5 ms per second), inside frame noise | kept only as the fallback of `ParallelScan_Prefiltered` (opt-in) |
+| Approximate set: `LosTopK`, `FriendlyFire_Cache`, `SensorPipeline_Rate` | approximate | adds 1-5 points with damage, 8-15 in god mode; `LosTopK` causes 10 % extra full rescans | small gain, behaviour not measured |
+
+Not built on purpose: the construction-placement budget (S4).
+
+## 8. Limits and open points
+
+* **Lab only, no players.** Every number comes from the lab server with no client connected. `Services.Net_SkipUpdatesNoClients` acts only while no player is connected, so on a populated server that part of the saving disappears. Network cost per player was not measured.
+* **Waiting for a client test:** the parked-vehicle set, the 20 Hz physics step, the worker-thread scans in a big fight, and how the 5 s removal looks to players (corpses and wrecks vanish without a fade). Hit registration on soldiers whose animators are switched off was not checked with a client either.
+* **Start-to-start variance.** Separate server starts differ by about 15 % (worst cases 25 to 30 %). Only paired comparisons within one run are reported; the absolute fps of a configuration depends on the run.
+* **Closest equivalent, not 0.2.0 itself.** The configuration closest to the 0.2.0 defaults (new invisible items + fixed 5 s removal) was measured once, in run b15_best_plat on build b15. The opt-in big-battle set was measured with the fps-following removal or without removal, never with the fixed 5 s. Build b21 was not measured.
+* **Real rounds.** Lab AI rounds on 1.0.17 stopped growing at 180 to 320 units, with and without the mod; high counts come only from generated scenarios.
+* **Not yet measured:** a `DeadAgentHalt`-only behaviour guard in a second scenario (the spread run guards the whole new set: all behaviour metrics within ±4 % at ~422 lab units); the worker-thread scans over long periods or in an AI round; the grid-pruned scan path at volume.
+* **One unexplained server hang.** In a shakedown run (build b10, previous defaults, four fronts at 300 units, bases with radar stations) the fog-of-war update stalled the server for about 84 s (0.9 fps). It did not recur with all items off, with the defaults, in god mode, or in 85 minutes of ramps. The mod does not patch the stalled code, but its default `Headless.Fog_DetectedTargetLookup` runs in the method that prepares that work, so it is not ruled out. It may be related to a hang on the live server on 13 November.

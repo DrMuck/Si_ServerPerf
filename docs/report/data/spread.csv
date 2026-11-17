@@ -1,0 +1,13 @@
+run,build,plateau,lab_units,config,fps,work_ms,vs_off_pct,vs_off_se,source
+b19_spread,b20,450,422,off,50.3,19.95,,,RESULTS_LOG.md b19_spread
+b19_spread,b20,450,422,prev,67.2,14.31,-27.7,7.4,RESULTS_LOG.md b19_spread
+b19_spread,b20,450,422,new,77.0,12.06,-40.0,2.0,RESULTS_LOG.md b19_spread
+b19_spread,b20,450,422,all,76.4,12.24,-39.6,1.6,RESULTS_LOG.md b19_spread
+b19_spread,b20,550,518,off,19.3,53.26,,,RESULTS_LOG.md b19_spread
+b19_spread,b20,550,518,prev,33.2,30.67,-43.4,4.5,RESULTS_LOG.md b19_spread
+b19_spread,b20,550,518,new,38.6,26.23,-52.3,1.6,RESULTS_LOG.md b19_spread
+b19_spread,b20,550,518,all,43.3,23.23,-54.3,5.0,RESULTS_LOG.md b19_spread
+b19_spread,b20,650,614,off,10.6,98.75,,,RESULTS_LOG.md b19_spread
+b19_spread,b20,650,614,prev,13.9,74.73,-24.7,2.0,RESULTS_LOG.md b19_spread
+b19_spread,b20,650,614,new,17.8,57.85,-41.1,1.6,RESULTS_LOG.md b19_spread
+b19_spread,b20,650,614,all,19.0,54.11,-45.3,1.4,RESULTS_LOG.md b19_spread

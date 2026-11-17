@@ -1,0 +1,13 @@
+run,build,world_units,config,fps_median,fps_p5,work_ms,vs_off_pct,source
+battle_b9,b9,329,off,108,103,6.59,,WAVE1.md section 1
+battle_b9,b9,329,prev,112,107,5.75,-14,WAVE1.md section 1
+battle_b9,b9,329,agg,114,110,4.99,-24,WAVE1.md section 1
+battle_b9,b9,477,off,78,64,12.9,,WAVE1.md section 1
+battle_b9,b9,477,prev,90,78,9.95,-27,WAVE1.md section 1
+battle_b9,b9,477,agg,92,85,9.16,-29,WAVE1.md section 1
+battle_b9,b9,617,off,39,32,25.9,,WAVE1.md section 1
+battle_b9,b9,617,prev,60,45,17.2,-37,WAVE1.md section 1
+battle_b9,b9,617,agg,63,49,15.7,-39,WAVE1.md section 1
+battle_b9,b9,800,off,15,13,70.1,,WAVE1.md section 1
+battle_b9,b9,800,prev,22,19,45.2,-37,WAVE1.md section 1
+battle_b9,b9,800,agg,25,21,41.7,-41,WAVE1.md section 1

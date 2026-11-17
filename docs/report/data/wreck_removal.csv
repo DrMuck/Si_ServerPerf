@@ -1,0 +1,6 @@
+case,run,build,scenario,lab_units,removal_form,base_config,fps_without,fps_with,work_without_ms,work_with_ms,paired_change_pct,paired_se,blocks,note,source
+1,b15_best_plat,b15,dense fight 450 plateau,,fixed 5 s,new,66.0,75.4,15.00,12.93,,,,block means; not paired with each other,b15_best_plat/report_1_step_table.txt
+2,b15_best_plat,b15,dense fight 550 plateau,~521,fixed 5 s,new,27.3,40.1,37.12,25.40,,,,block means; not paired with each other,b15_best_plat/report_1_step_table.txt
+3,b20_dispose_paired,b20,dense fight,514,fps-proportional,all,34.5,41.7,29.44,24.33,-10.5,1.3,2,blocks not interleaved,RESULTS_LOG.md b20_dispose_paired
+4,b20_dispose_paired,b20,spread battle,518,fps-proportional,all,47.4,47.6,21.18,21.16,-2.2,7.9,3,noise,RESULTS_LOG.md b20_dispose_paired
+5,b20_dispose_paired2,b20,dense fight 620 plateau,592,fps-proportional,all,21.1,30.0,48.54,34.03,-31.6,5.0,4,strictly alternating 90 s blocks,RESULTS_LOG.md b20_dispose_paired2

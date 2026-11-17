@@ -1,0 +1,13 @@
+run,build,mode,config,below30,below20,below10,source
+b15_best_qc,b15,damage,off,447,461,608,b15_best_qc/CROSSINGS.md
+b15_best_qc,b15,damage,prev,478,535,683,b15_best_qc/CROSSINGS.md
+b15_best_qc,b15,damage,new,505,550,,b15_best_qc/CROSSINGS.md (not reached; 12 fps at 675-699 where the climb ended)
+qc1,b10,damage,off,434,457,570,NIGHT1.md 6.5
+qc1,b10,damage,prev,469,509,,NIGHT1.md 6.5 (not reached)
+qc1,b10,damage,agg,484,521,,NIGHT1.md 6.5 (not reached)
+qc2,b10,damage,off,431,474,558,NIGHT1.md 6.5
+qc2,b10,damage,prev,492,523,,NIGHT1.md 6.5 (not reached)
+qc2,b10,damage,agg,483,525,,NIGHT1.md 6.5 (not reached)
+qcgod1,b10,god,off,607,665,812,NIGHT1.md 6.5
+qcgod1,b10,god,prev,668,743,,NIGHT1.md 6.5 (not reached)
+qcgod1,b10,god,agg,688,743,,NIGHT1.md 6.5 (not reached)
