@@ -14,7 +14,7 @@
      FriendlyFire_Grid     Target.CheckRiskOfFriendlyFire              ON   13.4 ms/s at 500 u, lab k 2.49
      Rank_Sort             TargetFinder.Rank                           ON
      CollectEnemies_Snapshot / _SnapshotScore / _FastAdd  ride on CollectEnemies_Grid's prefix   ON since 0.2.0 (Snapshot.cs)
-     CollectPreFiltered_Snapshot  TargetFinder.CollectPreFilteredEnemies  off  (PreFiltered.cs)
+     CollectPreFiltered_Snapshot  TargetFinder.CollectPreFilteredEnemies  ON since 0.2.1  (PreFiltered.cs)
      FriendlyFire_StaleGuard ON, FriendlyFire_Flat off (FriendlyFire.cs, FriendlyFireFlat.cs), Scan_Diag ON (counters)
    approximate (change when / how often something is evaluated)
      LosTopK               LOS queries only for the top K candidates   off

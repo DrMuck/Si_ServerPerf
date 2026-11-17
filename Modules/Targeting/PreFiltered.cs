@@ -69,7 +69,7 @@ namespace SiServerPerf.Modules.Targeting
         {
             Item = ctx.Item("CollectPreFiltered_Snapshot",
                 "TargetFinder.CollectPreFilteredEnemies: snapshot prefilter + CalculateBestTargetScore replay + FastAdd over the team job's output (range01 taken from the job; exact)",
-                v => On = v, defaultOn: false);
+                v => On = v, defaultOn: true);   // on since 0.2.1 (with ParallelScan_Prefiltered)
             St = new Stat(Item, "job entries", "entries refilled");
             FastStat = new Stat(null, null);   // FastAdd counters of this path (not published separately)
             s_Cands = Refl.Field<TargetFinder, List<Target>>("m_Candidates", Item);

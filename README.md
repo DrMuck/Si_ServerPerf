@@ -1,4 +1,4 @@
-# Si_ServerPerf 0.2.0
+# Si_ServerPerf 0.2.1
 
 MelonLoader server mod for the **Silica dedicated server, 1.0.17, Mono, headless** (Steam test branch). It implements
 the server recommendations S1-S13 of the Silica performance DEV_REPORT §5 (separate project) as switchable Harmony
@@ -7,7 +7,9 @@ so A/B measurements can flip it inside one running server.
 
 Status: built and statically verified against 1.0.17 (refcheck + TargetCheck + offline kernel tests), measured on a
 headless 1.0.17 lab server with generated battle scenarios and no client (builds b10-b20, `measure\night1\NIGHT1.md`).
-**Never run with a client connected.** 0.2.0 = build b21: same code as b20 with the new defaults below.
+0.2.0 = build b21: same code as b20 with the new defaults below. 0.2.1 = build b22: same code, worker-thread target
+scans on by default as well. Client experience so far: one session on the owner's server with the full public mod set
+and one player (0.2.0, 2026-11-17, no errors); nothing more. Not yet run on a populated server.
 
 | Module | DEV_REPORT | State |
 |---|---|---|
@@ -16,9 +18,9 @@ headless 1.0.17 lab server with generated battle scenarios and no client (builds
 | `Targeting` | S2 + friendly-fire + Rank + target-scan snapshot | implemented |
 | `Physics` | S3 + catch-up cap + dead-unit items | implemented |
 | `Services` | S6 index lookups, S8 A*, S9 commander AI, S10 server-only network, #14 disposal walk | implemented (S4 placement budget not built, on purpose) |
-| `MultiCore` | S7 / S12: work on Unity's job-worker threads | implemented, experimental, all items off |
+| `MultiCore` | S7 / S12: work on Unity's job-worker threads | implemented; target scans on workers on by default since 0.2.1, the rest experimental and off |
 
-## Defaults in 0.2.0
+## Defaults in 0.2.0 and 0.2.1
 
 New defaults compared with 0.1.0 (decided after the night-1 lab measurements):
 
@@ -30,6 +32,7 @@ New defaults compared with 0.1.0 (decided after the night-1 lab measurements):
 | `Physics.DeadAgentHalt` (with `DeadAgentHaltClearAim` = false) | off | **on** | no (server-side AI of dead units; see below) |
 | `Physics.DeadDisposeEarly` | off | **on**, fixed 5 s | **yes**: wrecks and corpses vanish 5 s after death instead of 15 s |
 | `Physics.Settings.DisposeEarlyFpsLow` / `DisposeEarlyFpsHigh` | 25 / 45 | **0 / 0** (= always `DisposeEarlySeconds`, 5 s) | |
+| `MultiCore.ParallelScan`, `MultiCore.ParallelScan_Prefiltered`, `Targeting.CollectPreFiltered_Snapshot` | off | off in 0.2.0, **on since 0.2.1** | no (exact; AI target scans computed on worker threads) |
 
 All other items keep their 0.1.0 default. Every item and its default:
 
@@ -37,10 +40,10 @@ All other items keep their 0.1.0 default. Every item and its default:
 |---|---|---|
 | `Headless` | `SteamDetails_1Hz`, `PlayerBans_1Hz`, `Fog_SkipPresentation`, `Fog_DetectedTargetLookup`, `Animators_Disable`, `Particles_Disable`, `StructureLights_Skip`, `MeshCombiner_Skip`, `SceneLOD_Skip`, `LightGrid_Skip`, `VehicleEngineVents_Skip`, `VehicleCreaking_Skip`, `ConstructionWarningUI_Skip`, `CreatureAttackFX_Skip`, `Diag_LogExceptions` | `CreatureAttackInflate_Skip` |
 | `UpdateTiers` | `Tier_Structures`, `Tier_HealDecay`, `Tier_OrderProcessors`, `Tier_IdleSoldiers`, `Tier_StaticNetTransforms`, `Register_O1` | `Tier_IdleAgents` (no gain), `FixedLate_StepDt` |
-| `Targeting` | `DetectedGrid`, `CollectEnemies_Grid`, **`CollectEnemies_Snapshot`**, **`CollectEnemies_SnapshotScore`**, **`CollectEnemies_FastAdd`**, `UrgentClose_Grid`, `NearestTarget_Grid`, `AlarmProximity_Grid`, `FriendlyFire_Grid`, `FriendlyFire_StaleGuard`, `Rank_Sort`, `Scan_Diag` (counters) | `CollectPreFiltered_Snapshot` (exact, no measurable gain alone), `FriendlyFire_Flat` (no gain), `LosTopK` and `FriendlyFire_Cache` (approximate) |
+| `Targeting` | `DetectedGrid`, `CollectEnemies_Grid`, **`CollectEnemies_Snapshot`**, **`CollectEnemies_SnapshotScore`**, **`CollectEnemies_FastAdd`**, **`CollectPreFiltered_Snapshot`** (0.2.1), `UrgentClose_Grid`, `NearestTarget_Grid`, `AlarmProximity_Grid`, `FriendlyFire_Grid`, `FriendlyFire_StaleGuard`, `Rank_Sort`, `Scan_Diag` (counters) | `FriendlyFire_Flat` (no gain), `LosTopK` and `FriendlyFire_Cache` (approximate) |
 | `Physics` | `Census` (read-only), `CatchUpCap`, **`DeadAgentHalt`**, **`DeadDisposeEarly`** | parked-vehicle set `IdleForceSleep` + `ParkedWheelHold` + `AvoidanceSkipOntoResting` + `AvoidanceNoIdleDetour` (client test first), `FixedStep_Override` (20 Hz step, behaviour change), `AvoidanceIdlePairSkip`, `RestWriteGuards`, `HitZonePoseGuard`, `Interpolation_Off`, no gain: `WheelJointWriteGuard`, `VehicleSolverIterations`, `DeadSettle`, `DeadNoUnitContact`; diagnostics: `WakeProbe`, `WheeledSleepDiag`, `IdleSleepDiag`, `FixedWakeTrace` |
 | `Services` | `CommanderAI_SkipOwnedTeams`, `CommanderAI_ThinkStats`, `CommanderAI_ClusterRebuild`, `Astar_CutPollInterval`, `Detected_IndexLookups`, `DestroyedDisposal_EveryN`, `TerrainMaterial_Cache`, `Net_SkipUpdatesNoClients` | `Astar_ProbeFlushDebounce` |
-| `MultiCore` | - | `ParallelScan` + `ParallelScan_Prefiltered` (worker-thread target scans, exact; opt-in for big battles), `SensorTeamMaps_Job` (no gain), `SensorPipeline_Rate` (approximate) |
+| `MultiCore` | **`ParallelScan`**, **`ParallelScan_Prefiltered`** (worker-thread target scans, exact; 0.2.1; pays in dense battles, little in spread ones; short lab blocks only, no long soak yet) | `SensorTeamMaps_Job` (no gain), `SensorPipeline_Rate` (approximate) |
 
 Dependencies: the three `CollectEnemies_Snapshot*` items run inside `CollectEnemies_Grid`'s prefix; with
 `CollectEnemies_Grid` off in the config they are SKIPPED ("needs CollectEnemies_Grid patched"). `_SnapshotScore` only
@@ -57,7 +60,8 @@ changed**, so a config written by 0.1.0 still has the five items above set to `f
 rewritten with all defaults on the next start) or edit these keys by hand:
 `Modules.Targeting.Items.CollectEnemies_Snapshot`, `CollectEnemies_SnapshotScore`, `CollectEnemies_FastAdd`,
 `Modules.Physics.Items.DeadAgentHalt`, `DeadDisposeEarly` = `true`, and `Modules.Physics.Settings.DisposeEarlyFpsLow` =
-`DisposeEarlyFpsHigh` = `0`. Remember that an item that is `false` at server start is not patched at all, so it cannot
+`DisposeEarlyFpsHigh` = `0`; for 0.2.1 also `Modules.MultiCore.Items.ParallelScan`, `ParallelScan_Prefiltered` and
+`Modules.Targeting.Items.CollectPreFiltered_Snapshot` = `true`. Remember that an item that is `false` at server start is not patched at all, so it cannot
 be switched on later through `runtime.json` or `perf on`; it needs the config change and a restart.
 
 ### What players can see
@@ -82,6 +86,10 @@ be switched on later through `runtime.json` or `perf on`; it needs the config ch
   each, 0 mismatches). Nothing visible.
 
 ## Measured (lab, `measure\night1\NIGHT1.md`)
+
+First run outside the lab (0.2.0 defaults, owner's server, full public mod set, one player, 2026-11-17): a short
+on/off comparison inside a stress round at 730-790 units gave 8.4 fps with the mod against 6.3 fps with its items
+switched off (about +34 %), no errors: `measure\smoke_b21\LIVE_AB.md`. Smoke tests of b21: `measure\smoke_b21\SMOKE.md`.
 
 Headless 1.0.17 lab server, 0 clients, 120 fps cap, generated three-faction scenarios driven by a lab mod, all arms
 switched through `runtime.json` inside one running server (paired 30-120 s blocks). Percent values are main-thread
@@ -114,7 +122,7 @@ From the project folder. Lab builds go to a versioned folder (the test rig measu
 
 ```
 dotnet build Si_ServerPerf.csproj -c Release -nologo -v q -o release\b21
-  -> release\b21\Si_ServerPerf.dll          (0.2.0 = b21)
+  -> release\b21\Si_ServerPerf.dll          (0.2.0 = b21, 0.2.1 = b22)
 
 # compile-time references vs 1.0.17 (must print "issues": []); SiCecil lives in the Si_UpdatePipeline project
 <SiCecil.exe> refcheck <_silica_refs>\versions\1.0.17\server_Managed ^
@@ -412,7 +420,7 @@ Server console (also an admin client's remote console, admin level ROOT) and, wi
 ## Startup report (MelonLoader\Latest.log)
 
 ```
-==== Si_ServerPerf 0.2.0 startup ====
+==== Si_ServerPerf 0.2.1 startup ====
 headless=True (batchmode=True, graphics=Null), RequireHeadless=True | Si_ServerOptimizer: 0.7.1 loaded (Si_ServerOptimizer) | frame 0, round 0 | config ...
 module Headless: enabled, 16 items, 14 on - S5 presentation skips + ...
   note: Si_ServerOptimizer 0.7.1 loaded: 1 overlapping item(s) left off so nothing is patched twice: LightGrid_Skip

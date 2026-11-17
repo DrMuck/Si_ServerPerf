@@ -332,11 +332,11 @@ namespace SiServerPerf.Modules.MultiCore
             s_Sampler.Init(s.SelfCheckFraction, 0x9E3779B9u);
 
             Item = ctx.Item("ParallelScan",
-                "EXPERIMENTAL: the AI full target scans of a frame (TargetFinder.CollectDetectedEnemies from behaviour-tree ticks) are predicted at the start of AIBaseAgent.OrderedUpdateAllAgents, computed on Unity job workers from a plain-data snapshot and served when vanilla calls (exact: params / list / scanner validated, in-loop changes corrected, type-value cache merged or replayed; anything else runs the synchronous path)",
-                v => On = v, defaultOn: false);
+                "the AI full target scans of a frame (TargetFinder.CollectDetectedEnemies from behaviour-tree ticks) are predicted at the start of AIBaseAgent.OrderedUpdateAllAgents, computed on Unity job workers from a plain-data snapshot and served when vanilla calls (exact: params / list / scanner validated, in-loop changes corrected, type-value cache merged or replayed; anything else runs the synchronous path)",
+                v => On = v, defaultOn: true);       // on since 0.2.1
             PrefItem = ctx.Item("ParallelScan_Prefiltered",
-                "EXPERIMENTAL (needs ParallelScan patched): the finish-phase re-evaluation scans (TargetFinder.CollectPreFilteredEnemies after the team Burst filter) on the same snapshot and workers, served exactly the same way",
-                v => PrefOn = v, defaultOn: false);
+                "(needs ParallelScan patched) the finish-phase re-evaluation scans (TargetFinder.CollectPreFilteredEnemies after the team Burst filter) on the same snapshot and workers, served exactly the same way",
+                v => PrefOn = v, defaultOn: true);   // on since 0.2.1
 
             Type ai = typeof(GameAI);
             s_BtDelay = Refl.Field<AIBaseAgent, float>("m_BTUpdateDelay", Item);

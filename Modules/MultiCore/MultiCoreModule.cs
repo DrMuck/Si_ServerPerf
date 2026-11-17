@@ -112,7 +112,7 @@ namespace SiServerPerf.Modules.MultiCore
     public sealed class MultiCoreModule : IPerfModule
     {
         public string Name => "MultiCore";
-        public string Description => "EXPERIMENTAL S7/S12: main-thread work on Unity's job workers (sensor team maps) + S7 sensor pipeline at a fixed rate; all items default off";
+        public string Description => "S7/S12: main-thread work on Unity's job workers: target scans on workers (ParallelScan, default on since 0.2.1); experimental and default off: sensor team maps job, sensor pipeline at a fixed rate";
 
         static MultiCoreSettings S;
         static float s_NextStatus, s_LastStatus;

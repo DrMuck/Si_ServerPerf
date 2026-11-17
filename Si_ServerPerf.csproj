@@ -5,7 +5,7 @@
     <Nullable>disable</Nullable>
     <AssemblyName>Si_ServerPerf</AssemblyName>
     <RootNamespace>SiServerPerf</RootNamespace>
-    <Version>0.2.0</Version>
+    <Version>0.2.1</Version>
     <Deterministic>true</Deterministic>
     <MSBuildWarningsAsMessages>MSB3270</MSBuildWarningsAsMessages>
     <NuGetAudit>false</NuGetAudit>
