@@ -1,0 +1,27 @@
+{
+  "_readme": "rig 2 plan b18a on b20 (mk_arms.py --r 1 --j 1 --f 1 --pp 1)",
+  "runs": [
+    {
+      "label": "b18_check",
+      "expect_min": 9,
+      "timeout_min": 18,
+      "dll": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\release\\b20\\Si_ServerPerf.dll",
+      "scenarios": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\melee_check450.json",
+      "config": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\cfg_b20_chk18.json",
+      "runtime": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_k18a.json",
+      "probe": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\probe_b18.json",
+      "flips": [
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_k18a.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_k18b.json"
+      ],
+      "flip_labels": [
+        "K1",
+        "K2"
+      ],
+      "flip_every_s": 45,
+      "reports": [
+        "ab_report.py windows --run {run}"
+      ]
+    }
+  ]
+}

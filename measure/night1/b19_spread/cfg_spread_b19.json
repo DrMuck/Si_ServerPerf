@@ -1,0 +1,109 @@
+{
+  "_readme": "b19_spread: ramp_sustain geometry (4 fronts, damage on, respawn 2 s, structures respawn) held at 450/550/650 lab units, hold 375 s each (off/def/new/all 30 s blocks, 3 per arm); fps_floor 5 so the off blocks at 650 do not end the climb",
+  "auto_run": true,
+  "start_after_round_start_s": 45,
+  "between_scenarios_s": 15,
+  "max_extra_cleanup_wait_s": 30,
+  "fast_dispose_after_s": 2,
+  "stop_server_when_done": true,
+  "max_spawned": 1500,
+  "spawn_per_frame": 30,
+  "refuse_with_humans": true,
+  "fake_player_names": [
+    "RTSA_HeadlessBot"
+  ],
+  "disable_ai_commanders": true,
+  "suppress_wildlife": true,
+  "perfprobe_run_tag": "lab",
+  "exit_on_config_error": true,
+  "engagement_counters": true,
+  "runtime_sig_file": "cfg/Si_ServerPerf/runtime.json",
+  "scenarios": [
+    {
+      "name": "spread-b19",
+      "type": "ramp",
+      "climb": "steps",
+      "mode": "sustain",
+      "teams": [
+        "sol",
+        "cent",
+        "alien"
+      ],
+      "plateaus": [
+        450,
+        550,
+        650
+      ],
+      "settle_s": 30,
+      "hold_s": 375,
+      "fps_floor": 5,
+      "fps_window_s": 20,
+      "roles": {
+        "base": 0.2,
+        "transit": 0.15,
+        "front": 0.65
+      },
+      "fronts": [
+        {
+          "_name": "K1 three-way, map centre",
+          "center": [
+            -277,
+            -341
+          ],
+          "teams": [
+            "sol",
+            "cent",
+            "alien"
+          ]
+        },
+        {
+          "_name": "K2 south",
+          "center": [
+            -40,
+            -620
+          ],
+          "teams": [
+            "sol",
+            "cent"
+          ]
+        },
+        {
+          "_name": "K3 west",
+          "center": [
+            -650,
+            -120
+          ],
+          "teams": [
+            "cent",
+            "alien"
+          ]
+        },
+        {
+          "_name": "K4 north-east",
+          "center": [
+            120,
+            -60
+          ],
+          "teams": [
+            "sol",
+            "alien"
+          ]
+        }
+      ],
+      "front_spawn_back_m": 90,
+      "front_radius_m": 35,
+      "front_reorder_s": 20,
+      "stall_s": 30,
+      "base_offset_m": 130,
+      "transit_from_m": 220,
+      "composition": "lategame",
+      "base": "lategame",
+      "structure_ratio": 0.12,
+      "base_placement": "game_then_lab",
+      "respawn": true,
+      "respawn_delay_s": 2,
+      "respawn_structures": true,
+      "log_every_s": 10
+    }
+  ]
+}

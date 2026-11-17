@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Offline tests (normal .NET, no Unity, no game): the Unity-free MultiCore kernel (..\Kernel.cs) against a
+       brute-force reference, and a threaded stress run of the snapshot / hand-off / compute / take-back protocol.
+         dotnet build -c Release [-p:MultiCoreTestsOut=<dir>\]
+         <MultiCoreTestsOut>MultiCoreTests\bin\Release\net8.0\MultiCoreTests.exe [frames] [seed]
+           (MultiCoreTestsOut defaults to %TEMP%\Si_ServerPerf_MultiCoreTests\, see Directory.Build.props)
+       Exit code 0 = all passed. The test sources are wrapped in #if MULTICORE_OFFLINE_TESTS, so the mod build (which
+       compiles every .cs below its folder) sees empty files. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <DefineConstants>$(DefineConstants);MULTICORE_OFFLINE_TESTS</DefineConstants>
+    <NuGetAudit>false</NuGetAudit>
+    <!-- counters the glue (not compiled here) writes -->
+    <NoWarn>$(NoWarn);CS0649</NoWarn>
+    <ServerGarbageCollection>false</ServerGarbageCollection>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\Kernel.cs" />
+    <Compile Include="MultiCoreTests.cs" />
+  </ItemGroup>
+</Project>

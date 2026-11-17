@@ -1,0 +1,40 @@
+{
+    "Modules":  {
+                    "Targeting":  {
+                                      "Items":  {
+                                                    "CollectEnemies_Snapshot":  true,
+                                                    "CollectEnemies_SnapshotScore":  true,
+                                                    "CollectEnemies_FastAdd":  true,
+                                                    "Scan_Diag":  true
+                                                },
+                                      "Settings":  {
+                                                       "SelfCheckFraction":  0
+                                                   }
+                                  },
+                    "Physics":  {
+                                    "Items":  {
+                                                  "DeadAgentHalt":  true,
+                                                  "DeadNoUnitContact":  true,
+                                                  "DeadSettle":  true,
+                                                  "DeadDisposeEarly":  true
+                                              },
+                                    "Settings":  {
+                                                     "DeadSettleRemoveAvoidance":  false,
+                                                     "DisposeEarlyBelowFps":  0,
+                                                     "DisposeEarlySeconds":  5,
+                                                     "DeadNoContactCreatures":  true,
+                                                     "DeadNoContactVehicles":  false,
+                                                     "DeadNoContactSoldiers":  false,
+                                                     "DeadAgentHaltClearAim":  false
+                                                 }
+                                },
+                    "MultiCore":  {
+                                      "Items":  {
+                                                    "ParallelScan":  true
+                                                },
+                                      "Settings":  {
+                                                       "ParallelScanJobs":  0
+                                                   }
+                                  }
+                }
+}

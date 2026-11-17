@@ -1,0 +1,1 @@
+{ "_readme": "b10 physics F + IdleSleepDiag (diagnostic block, not for timing)", "items": { "*": true, "Physics.IdleForceSleep": true, "Physics.AvoidanceSkipOntoResting": true, "Physics.AvoidanceNoIdleDetour": true, "Physics.IdleSleepDiag": true }, "dump": true }

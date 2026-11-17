@@ -1,0 +1,50 @@
+{
+    "_readme":  "night1 chain plan 2 (after chain 1): quick check in GOD mode (coordinator request) + repeats chosen after NIGHT1.md.",
+    "runs":  [
+                 {
+                     "label":  "qcgod1",
+                     "expect_min":  26,
+                     "timeout_min":  40,
+                     "dll":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\release\\b10\\Si_ServerPerf.dll",
+                     "scenarios":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\scenarios_n1_quickcheck_god.json",
+                     "config":  "cfg_serverperf_battle.json",
+                     "runtime":  "runtime_all_default.json",
+                     "flips":  [
+                                   "runtime_all_off.json",
+                                   "runtime_bat_B.json",
+                                   "runtime_bat_C.json"
+                               ],
+                     "flip_labels":  [
+                                         "off",
+                                         "def",
+                                         "agg"
+                                     ],
+                     "flip_every_s":  30,
+                     "reports":  [
+                                     "ramp_report.py {run} --settle 5 --md {run}\\RAMP.md --csv {run}\\ramp",
+                                     "ab_report.py windows --run {run}"
+                                 ]
+                 },
+                 {
+                     "label":  "b15_snap_check4",
+                     "expect_min":  13,
+                     "timeout_min":  22,
+                     "dll":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\release\\b15\\Si_ServerPerf.dll",
+                     "scenarios":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\scenarios_check4.json",
+                     "config":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\cfg_b15_check4.json",
+                     "runtime":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\rt14_check3_a.json",
+                     "flips":  [
+                                   "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\rt14_check3_a.json",
+                                   "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\rt14_check3_b.json"
+                               ],
+                     "flip_labels":  [
+                                         "C1",
+                                         "C2"
+                                     ],
+                     "flip_every_s":  45,
+                     "reports":  [
+                                     "ab_report.py windows --run {run}"
+                                 ]
+                 }
+             ]
+}

@@ -1,0 +1,1 @@
+{ "_readme": "b14 C: defaults + DeadDisposeEarly always on (5 s)", "items": { "*": true, "Targeting.CollectEnemies_Snapshot": false, "Targeting.CollectEnemies_SnapshotScore": false, "Targeting.CollectEnemies_FastAdd": false, "Physics.DeadAgentHalt": false, "Physics.DeadNoUnitContact": false, "Physics.DeadSettle": false, "Physics.DeadDisposeEarly": true }, "dump": true }

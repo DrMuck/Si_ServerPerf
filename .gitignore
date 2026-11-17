@@ -1,0 +1,29 @@
+# C# build artifacts
+**/bin/
+**/obj/
+.vs/
+*.user
+*.pdb
+*.cache
+
+# Versioned lab builds (release\bNN\Si_ServerPerf.dll); built locally, not committed (same as the sibling Si_* repos)
+release/
+
+# Local tooling
+.codebase-memory/
+__pycache__/
+*.pyc
+*.zip
+*.7z
+
+# measure\: only what a reader needs to follow and reproduce the method. Raw server logs, per-run probe / lab CSV
+# dumps, per-run state dumps and driver output stay local (several hundred MB).
+measure/**
+!measure/**/
+!measure/**/*.md
+!measure/**/*.ps1
+!measure/**/*.py
+!measure/*.json
+!measure/night1/*.json
+!measure/**/cfg_*.json
+!measure/**/report_*.txt

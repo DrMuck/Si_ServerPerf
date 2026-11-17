@@ -1,0 +1,58 @@
+{
+  "_readme": "rig 2: remaining old plan3 runs after b18 (b15_eveh, b15_snap_check4), dropped if they would start after 09:00",
+  "runs": [
+    {
+      "label": "b15_eveh",
+      "expect_min": 23,
+      "timeout_min": 35,
+      "dll": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\release\\b15\\Si_ServerPerf.dll",
+      "scenarios": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\melee_dead14.json",
+      "config": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\cfg_b15_eveh.json",
+      "runtime": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\rt14_A.json",
+      "flips": [
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\rt14_A.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\rt14_D.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\rt14_E.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\rt14_A.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\rt14_E.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\rt14_D.json"
+      ],
+      "flip_labels": [
+        "A",
+        "D",
+        "E",
+        "A",
+        "E",
+        "D"
+      ],
+      "flip_every_s": 60,
+      "reports": [
+        "night1\\step_table.py {run} --arms A,D,E --settle 20",
+        "ab_report.py windows --run {run}"
+      ],
+      "latest_start": "2026-11-17T09:00:00"
+    },
+    {
+      "label": "b15_snap_check4",
+      "expect_min": 13,
+      "timeout_min": 22,
+      "dll": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\release\\b15\\Si_ServerPerf.dll",
+      "scenarios": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\scenarios_check4.json",
+      "config": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\cfg_b15_check4.json",
+      "runtime": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\rt14_check3_a.json",
+      "flips": [
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\rt14_check3_a.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\rt14_check3_b.json"
+      ],
+      "flip_labels": [
+        "C1",
+        "C2"
+      ],
+      "flip_every_s": 45,
+      "reports": [
+        "ab_report.py windows --run {run}"
+      ],
+      "latest_start": "2026-11-17T09:00:00"
+    }
+  ]
+}

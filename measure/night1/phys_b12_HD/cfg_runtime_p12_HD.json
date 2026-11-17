@@ -1,0 +1,1 @@
+{ "_readme": "b12 physics HD: H + FixedWakeTrace + IdleSleepDiag (diagnostic, not for timing)", "items": { "*": true, "Physics.IdleForceSleep": true, "Physics.AvoidanceSkipOntoResting": true, "Physics.AvoidanceNoIdleDetour": true, "Physics.ParkedWheelHold": true, "Physics.FixedWakeTrace": true, "Physics.IdleSleepDiag": true }, "dump": true }

@@ -1,0 +1,55 @@
+# Physics.Census / IdleForceSleep (prefix/postfix on the ordered fixed list's MonoBehaviour message)
+M|OrderedUpdateManager|FixedUpdate||0
+# Physics.WakeProbe
+M|Soldier|OrderedFixedUpdate|System.Single|1
+M|Soldier|OrderedFixedUpdatePartTwo|System.Single|1
+M|Soldier|OrderedFixedUpdatePartThree|System.Single|1
+M|Soldier|OrderedUpdate|System.Single|1
+M|CreatureDecapod|OrderedFixedUpdate|System.Single|1
+M|CreatureDecapod|OrderedUpdate|System.Single|1
+M|VehicleWheeled|OrderedFixedUpdate|System.Single|1
+M|VehicleWheeled|OrderedFixedUpdatePartTwo|System.Single|1
+M|VehicleWheeled|OrderedUpdate|System.Single|1
+M|VehicleHovered|OrderedFixedUpdate|System.Single|1
+M|VehicleAntiFlip|OrderedFixedUpdate|System.Single|1
+M|Silica.AI.CollisionAvoidance|OrderedFixedUpdate|System.Single|0
+M|Silica.AI.CollisionAvoidance|ApplyAvoidanceForces|Vehicle,UnityEngine.Rigidbody,System.Single,System.Single,System.Single,UnityEngine.Vector3,UnityEngine.Quaternion,System.Single,UnityEngine.Vector3,UnityEngine.Vector3,System.Single,System.Single,System.Single,System.Boolean,UnityEngine.Vector3|0
+F|Soldier|m_JumpDelay|System.Single
+# Physics.RestWriteGuards (transpilers) / HitZonePoseGuard (transpilers): same Soldier/CreatureDecapod methods as above
+# Physics.IdleForceSleep
+M|VehicleWheeled|SleepVehicle||1
+M|VehicleWheeled|WakeVehicle||1
+F|CreatureDecapod|m_InputMovement|UnityEngine.Vector3
+F|CreatureDecapod|m_fAttackInput|System.Single
+F|CreatureDecapod|m_bQueueJump|System.Boolean
+# Physics.AvoidanceIdlePairSkip (+ ApplyAvoidanceForces above)
+M|Silica.AI.CollisionAvoidance|HandlePhysicsAvoidancePushing|System.Single|0
+# Physics.FixedStep_Override
+M|GameManager|Start||0
+# Physics.Interpolation_Off
+M|Unit|EnableRigidBodyInterpolation|System.Boolean|1
+M|Vehicle|EnableRigidBodyInterpolation|System.Boolean|1
+M|Soldier|OnExitCompartment|UnitCompartment|1
+# Physics.WheeledSleepDiag (+ OrderedUpdateManager.FixedUpdate, VehicleWheeled.OrderedFixedUpdate/SleepVehicle, ApplyAvoidanceForces above)
+F|VehicleWheeled|m_fSleepSlowTime|System.Single
+F|VehicleWheeled|m_fCurrentTurnRate|System.Single
+# Physics.AvoidanceNoIdleDetour (+ HandlePhysicsAvoidancePushing above)
+M|Silica.AI.CollisionAvoidance|set_Avoid|System.Boolean|1
+M|Silica.AI.CollisionAvoidance|set_DetourPoint|UnityEngine.Vector3|1
+M|Silica.AI.CollisionAvoidance|set_SpeedLimit|System.Single|1
+# Physics.FixedWakeTrace (+ OrderedUpdateManager.FixedUpdate above)
+M|OrderedUpdateManager/UpdateList|Run|System.Single,System.Boolean,System.Int64,System.Single,System.Int32|1
+M|OrderedUpdateManager|Update||1
+M|GameManager|Update||1
+# Physics.DeadSettle (+ OrderedUpdateManager.FixedUpdate, VehicleWheeled.OrderedFixedUpdate, m_fCurrentTurnRate above)
+F|VehicleWheeled|m_RaycastCommandIndex|System.Int32
+F|Silica.AI.CollisionAvoidance|m_AvoidanceCapsuleCollider|UnityEngine.CapsuleCollider
+F|VehicleWheelSetup|BrakeRaycastIndex|System.Int32
+F|Unit|AI_CollisionAvoidance|Silica.AI.CollisionAvoidance
+# Physics.DeadDisposeEarly (+ OrderedUpdateManager.FixedUpdate above)
+F|BaseGameObject|DestroyedDisposeTime|System.Single
+# Physics.DeadAgentHalt (+ OrderedUpdateManager.FixedUpdate above)
+M|Silica.AI.AIBaseAgent|OrderedUpdate|System.Single|1
+F|Unit|AIAgent|Silica.AI.AIBaseAgent
+# Physics.DeadNoUnitContact: OrderedUpdateManager.FixedUpdate above; Rigidbody.excludeLayers is compile-time (refcheck)
+# Physics.WheelJointWriteGuard: transpiler on VehicleWheeled.OrderedFixedUpdate (listed above); VehicleSolverIterations: no string targets

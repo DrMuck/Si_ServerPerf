@@ -1,0 +1,12 @@
+{
+  "_readme": "night1 b13 plan A (coordinator 00:20): snapshot correctness check, then DeadSettle/DeadDisposeEarly arms on melee plateaus 450/550.",
+  "runs": [
+    { "label": "b13_snap_check", "expect_min": 9, "timeout_min": 18, "dll": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\release\\b13\\Si_ServerPerf.dll",
+      "scenarios": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\melee_check450.json", "config": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\cfg_b13_check.json", "runtime": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\rt13_check.json",
+      "reports": ["ab_report.py windows --run {run}"] },
+    { "label": "b13_dead", "expect_min": 19, "timeout_min": 32, "dll": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\release\\b13\\Si_ServerPerf.dll",
+      "scenarios": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\melee_dead.json", "config": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\cfg_b13.json", "runtime": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\rt13_A.json",
+      "flips": ["C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\rt13_A.json", "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\rt13_B.json", "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\rt13_C.json", "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\rt13_A.json", "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\rt13_C.json", "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\rt13_B.json"], "flip_labels": ["A", "B", "C", "A", "C", "B"], "flip_every_s": 60,
+      "reports": ["night1\\step_table.py {run} --arms A,B,C --settle 20", "physics_report.py {run} --settle 20", "ab_report.py windows --run {run}", "night1\\sections_by_step.py {run} --arms A,B,C --steps 2 --top 30 --settle 20"] }
+  ]
+}

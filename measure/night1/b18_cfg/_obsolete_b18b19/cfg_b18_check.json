@@ -1,0 +1,49 @@
+{
+  "Modules": {
+    "Targeting": {
+      "Items": {
+        "CollectEnemies_Snapshot": true,
+        "CollectEnemies_SnapshotScore": true,
+        "CollectEnemies_FastAdd": true,
+        "Scan_Diag": true,
+        "CollectPreFiltered_Snapshot": true
+      },
+      "Settings": {
+        "SelfCheckFraction": 0.5
+      }
+    },
+    "Physics": {
+      "Items": {
+        "DeadAgentHalt": true,
+        "DeadNoUnitContact": true,
+        "DeadSettle": true,
+        "DeadDisposeEarly": true,
+        "WheelJointWriteGuard": true,
+        "VehicleSolverIterations": true
+      },
+      "Settings": {
+        "DeadSettleRemoveAvoidance": false,
+        "DeadNoContactCreatures": true,
+        "DeadNoContactVehicles": false,
+        "DeadNoContactSoldiers": false,
+        "DeadAgentHaltClearAim": false,
+        "DisposeEarlyFpsLow": 25,
+        "DisposeEarlyFpsHigh": 45,
+        "DisposeEarlyFpsSmoothSeconds": 10,
+        "DisposeEarlySlewSecondsPerSecond": 0.5,
+        "DisposeEarlySeconds": 5,
+        "VehicleSolverIterations": 4,
+        "VehicleSolverVelocityIterations": 0
+      }
+    },
+    "MultiCore": {
+      "Items": {
+        "ParallelScan": true
+      },
+      "Settings": {
+        "ParallelScanJobs": 6,
+        "SelfCheckFraction": 0
+      }
+    }
+  }
+}

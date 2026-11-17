@@ -1,0 +1,52 @@
+{
+  "_readme": "Ramp in GOD mode (Si_PerfLab 0.2.0, GreatErg): plateaus 200..1000 lab units, each held 270 s (3 cycles of a 3-arm x 30 s flip), climbing by ADDING units; 20 % idle in base lots, 15 % in transit, 65 % fighting on 4 fronts (the battle_b9 cluster centres); per-team base from real structures (0.12 structures per unit, game placement rules). All damage off while it runs (DamageCheatMultiplier 0, as Si_PerfLab 0.1.1 god mode). Stops after a plateau below 10 fps. ~41 min + boot. See SCENARIOS_V2.md.",
+  "auto_run": true,
+  "start_after_round_start_s": 45,
+  "between_scenarios_s": 15,
+  "max_extra_cleanup_wait_s": 30,
+  "fast_dispose_after_s": 2,
+  "stop_server_when_done": true,
+  "max_spawned": 1500,
+  "spawn_per_frame": 30,
+  "refuse_with_humans": true,
+  "fake_player_names": ["RTSA_HeadlessBot"],
+  "disable_ai_commanders": true,
+  "suppress_wildlife": true,
+  "perfprobe_run_tag": "lab",
+  "exit_on_config_error": true,
+  "engagement_counters": true,
+  "runtime_sig_file": "cfg/Si_ServerPerf/runtime.json",
+  "scenarios": [
+    {
+      "name": "ramp-god",
+      "type": "ramp",
+      "climb": "steps",
+      "mode": "god",
+      "teams": ["sol", "cent", "alien"],
+      "plateaus": [200, 300, 400, 500, 600, 700, 800, 1000],
+      "settle_s": 30,
+      "hold_s": 270,
+      "fps_floor": 10,
+      "fps_window_s": 20,
+      "roles": { "base": 0.20, "transit": 0.15, "front": 0.65 },
+      "fronts": [
+        { "_name": "K1 three-way, map centre", "center": [-277, -341], "teams": ["sol", "cent", "alien"] },
+        { "_name": "K2 south", "center": [-40, -620], "teams": ["sol", "cent"] },
+        { "_name": "K3 west", "center": [-650, -120], "teams": ["cent", "alien"] },
+        { "_name": "K4 north-east", "center": [120, -60], "teams": ["sol", "alien"] }
+      ],
+      "front_spawn_back_m": 90,
+      "front_radius_m": 35,
+      "front_reorder_s": 20,
+      "stall_s": 30,
+      "base_offset_m": 130,
+      "transit_from_m": 220,
+      "composition": "lategame",
+      "base": "lategame",
+      "structure_ratio": 0.12,
+      "base_placement": "game_then_lab",
+      "respawn": false,
+      "log_every_s": 10
+    }
+  ]
+}

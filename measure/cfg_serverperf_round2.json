@@ -1,0 +1,1 @@
+{ "Modules": { "MultiCore": { "Items": { "SensorPipeline_Rate": true } }, "UpdateTiers": { "Items": { "Tier_IdleAgents": true } }, "Targeting": { "Items": { "LosTopK": true, "FriendlyFire_Cache": true } }, "Physics": { "Items": { "AvoidanceIdlePairSkip": true, "IdleForceSleep": true } } } }

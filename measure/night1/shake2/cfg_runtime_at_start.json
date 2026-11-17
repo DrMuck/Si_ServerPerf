@@ -1,0 +1,1 @@
+{ "_readme": "every item OFF except the exception counter (Headless.Diag_LogExceptions stays on so exceptions can be attributed per arm; changed 2026-11-16 06:05 during round1_arms3)", "items": { "*": false, "Headless.Diag_LogExceptions": true }, "dump": true }

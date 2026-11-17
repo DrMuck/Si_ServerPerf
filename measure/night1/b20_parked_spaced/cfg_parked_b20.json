@@ -1,0 +1,261 @@
+{
+  "_readme": "b20_parked_spaced: spaced-any 4x75 and spaced-slope 6x50 (from scenarios_n1_parked.json), measure 270 s each (A/H 60 s blocks)",
+  "auto_run": true,
+  "start_after_round_start_s": 45,
+  "between_scenarios_s": 10,
+  "max_extra_cleanup_wait_s": 20,
+  "fast_dispose_after_s": 2,
+  "stop_server_when_done": true,
+  "max_spawned": 1500,
+  "spawn_per_frame": 50,
+  "refuse_with_humans": true,
+  "fake_player_names": [
+    "RTSA_HeadlessBot"
+  ],
+  "disable_ai_commanders": true,
+  "suppress_wildlife": true,
+  "perfprobe_run_tag": "lab",
+  "exit_on_config_error": true,
+  "engagement_counters": false,
+  "runtime_sig_file": "cfg/Si_ServerPerf/runtime.json",
+  "defaults": {
+    "settle_s": 20,
+    "measure_s": 540,
+    "team_a": "sol",
+    "team_b": "cent"
+  },
+  "scenarios": [
+    {
+      "name": "parked-spaced-any",
+      "behaviour": "idle",
+      "spawns": [
+        {
+          "type": "unit",
+          "layout": "parking",
+          "terrain": "any",
+          "team": "sol",
+          "count": 75,
+          "center": "team_hq",
+          "offset_m": 150,
+          "prefabs": [
+            "Sol_Light_LightStriker",
+            "Sol_Light_HeavyStriker",
+            "Sol_Light_AATruck",
+            "Sol_Heavy_BarrageTruck",
+            "Sol_Light_LightQuad"
+          ],
+          "per_row": 10,
+          "capsule_gap_m": 4,
+          "aisle_gap_m": 6,
+          "heading_jitter_deg": 35
+        },
+        {
+          "type": "unit",
+          "layout": "parking",
+          "terrain": "any",
+          "team": "sol",
+          "count": 75,
+          "center": "team_hq",
+          "offset_m": 260,
+          "prefabs": [
+            "Sol_Light_HeavyStriker",
+            "Sol_Light_AATruck",
+            "Sol_Heavy_BarrageTruck",
+            "Sol_Light_LightQuad",
+            "Sol_Light_LightStriker"
+          ],
+          "per_row": 10,
+          "capsule_gap_m": 4,
+          "aisle_gap_m": 6,
+          "heading_jitter_deg": 35
+        },
+        {
+          "type": "unit",
+          "layout": "parking",
+          "terrain": "any",
+          "team": "sol",
+          "count": 75,
+          "center": "team_hq",
+          "offset_m": 370,
+          "prefabs": [
+            "Sol_Light_AATruck",
+            "Sol_Heavy_BarrageTruck",
+            "Sol_Light_LightQuad",
+            "Sol_Light_LightStriker",
+            "Sol_Light_HeavyStriker"
+          ],
+          "per_row": 10,
+          "capsule_gap_m": 4,
+          "aisle_gap_m": 6,
+          "heading_jitter_deg": 35
+        },
+        {
+          "type": "unit",
+          "layout": "parking",
+          "terrain": "any",
+          "team": "sol",
+          "count": 75,
+          "center": "team_hq",
+          "offset_m": 480,
+          "prefabs": [
+            "Sol_Heavy_BarrageTruck",
+            "Sol_Light_LightQuad",
+            "Sol_Light_LightStriker",
+            "Sol_Light_HeavyStriker",
+            "Sol_Light_AATruck"
+          ],
+          "per_row": 10,
+          "capsule_gap_m": 4,
+          "aisle_gap_m": 6,
+          "heading_jitter_deg": 35
+        }
+      ],
+      "measure_s": 270
+    },
+    {
+      "name": "parked-spaced-slope",
+      "behaviour": "idle",
+      "spawns": [
+        {
+          "type": "unit",
+          "layout": "parking",
+          "terrain": "slope",
+          "slope_min_deg": 6,
+          "slope_max_deg": 16,
+          "team": "sol",
+          "count": 50,
+          "center": "team_hq",
+          "offset_m": 150,
+          "prefabs": [
+            "Sol_Light_LightStriker",
+            "Sol_Light_HeavyStriker",
+            "Sol_Light_AATruck",
+            "Sol_Heavy_BarrageTruck",
+            "Sol_Light_LightQuad"
+          ],
+          "per_row": 10,
+          "capsule_gap_m": 4,
+          "aisle_gap_m": 6,
+          "heading_jitter_deg": 35,
+          "search_radius_m": 900
+        },
+        {
+          "type": "unit",
+          "layout": "parking",
+          "terrain": "slope",
+          "slope_min_deg": 6,
+          "slope_max_deg": 16,
+          "team": "sol",
+          "count": 50,
+          "center": "team_hq",
+          "offset_m": 230,
+          "prefabs": [
+            "Sol_Light_HeavyStriker",
+            "Sol_Light_AATruck",
+            "Sol_Heavy_BarrageTruck",
+            "Sol_Light_LightQuad",
+            "Sol_Light_LightStriker"
+          ],
+          "per_row": 10,
+          "capsule_gap_m": 4,
+          "aisle_gap_m": 6,
+          "heading_jitter_deg": 35,
+          "search_radius_m": 900
+        },
+        {
+          "type": "unit",
+          "layout": "parking",
+          "terrain": "slope",
+          "slope_min_deg": 6,
+          "slope_max_deg": 16,
+          "team": "sol",
+          "count": 50,
+          "center": "team_hq",
+          "offset_m": 310,
+          "prefabs": [
+            "Sol_Light_AATruck",
+            "Sol_Heavy_BarrageTruck",
+            "Sol_Light_LightQuad",
+            "Sol_Light_LightStriker",
+            "Sol_Light_HeavyStriker"
+          ],
+          "per_row": 10,
+          "capsule_gap_m": 4,
+          "aisle_gap_m": 6,
+          "heading_jitter_deg": 35,
+          "search_radius_m": 900
+        },
+        {
+          "type": "unit",
+          "layout": "parking",
+          "terrain": "slope",
+          "slope_min_deg": 6,
+          "slope_max_deg": 16,
+          "team": "sol",
+          "count": 50,
+          "center": "team_hq",
+          "offset_m": 390,
+          "prefabs": [
+            "Sol_Heavy_BarrageTruck",
+            "Sol_Light_LightQuad",
+            "Sol_Light_LightStriker",
+            "Sol_Light_HeavyStriker",
+            "Sol_Light_AATruck"
+          ],
+          "per_row": 10,
+          "capsule_gap_m": 4,
+          "aisle_gap_m": 6,
+          "heading_jitter_deg": 35,
+          "search_radius_m": 900
+        },
+        {
+          "type": "unit",
+          "layout": "parking",
+          "terrain": "slope",
+          "slope_min_deg": 6,
+          "slope_max_deg": 16,
+          "team": "sol",
+          "count": 50,
+          "center": "team_hq",
+          "offset_m": 470,
+          "prefabs": [
+            "Sol_Light_LightStriker",
+            "Sol_Light_HeavyStriker",
+            "Sol_Light_AATruck",
+            "Sol_Heavy_BarrageTruck",
+            "Sol_Light_LightQuad"
+          ],
+          "per_row": 10,
+          "capsule_gap_m": 4,
+          "aisle_gap_m": 6,
+          "heading_jitter_deg": 35,
+          "search_radius_m": 900
+        },
+        {
+          "type": "unit",
+          "layout": "parking",
+          "terrain": "slope",
+          "slope_min_deg": 6,
+          "slope_max_deg": 16,
+          "team": "sol",
+          "count": 50,
+          "center": "team_hq",
+          "offset_m": 550,
+          "prefabs": [
+            "Sol_Light_HeavyStriker",
+            "Sol_Light_AATruck",
+            "Sol_Heavy_BarrageTruck",
+            "Sol_Light_LightQuad",
+            "Sol_Light_LightStriker"
+          ],
+          "per_row": 10,
+          "capsule_gap_m": 4,
+          "aisle_gap_m": 6,
+          "heading_jitter_deg": 35,
+          "search_radius_m": 900
+        }
+      ],
+      "measure_s": 270
+    }
+  ]
+}

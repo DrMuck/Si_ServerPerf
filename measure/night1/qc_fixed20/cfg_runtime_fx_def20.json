@@ -1,0 +1,1 @@
+{ "_readme": "qc_fixed20 arm def20: defaults + FixedStep_Override (20 Hz)", "items": { "*": true, "MultiCore.SensorPipeline_Rate": false, "Targeting.LosTopK": false, "Targeting.FriendlyFire_Cache": false, "Physics.FixedStep_Override": true }, "dump": true }

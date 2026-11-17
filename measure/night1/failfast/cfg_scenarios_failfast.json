@@ -1,0 +1,79 @@
+{
+  "_readme": "night1 shakedown 2 (Si_PerfLab 0.2.1, run with Si_ServerPerf all OFF): is the FogOfWar.LateUpdate hang of shake1 caused by the RadarStation in the lategame base? + god-mode stall fix + flat parking with relaxed slope.",
+  "auto_run": true,
+  "start_after_round_start_s": 45,
+  "between_scenarios_s": 10,
+  "max_extra_cleanup_wait_s": 30,
+  "fast_dispose_after_s": 2,
+  "stop_server_when_done": true,
+  "max_spawned": 1500,
+  "spawn_per_frame": 30,
+  "refuse_with_humans": true,
+  "fake_player_names": ["RTSA_HeadlessBot"],
+  "disable_ai_commanders": true,
+  "suppress_wildlife": true,
+  "perfprobe_run_tag": "lab",
+  "exit_on_config_error": true,
+  "engagement_counters": true,
+  "runtime_sig_file": "cfg/Si_ServerPerf/runtime.json",
+  "defaults": { "settle_s": 20, "measure_s": 45, "team_a": "sol", "team_b": "cent" },
+  "scenarios": [
+    {
+      "name": "sk2-noradar-god",
+      "type": "ramp", "climb": "steps", "mode": "god",
+      "teams": ["sol", "cent", "alien"],
+      "plateaus": [300], "settle_s": 20, "hold_s": 60,
+      "fps_floor": 10, "fps_window_s": 20,
+      "roles": { "base": 0.20, "transit": 0.15, "front": 0.65 },
+      "fronts": [
+        { "center": [-277, -341], "teams": ["sol", "cent", "alien"] },
+        { "center": [-40, -620], "teams": ["sol", "cent"] },
+        { "center": [-650, -120], "teams": ["cent", "alien"] },
+        { "center": [120, -60], "teams": ["sol", "alien"] }
+      ],
+      "front_spawn_back_m": 90, "front_radius_m": 35, "front_reorder_s": 20, "stall_s": 30,
+      "base_offset_m": 130, "transit_from_m": 220,
+      "composition": "lategame",
+      "base": {
+        "sol": [["Sol_Refinery", 2], ["Sol_Barracks", 2], ["Sol_LightFactory", 2], ["Sol_Turret_Light", 8], ["Sol_Silo", 3], ["Sol_HeavyFactory", 1], ["Sol_Turret_Heavy", 5], ["Sol_Turret_AntiAir", 4], ["Sol_ResearchFacility", 1], ["Sol_AirFactory", 1], ["Sol_UltraHeavyFactory", 1]],
+        "cent": [["Cent_Refinery", 2], ["Cent_Barracks", 2], ["Cent_LightFactory", 2], ["Cent_Turret_Light", 8], ["Cent_Silo", 3], ["Cent_HeavyFactory", 1], ["Cent_Turret_Heavy", 5], ["Cent_Turret_AntiAir", 4], ["Cent_ResearchFacility", 1], ["Cent_AirFactory", 1], ["Cent_UltraHeavyFactory", 1]]
+      },
+      "structure_ratio": 0.12, "base_placement": "game_then_lab",
+      "respawn": false, "log_every_s": 10
+    },
+    {
+      "name": "sk2-radar-god",
+      "type": "ramp", "climb": "steps", "mode": "god",
+      "teams": ["sol", "cent", "alien"],
+      "plateaus": [150], "settle_s": 20, "hold_s": 90,
+      "fps_floor": 10, "fps_window_s": 20,
+      "roles": { "base": 0.20, "transit": 0.15, "front": 0.65 },
+      "fronts": [
+        { "center": [-277, -341], "teams": ["sol", "cent", "alien"] },
+        { "center": [-40, -620], "teams": ["sol", "cent"] },
+        { "center": [-650, -120], "teams": ["cent", "alien"] },
+        { "center": [120, -60], "teams": ["sol", "alien"] }
+      ],
+      "front_spawn_back_m": 90, "front_radius_m": 35, "front_reorder_s": 20, "stall_s": 30,
+      "base_offset_m": 130, "transit_from_m": 220,
+      "composition": "lategame",
+      "base": "lategame",
+      "structure_ratio": "lots", "base_placement": "game_then_lab",
+      "respawn": false, "log_every_s": 10
+    },
+    {
+      "name": "sk2-parked-flat",
+      "behaviour": "idle",
+      "engagement": false,
+      "order_probe": { "after_idle_s": 75, "idle_s": 30, "cycles": 2, "move_m": 30, "speed_threshold_mps": 0.5, "move_threshold_m": 2, "timeout_s": 30 },
+      "spawns": [
+        { "type": "unit", "layout": "parking", "terrain": "flat", "flat_max_deg": 7, "search_radius_m": 900, "team": "sol", "count": 75, "center": "team_hq", "offset_m": 150,
+          "prefabs": ["Sol_Light_LightStriker", "Sol_Light_HeavyStriker", "Sol_Light_AATruck", "Sol_Heavy_BarrageTruck", "Sol_Light_LightQuad"],
+          "per_row": 10, "capsule_gap_m": 4, "aisle_gap_m": 6, "heading_jitter_deg": 35 },
+        { "type": "unit", "layout": "parking", "terrain": "flat", "flat_max_deg": 7, "search_radius_m": 900, "team": "cent", "count": 60, "center": "team_hq", "offset_m": 200,
+          "prefabs": ["Cent_Light_AssaultCar", "Cent_Light_StrikeTank", "Cent_Heavy_CombatTank"],
+          "per_row": 10, "capsule_gap_m": 4, "aisle_gap_m": 8, "heading_jitter_deg": 35 }
+      ]
+    }
+  ]
+}

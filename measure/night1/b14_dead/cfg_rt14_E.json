@@ -1,0 +1,1 @@
+{ "_readme": "b14 E: D + DeadSettle + DeadNoUnitContact (creatures)", "items": { "*": true, "Targeting.CollectEnemies_Snapshot": false, "Targeting.CollectEnemies_SnapshotScore": false, "Targeting.CollectEnemies_FastAdd": false, "Physics.DeadAgentHalt": true, "Physics.DeadNoUnitContact": true, "Physics.DeadSettle": true, "Physics.DeadDisposeEarly": false }, "dump": true }

@@ -1,0 +1,51 @@
+# UpdateTiers shared dispatcher (Tier_Structures, Tier_HealDecay, Tier_OrderProcessors, Tier_IdleSoldiers, Tier_StaticNetTransforms)
+M|OrderedUpdateManager/UpdateList|Run|System.Single,System.Boolean,System.Int64,System.Single,System.Int32|1
+F|OrderedUpdateManager/UpdateList|m_CurrentIndex|System.Int32
+F|OrderedUpdateManager|FixedUpdate_List|OrderedUpdateManager/UpdateList
+F|OrderedUpdateManager|FixedLateUpdate_List|OrderedUpdateManager/UpdateList
+F|OrderedUpdateManager|Update_List|OrderedUpdateManager/UpdateList
+F|OrderedUpdateManager|LateUpdate_List|OrderedUpdateManager/UpdateList
+F|UpdateActionData|function|System.Action`1<System.Single>
+F|UpdateActionData|everyTick|System.Boolean
+# tiered handler methods (classification by method handle; not patched, only compared, so the small-IL inlining
+# flag TargetCheck prints for AIOrderProcessor.OrderedUpdate does not matter: it is only ever called through its delegate)
+M|Structure|OrderedUpdate|System.Single|1
+M|HumanStructure|OrderedUpdate|System.Single|1
+M|AlienStructure|OrderedUpdate|System.Single|1
+M|ConstructionSite|OrderedUpdate|System.Single|1
+M|AutoHeal|OrderedUpdate|System.Single|1
+M|Decay|OrderedUpdate|System.Single|1
+M|Silica.AI.AIOrderProcessor|OrderedUpdate|System.Single|1
+M|Soldier|OrderedUpdate|System.Single|1
+M|NetworkTransformComponent|OrderedFixedUpdate|System.Single|1
+# quiet-test fields (Idle.cs)
+F|AIAiming|m_AimTarget|Target
+F|AIAiming|m_AssignedAttackTarget|Target
+F|AIAiming|m_AssignedDefendTarget|Target
+F|AIAiming|m_IsGroundAiming|System.Boolean
+F|AIPathfinding|QueuedFindPath_ShortRange_Type|AIPathfinding/EFindPathCallType
+F|AIPathfinding|QueuedFindPath_LongRange_Type|AIPathfinding/EFindPathCallType
+F|Silica.AI.AIBaseAgent|Net_QueueSendLongRangePath|System.Boolean
+F|Soldier|m_InputRotation|UnityEngine.Vector2
+F|Structure|WaitQueueNavmeshRecalculation|System.Boolean
+F|ConstructionSite|WaitQueueNavmeshRecalculation|System.Boolean
+F|AlienStructure|_linkInitialized|System.Boolean
+F|AlienStructure|_linkDirty|System.Boolean
+F|NetworkTransformComponent|net_HasChanged|System.Boolean
+# UpdateTiers.Tier_IdleAgents
+M|Silica.AI.AIBaseAgent|OrderedUpdate|System.Single|1
+# UpdateTiers.Register_O1
+M|OrderedUpdateManager/UpdateList|Register|System.Action`1<System.Single>,System.Int32,System.Single,System.Boolean|1
+M|OrderedUpdateManager/UpdateList|Unregister|System.Action`1<System.Single>|1
+F|OrderedUpdateManager/UpdateList|m_Entries|System.Collections.Generic.List`1<UpdateActionData>
+F|OrderedUpdateManager/UpdateList|m_LoopDepth|System.Int32
+F|OrderedUpdateManager/UpdateList|m_HasRemoved|System.Boolean
+F|UpdateActionData|priority|System.Int32
+F|UpdateActionData|targetID|System.Int32
+F|UpdateActionData|removed|System.Boolean
+F|UpdateActionData|callTime|System.Single
+F|UpdateActionData|targetTransform|UnityEngine.Transform
+F|UpdateActionData|perfSection|System.Int32
+# UpdateTiers.FixedLate_StepDt
+M|OrderedUpdateManager|FixedUpdate||1
+F|OrderedUpdateManager|QueueFixedLateUpdate|System.Boolean

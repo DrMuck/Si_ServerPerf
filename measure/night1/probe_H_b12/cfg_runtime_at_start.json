@@ -1,0 +1,1 @@
+{ "_readme": "b12 physics H: F + ParkedWheelHold", "items": { "*": true, "Physics.IdleForceSleep": true, "Physics.AvoidanceSkipOntoResting": true, "Physics.AvoidanceNoIdleDetour": true, "Physics.ParkedWheelHold": true, "Physics.FixedWakeTrace": false, "Physics.IdleSleepDiag": false }, "dump": true }

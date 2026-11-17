@@ -1,0 +1,1 @@
+{ "_readme": "all default items on except module Services", "items": { "*": true, "Services.*": false }, "dump": true }

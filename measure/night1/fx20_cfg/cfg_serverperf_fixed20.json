@@ -1,0 +1,1 @@
+{ "Modules": { "MultiCore": { "Items": { "SensorPipeline_Rate": true } }, "Targeting": { "Items": { "LosTopK": true, "FriendlyFire_Cache": true } }, "Physics": { "Items": { "FixedStep_Override": true }, "Settings": { "FixedStepHz": 20 } } } }

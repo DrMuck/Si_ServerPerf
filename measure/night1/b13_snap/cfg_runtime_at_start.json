@@ -1,0 +1,1 @@
+{ "_readme": "b13 A: shipped defaults", "items": { "*": true, "Targeting.CollectEnemies_Snapshot": false, "Targeting.CollectEnemies_SnapshotScore": false, "Targeting.CollectEnemies_FastAdd": false, "Targeting.LosTopK": false, "Physics.DeadSettle": false, "Physics.DeadDisposeEarly": false }, "dump": true }

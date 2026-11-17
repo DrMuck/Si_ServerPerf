@@ -1,0 +1,30 @@
+{
+  "_readme": "rig 2 plan b20b on b20 (mk_arms.py --r 1 --j 0 --f 1 --pp 1)",
+  "runs": [
+    {
+      "label": "b20_ff",
+      "expect_min": 14,
+      "timeout_min": 25,
+      "dll": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\release\\b20\\Si_ServerPerf.dll",
+      "scenarios": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\melee_ff.json",
+      "config": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\cfg_b20.json",
+      "runtime": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_N.json",
+      "probe": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\probe_b18.json",
+      "flips": [
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_N.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_F.json"
+      ],
+      "flip_labels": [
+        "N",
+        "F"
+      ],
+      "flip_every_s": 30,
+      "reports": [
+        "night1\\step_table.py {run} --arms N,F --settle 5",
+        "ab_report.py windows --run {run}",
+        "night1\\methods_by_arm.py {run} --arms N,F --methods TargetFinder.CollectPreFilteredEnemies,BehaviorTrees.BTEnemyTargetDetected.ActualExecute,TargetFinder.CollectDetectedEnemies,TargetFinder.RequestScan,Silica.AI.AIBaseAgent.OrderedUpdateAllAgents,VehicleTurret.OrderedUpdateAllTurrets,Target.CheckRiskOfFriendlyFire",
+        "night1\\guard_by_arm.py {run} 5"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+{ "Modules": { "MultiCore": { "Items": { "SensorTeamMaps_Job": true }, "Settings": { "SensorMapsMinEntries": 16, "SelfCheckFraction": 0.02 } }, "Services": { "Settings": { "VerifyAgainstVanilla": true } } } }

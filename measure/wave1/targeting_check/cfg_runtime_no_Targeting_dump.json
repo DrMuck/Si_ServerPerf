@@ -1,0 +1,1 @@
+{ "_readme": "defaults without MultiCore.SensorPipeline_Rate (b7 smoke; this file replaced the Targeting leave-one-out at 06:40 because the Targeting self-check runs in both arms anyway)", "items": { "*": true, "MultiCore.SensorPipeline_Rate": false }, "dump": true }

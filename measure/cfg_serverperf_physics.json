@@ -1,0 +1,1 @@
+{ "Modules": { "Physics": { "Items": { "AvoidanceIdlePairSkip": true, "IdleForceSleep": true } } } }

@@ -1,0 +1,72 @@
+{
+    "_readme":  "night1 b17 plan B: b17_pscan_check2 (MultiCore.Settings.SelfCheckFraction 0.2 - check1 had only the Targeting fraction set, so ParallelScan did not self-check), then b17_pscan and b17_pscan_inline (skip them by creating their folders if check2 fails).",
+    "runs":  [
+                 {
+                     "label":  "b17_pscan_check2",
+                     "expect_min":  9,
+                     "timeout_min":  18,
+                     "dll":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\release\\b17\\Si_ServerPerf.dll",
+                     "scenarios":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\melee_check450.json",
+                     "config":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b16_cfg\\cfg_b17_check2.json",
+                     "runtime":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b16_cfg\\rt16_P_a.json",
+                     "flips":  [
+                                   "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b16_cfg\\rt16_P_a.json",
+                                   "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b16_cfg\\rt16_P_b.json"
+                               ],
+                     "flip_labels":  [
+                                         "P1",
+                                         "P2"
+                                     ],
+                     "flip_every_s":  45,
+                     "reports":  [
+                                     "ab_report.py windows --run {run}"
+                                 ]
+                 },
+                 {
+                     "label":  "b17_pscan",
+                     "expect_min":  13,
+                     "timeout_min":  24,
+                     "dll":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\release\\b17\\Si_ServerPerf.dll",
+                     "scenarios":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b16_cfg\\melee_pscan.json",
+                     "config":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b16_cfg\\cfg_b17.json",
+                     "runtime":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b16_cfg\\rt16_S3.json",
+                     "flips":  [
+                                   "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b16_cfg\\rt16_S3.json",
+                                   "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b16_cfg\\rt16_P.json"
+                               ],
+                     "flip_labels":  [
+                                         "S3",
+                                         "P"
+                                     ],
+                     "flip_every_s":  30,
+                     "reports":  [
+                                     "night1\\step_table.py {run} --arms S3,P --settle 5",
+                                     "ab_report.py windows --run {run}",
+                                     "night1\\methods_by_arm.py {run} --arms S3,P"
+                                 ]
+                 },
+                 {
+                     "label":  "b17_pscan_inline",
+                     "expect_min":  9,
+                     "timeout_min":  18,
+                     "dll":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\release\\b17\\Si_ServerPerf.dll",
+                     "scenarios":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b16_cfg\\melee_pscan_inline.json",
+                     "config":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b16_cfg\\cfg_b17_inline.json",
+                     "runtime":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b16_cfg\\rt16_S3.json",
+                     "flips":  [
+                                   "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b16_cfg\\rt16_S3.json",
+                                   "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b16_cfg\\rt16_P.json"
+                               ],
+                     "flip_labels":  [
+                                         "S3",
+                                         "P"
+                                     ],
+                     "flip_every_s":  30,
+                     "reports":  [
+                                     "night1\\step_table.py {run} --arms S3,P --settle 5",
+                                     "ab_report.py windows --run {run}",
+                                     "night1\\methods_by_arm.py {run} --arms S3,P"
+                                 ]
+                 }
+             ]
+}

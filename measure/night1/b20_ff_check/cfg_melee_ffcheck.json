@@ -1,0 +1,58 @@
+{
+  "_readme": "b20_ff_check: melee plateau 450 only, hold 330 s (first ~half Grid on, then FriendlyFire_Grid off; 45 s seq flips)",
+  "auto_run": true,
+  "start_after_round_start_s": 45,
+  "between_scenarios_s": 15,
+  "max_extra_cleanup_wait_s": 30,
+  "fast_dispose_after_s": 2,
+  "stop_server_when_done": true,
+  "max_spawned": 1500,
+  "spawn_per_frame": 30,
+  "refuse_with_humans": true,
+  "fake_player_names": [
+    "RTSA_HeadlessBot"
+  ],
+  "disable_ai_commanders": true,
+  "suppress_wildlife": true,
+  "perfprobe_run_tag": "lab",
+  "exit_on_config_error": true,
+  "engagement_counters": true,
+  "runtime_sig_file": "cfg/Si_ServerPerf/runtime.json",
+  "scenarios": [
+    {
+      "name": "melee-ffcheck",
+      "type": "ramp",
+      "climb": "steps",
+      "mode": "sustain",
+      "teams": [
+        "sol",
+        "cent",
+        "alien"
+      ],
+      "settle_s": 30,
+      "fps_floor": 10,
+      "fps_window_s": 20,
+      "roles": {
+        "base": 0,
+        "transit": 0,
+        "front": 1
+      },
+      "fronts": "center",
+      "front_spawn_back_m": 250,
+      "front_radius_m": 45,
+      "front_reorder_s": 20,
+      "stall_s": 30,
+      "composition": "lategame",
+      "base": "lategame",
+      "structure_ratio": 0.08,
+      "base_placement": "game_then_lab",
+      "respawn_delay_s": 2,
+      "log_every_s": 10,
+      "plateaus": [
+        450
+      ],
+      "hold_s": 330,
+      "respawn": true
+    }
+  ]
+}

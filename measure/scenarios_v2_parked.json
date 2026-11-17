@@ -1,0 +1,66 @@
+{
+  "_readme": "Parked vehicles near the Sol base (Si_PerfLab 0.2.0). parked-spaced-flat / parked-spaced-slope: 4 lots x 75 vehicles of 5 mixed prefabs in rows, avoidance-capsule circles (1.1 x max PhysicalBounds extent) at least 4 m apart, 6 m aisles, headings spread +/-35 deg; lots on flat ground (steepest sample < 4 deg) or on a slope (mean 6-16 deg). parked-tight-WORSTCASE: the 0.1.1 tight grid (300 LightStrikers, same heading, auto spacing) = phys-idle-vehicles-300, labelled as the worst case. Each 20 s settle + 540 s measure; ~30 min + boot. See SCENARIOS_V2.md.",
+  "auto_run": true,
+  "start_after_round_start_s": 45,
+  "between_scenarios_s": 10,
+  "max_extra_cleanup_wait_s": 20,
+  "fast_dispose_after_s": 2,
+  "stop_server_when_done": true,
+  "max_spawned": 1500,
+  "spawn_per_frame": 50,
+  "refuse_with_humans": true,
+  "fake_player_names": ["RTSA_HeadlessBot"],
+  "disable_ai_commanders": true,
+  "suppress_wildlife": true,
+  "perfprobe_run_tag": "lab",
+  "exit_on_config_error": true,
+  "engagement_counters": false,
+  "runtime_sig_file": "cfg/Si_ServerPerf/runtime.json",
+  "defaults": { "settle_s": 20, "measure_s": 540, "team_a": "sol", "team_b": "cent" },
+  "scenarios": [
+    {
+      "name": "parked-spaced-flat",
+      "behaviour": "idle",
+      "spawns": [
+        { "type": "unit", "layout": "parking", "terrain": "flat", "team": "sol", "count": 75, "center": "team_hq", "offset_m": 150,
+          "prefabs": ["Sol_Light_LightStriker", "Sol_Light_HeavyStriker", "Sol_Light_AATruck", "Sol_Heavy_BarrageTruck", "Sol_Light_LightQuad"],
+          "per_row": 10, "capsule_gap_m": 4, "aisle_gap_m": 6, "heading_jitter_deg": 35 },
+        { "type": "unit", "layout": "parking", "terrain": "flat", "team": "sol", "count": 75, "center": "team_hq", "offset_m": 260,
+          "prefabs": ["Sol_Light_HeavyStriker", "Sol_Light_AATruck", "Sol_Heavy_BarrageTruck", "Sol_Light_LightQuad", "Sol_Light_LightStriker"],
+          "per_row": 10, "capsule_gap_m": 4, "aisle_gap_m": 6, "heading_jitter_deg": 35 },
+        { "type": "unit", "layout": "parking", "terrain": "flat", "team": "sol", "count": 75, "center": "team_hq", "offset_m": 370,
+          "prefabs": ["Sol_Light_AATruck", "Sol_Heavy_BarrageTruck", "Sol_Light_LightQuad", "Sol_Light_LightStriker", "Sol_Light_HeavyStriker"],
+          "per_row": 10, "capsule_gap_m": 4, "aisle_gap_m": 6, "heading_jitter_deg": 35 },
+        { "type": "unit", "layout": "parking", "terrain": "flat", "team": "sol", "count": 75, "center": "team_hq", "offset_m": 480,
+          "prefabs": ["Sol_Heavy_BarrageTruck", "Sol_Light_LightQuad", "Sol_Light_LightStriker", "Sol_Light_HeavyStriker", "Sol_Light_AATruck"],
+          "per_row": 10, "capsule_gap_m": 4, "aisle_gap_m": 6, "heading_jitter_deg": 35 }
+      ]
+    },
+    {
+      "name": "parked-spaced-slope",
+      "behaviour": "idle",
+      "spawns": [
+        { "type": "unit", "layout": "parking", "terrain": "slope", "slope_min_deg": 6, "slope_max_deg": 16, "team": "sol", "count": 75, "center": "team_hq", "offset_m": 150,
+          "prefabs": ["Sol_Light_LightStriker", "Sol_Light_HeavyStriker", "Sol_Light_AATruck", "Sol_Heavy_BarrageTruck", "Sol_Light_LightQuad"],
+          "per_row": 10, "capsule_gap_m": 4, "aisle_gap_m": 6, "heading_jitter_deg": 35, "search_radius_m": 600 },
+        { "type": "unit", "layout": "parking", "terrain": "slope", "slope_min_deg": 6, "slope_max_deg": 16, "team": "sol", "count": 75, "center": "team_hq", "offset_m": 260,
+          "prefabs": ["Sol_Light_HeavyStriker", "Sol_Light_AATruck", "Sol_Heavy_BarrageTruck", "Sol_Light_LightQuad", "Sol_Light_LightStriker"],
+          "per_row": 10, "capsule_gap_m": 4, "aisle_gap_m": 6, "heading_jitter_deg": 35, "search_radius_m": 600 },
+        { "type": "unit", "layout": "parking", "terrain": "slope", "slope_min_deg": 6, "slope_max_deg": 16, "team": "sol", "count": 75, "center": "team_hq", "offset_m": 370,
+          "prefabs": ["Sol_Light_AATruck", "Sol_Heavy_BarrageTruck", "Sol_Light_LightQuad", "Sol_Light_LightStriker", "Sol_Light_HeavyStriker"],
+          "per_row": 10, "capsule_gap_m": 4, "aisle_gap_m": 6, "heading_jitter_deg": 35, "search_radius_m": 600 },
+        { "type": "unit", "layout": "parking", "terrain": "slope", "slope_min_deg": 6, "slope_max_deg": 16, "team": "sol", "count": 75, "center": "team_hq", "offset_m": 480,
+          "prefabs": ["Sol_Heavy_BarrageTruck", "Sol_Light_LightQuad", "Sol_Light_LightStriker", "Sol_Light_HeavyStriker", "Sol_Light_AATruck"],
+          "per_row": 10, "capsule_gap_m": 4, "aisle_gap_m": 6, "heading_jitter_deg": 35, "search_radius_m": 600 }
+      ]
+    },
+    {
+      "name": "parked-tight-WORSTCASE",
+      "_note": "0.1.1 layout on purpose: square grid, spacing 2 x radius + 1.5 m, one heading; every vehicle inside its neighbours' avoidance range. Same as phys-idle-vehicles-300.",
+      "behaviour": "idle",
+      "spawns": [
+        { "type": "unit", "prefab": "ObjectInfo_Sol_Light_LightStriker", "team": "sol", "count": 300, "center": "team_hq", "offset_m": 150 }
+      ]
+    }
+  ]
+}

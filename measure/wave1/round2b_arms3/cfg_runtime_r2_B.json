@@ -1,0 +1,1 @@
+{ "_readme": "round 2 arm B: defaults (aggressive items patched but off)", "items": { "*": true, "MultiCore.SensorPipeline_Rate": false, "UpdateTiers.Tier_IdleAgents": false, "Targeting.LosTopK": false, "Targeting.FriendlyFire_Cache": false, "Physics.AvoidanceIdlePairSkip": false, "Physics.IdleForceSleep": false }, "dump": true }

@@ -1,0 +1,222 @@
+{
+    "_readme":  "CORRECTNESS / diagnostics pass for Si_ServerPerf (not for timing): fights, idle vehicles/soldiers, structures, churn; measure 45 s.",
+    "auto_run":  true,
+    "start_after_round_start_s":  45,
+    "between_scenarios_s":  8,
+    "max_extra_cleanup_wait_s":  20,
+    "stop_server_when_done":  true,
+    "max_spawned":  1500,
+    "spawn_per_frame":  50,
+    "refuse_with_humans":  true,
+    "fake_player_names":  [
+                              "RTSA_HeadlessBot"
+                          ],
+    "disable_ai_commanders":  true,
+    "suppress_wildlife":  true,
+    "perfprobe_run_tag":  "lab",
+    "fast_dispose_after_s":  2,
+    "defaults":  {
+                     "settle_s":  20,
+                     "measure_s":  45,
+                     "team_a":  "sol",
+                     "team_b":  "cent",
+                     "patrol_dist_m":  60,
+                     "patrol_interval_s":  20,
+                     "fight_gap_m":  200
+                 },
+    "scenarios":  [
+                      {
+                          "name":  "idle-soldiers",
+                          "counts":  [
+                                         300
+                                     ],
+                          "behaviour":  "idle",
+                          "spawns":  [
+                                         {
+                                             "type":  "unit",
+                                             "prefab":  "ObjectInfo_Sol_Soldier_Rifleman",
+                                             "team":  "sol",
+                                             "count":  "n",
+                                             "center":  "team_hq",
+                                             "offset_m":  150
+                                         }
+                                     ]
+                      },
+                      {
+                          "name":  "idle-vehicles",
+                          "counts":  [
+                                         300
+                                     ],
+                          "behaviour":  "idle",
+                          "spawns":  [
+                                         {
+                                             "type":  "unit",
+                                             "prefab":  "ObjectInfo_Sol_Light_LightStriker",
+                                             "team":  "sol",
+                                             "count":  "n",
+                                             "center":  "team_hq",
+                                             "offset_m":  150
+                                         }
+                                     ]
+                      },
+                      {
+                          "name":  "fight-soldiers",
+                          "counts":  [
+                                         150,
+                                         300
+                                     ],
+                          "behaviour":  "fight",
+                          "spawns":  [
+                                         {
+                                             "type":  "unit",
+                                             "prefab":  "ObjectInfo_Sol_Soldier_Rifleman",
+                                             "team":  "sol",
+                                             "side":  "A",
+                                             "count":  "n",
+                                             "center":  "front"
+                                         },
+                                         {
+                                             "type":  "unit",
+                                             "prefab":  "ObjectInfo_Cent_Soldier_Trooper",
+                                             "team":  "cent",
+                                             "side":  "B",
+                                             "count":  "n",
+                                             "center":  "front"
+                                         }
+                                     ]
+                      },
+                      {
+                          "name":  "fight-vehicles",
+                          "counts":  [
+                                         150
+                                     ],
+                          "behaviour":  "fight",
+                          "spawns":  [
+                                         {
+                                             "type":  "unit",
+                                             "prefab":  "ObjectInfo_Sol_Light_LightStriker",
+                                             "team":  "sol",
+                                             "side":  "A",
+                                             "count":  "n",
+                                             "center":  "front"
+                                         },
+                                         {
+                                             "type":  "unit",
+                                             "prefab":  "ObjectInfo_Cent_Light_AssaultCar",
+                                             "team":  "cent",
+                                             "side":  "B",
+                                             "count":  "n",
+                                             "center":  "front"
+                                         }
+                                     ]
+                      },
+                      {
+                          "name":  "fight-creatures",
+                          "counts":  [
+                                         150
+                                     ],
+                          "behaviour":  "fight",
+                          "team_a":  "alien",
+                          "team_b":  "sol",
+                          "spawns":  [
+                                         {
+                                             "type":  "unit",
+                                             "prefab":  "ObjectInfo_Alien_Crab",
+                                             "team":  "alien",
+                                             "side":  "A",
+                                             "count":  "n",
+                                             "center":  "front"
+                                         },
+                                         {
+                                             "type":  "unit",
+                                             "prefab":  "ObjectInfo_Sol_Soldier_Rifleman",
+                                             "team":  "sol",
+                                             "side":  "B",
+                                             "count":  "n",
+                                             "center":  "front"
+                                         }
+                                     ]
+                      },
+                      {
+                          "name":  "structures-built",
+                          "counts":  [
+                                         30
+                                     ],
+                          "behaviour":  "idle",
+                          "settle_s":  75,
+                          "_note":  "30 Solar panels built the game\u0027s way (sites next to the HQ that complete on their own, anchored + functional): the A* navmesh-cut case (1.0.15: 0.70-0.75 ms/frame permanently)",
+                          "spawns":  [
+                                         {
+                                             "type":  "site",
+                                             "prefab":  "ObjectInfo_SolarPanel",
+                                             "team":  "sol",
+                                             "count":  "n",
+                                             "center":  "team_hq",
+                                             "offset_m":  90,
+                                             "hold_progress":  false
+                                         }
+                                     ]
+                      },
+                      {
+                          "name":  "mixed-lategame",
+                          "behaviour":  "idle",
+                          "settle_s":  45,
+                          "_note":  "200 unanchored Solar panels + 300 idle troopers + 100 patrolling riflemen (600 objects, 400 units)",
+                          "spawns":  [
+                                         {
+                                             "type":  "structure",
+                                             "prefab":  "ObjectInfo_SolarPanel",
+                                             "team":  "sol",
+                                             "count":  200,
+                                             "center":  "team_hq",
+                                             "offset_m":  250
+                                         },
+                                         {
+                                             "type":  "unit",
+                                             "prefab":  "ObjectInfo_Cent_Soldier_Trooper",
+                                             "team":  "cent",
+                                             "count":  300,
+                                             "center":  "team_hq",
+                                             "offset_m":  150
+                                         },
+                                         {
+                                             "type":  "unit",
+                                             "prefab":  "ObjectInfo_Sol_Soldier_Rifleman",
+                                             "team":  "sol",
+                                             "count":  100,
+                                             "center":  "team_hq",
+                                             "offset_m":  120,
+                                             "behaviour":  "move_patrol"
+                                         }
+                                     ]
+                      },
+                      {
+                          "name":  "unit-churn",
+                          "counts":  [
+                                         300
+                                     ],
+                          "behaviour":  "idle",
+                          "spawns":  [
+                                         {
+                                             "type":  "unit",
+                                             "prefab":  "ObjectInfo_Sol_Soldier_Rifleman",
+                                             "team":  "sol",
+                                             "count":  "n",
+                                             "center":  "team_hq",
+                                             "offset_m":  150
+                                         }
+                                     ],
+                          "churn":  [
+                                        {
+                                            "type":  "unit",
+                                            "prefab":  "ObjectInfo_Sol_Soldier_Rifleman",
+                                            "team":  "sol",
+                                            "center":  "map_center",
+                                            "every_s":  0.5,
+                                            "per_tick":  1,
+                                            "pool":  4
+                                        }
+                                    ]
+                      }
+                  ]
+}

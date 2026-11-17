@@ -1,0 +1,9 @@
+{
+  "_readme": "b20 off + Physics.Census (read-only body census, so deadU is visible in the off arm)",
+  "items": {
+    "*": false,
+    "Headless.Diag_LogExceptions": true,
+    "Physics.Census": true
+  },
+  "dump": true
+}

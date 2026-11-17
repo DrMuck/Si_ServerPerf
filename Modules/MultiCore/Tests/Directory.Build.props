@@ -1,0 +1,10 @@
+<Project>
+  <!-- Offline tests of the MultiCore module (MultiCoreTests.csproj, TranspilerCheck\TranspilerCheck.csproj). bin/obj must
+       NOT land below the mod's project folder (its default compile glob would pick up generated .cs files), so they go
+       to %TEMP%\Si_ServerPerf_MultiCoreTests\<project>\ unless MultiCoreTestsOut is given (-p:MultiCoreTestsOut=<dir>\). -->
+  <PropertyGroup>
+    <MultiCoreTestsOut Condition="'$(MultiCoreTestsOut)' == ''">$([System.IO.Path]::GetTempPath())Si_ServerPerf_MultiCoreTests\</MultiCoreTestsOut>
+    <BaseIntermediateOutputPath>$(MultiCoreTestsOut)$(MSBuildProjectName)\obj\</BaseIntermediateOutputPath>
+    <BaseOutputPath>$(MultiCoreTestsOut)$(MSBuildProjectName)\bin\</BaseOutputPath>
+  </PropertyGroup>
+</Project>

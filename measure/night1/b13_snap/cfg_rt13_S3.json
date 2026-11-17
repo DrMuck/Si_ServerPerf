@@ -1,0 +1,1 @@
+{ "_readme": "b13 S3: S2 + FastAdd", "items": { "*": true, "Targeting.CollectEnemies_Snapshot": true, "Targeting.CollectEnemies_SnapshotScore": true, "Targeting.CollectEnemies_FastAdd": true, "Targeting.LosTopK": false, "Physics.DeadSettle": false, "Physics.DeadDisposeEarly": false }, "dump": true }

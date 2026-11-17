@@ -1,0 +1,1 @@
+{ "_readme": "all default items on except module Targeting", "items": { "*": true, "Targeting.*": false }, "dump": true }

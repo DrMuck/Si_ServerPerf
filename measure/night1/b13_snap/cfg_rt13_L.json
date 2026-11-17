@@ -1,0 +1,1 @@
+{ "_readme": "b13 L: defaults + LosTopK", "items": { "*": true, "Targeting.CollectEnemies_Snapshot": false, "Targeting.CollectEnemies_SnapshotScore": false, "Targeting.CollectEnemies_FastAdd": false, "Targeting.LosTopK": true, "Physics.DeadSettle": false, "Physics.DeadDisposeEarly": false }, "dump": true }

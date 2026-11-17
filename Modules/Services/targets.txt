@@ -1,0 +1,59 @@
+# Services.CommanderAI_SkipOwnedTeams
+M|Silica.AI.AICommander|Tick|System.Single|0
+P|Silica.AI.AICommander|Team
+P|Silica.AI.AICommander|IsEnabled
+P|Silica.AI.AICommander|ThinkInterval
+M|Silica.AI.AIHandlerBase|Think||1
+M|Silica.AI.AIExpansion|Think||1
+M|Silica.AI.AIEnemyIntel|Refresh||1
+# Services.CommanderAI_ThinkStats
+M|Silica.AI.AICommander|Think||1
+# Services.CommanderAI_ClusterRebuild
+M|Silica.AI.AIDefenseHandler|RebuildClusters||1
+M|Silica.AI.AIDefenseHandler|GetBaseClusterRadius||1
+M|Silica.AI.AIDefenseHandler|GetOrCreateCluster|UnityEngine.Vector3|1
+M|Silica.AI.AIDefenseHandler|ReleaseClusterPosts|Silica.AI.AIDefenseHandler/BaseCluster|1
+M|Silica.AI.AIDefenseHandler|SnapToGrid|UnityEngine.Vector3,System.Single|1
+F|Silica.AI.AIDefenseHandler|m_Clusters|System.Collections.Generic.List`1<Silica.AI.AIDefenseHandler/BaseCluster>
+F|Silica.AI.AIDefenseHandler|m_ClusterScratch|System.Collections.Generic.List`1<Structure>
+F|Silica.AI.AIDefenseHandler|m_ClusterMembers|System.Collections.Generic.List`1<UnityEngine.Vector3>
+F|Silica.AI.AIDefenseHandler/BaseCluster|Center|UnityEngine.Vector3
+F|Silica.AI.AIDefenseHandler/BaseCluster|Extent|System.Single
+F|Silica.AI.AIDefenseHandler/BaseCluster|StructureCount|System.Int32
+F|Silica.AI.AIDefenseHandler/BaseCluster|Value|System.Int32
+F|Silica.AI.AIDefenseHandler/BaseCluster|BaseStructureCount|System.Int32
+F|Silica.AI.AIDefenseHandler/BaseCluster|IsMain|System.Boolean
+F|Silica.AI.AIDefenseHandler/BaseCluster|Seen|System.Boolean
+M|GameMath|DistanceSq2D|UnityEngine.Vector3,UnityEngine.Vector3|1
+M|GameMath|Distance2D|UnityEngine.Vector3,UnityEngine.Vector3|1
+P|Team|BaseStructure
+P|ObjectInfo|Cost
+# Services.Astar_CutPollInterval
+M|AstarPathfindingProject:Pathfinding.Graphs.Navmesh.NavmeshUpdates|ScheduleTileUpdates||1
+F|AstarPathfindingProject:Pathfinding.Graphs.Navmesh.NavmeshUpdates|updateInterval|System.Single
+F|AstarPathfindingProject:AstarPath|navmeshUpdates|Pathfinding.Graphs.Navmesh.NavmeshUpdates
+F|AstarPathfindingProject:AstarPath|active|AstarPath
+# Services.Astar_ProbeFlushDebounce
+M|Silica.AI.CollisionObstacleManager|ApplyChanges|Unit|1
+# Services.Detected_IndexLookups
+M|Team|LostTarget|Target|1
+M|Target|GetDetectedByTeam|Team,System.Boolean|1
+M|Team|GetTargetDetected|Target,System.Boolean|1
+M|Silica.AI.AITask_Attack|Think||1
+P|Team|DetectedTargets
+P|Team|DetectedTargetIndexes
+# Services.DestroyedDisposal_EveryN
+M|BaseGameObject|UpdateDestroyedDisposal||1
+# Services.TerrainMaterial_Cache
+M|GamePhysics|GetTerrainPhysicMaterial|UnityEngine.Vector3,UnityEngine.Terrain|1
+F|GamePhysics|s_TerrainMaterialIndexes|System.Collections.Generic.Dictionary`2<UnityEngine.Terrain,System.Byte[]>
+M|TerrainPhysicsMaterials|GetTerrainPhysicsIndices||1
+M|TerrainPhysicsMaterials|GetPhysicMaterial|System.Int32|1
+P|UnityEngine.TerrainModule:UnityEngine.Terrain|terrainData
+P|UnityEngine.TerrainModule:UnityEngine.TerrainData|size
+P|UnityEngine.TerrainModule:UnityEngine.TerrainData|alphamapWidth
+P|UnityEngine.TerrainModule:UnityEngine.TerrainData|alphamapHeight
+# Services.Net_SkipUpdatesNoClients
+M|NetworkComponent|TickNetworkObjects|System.Single|1
+F|Player|Players|System.Collections.Generic.List`1<Player>
+M|NetworkGameServer|GetServerPlayer||1

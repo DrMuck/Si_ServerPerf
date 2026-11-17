@@ -1,0 +1,4 @@
+# Core (round hooks, console command)
+M|MusicJukeboxHandler|OnGameStarted|GameMode|0
+M|MusicJukeboxHandler|OnGameEnded|GameMode,Team|0
+F|DebugTools.DebugConsole|s_Commands|System.Collections.Generic.Dictionary`2<System.String,DebugTools.DebugConsole/ICommand>

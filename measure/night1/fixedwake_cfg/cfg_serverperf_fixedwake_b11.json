@@ -1,0 +1,1 @@
+{ "Modules": { "Physics": { "Items": { "IdleForceSleep": true, "AvoidanceSkipOntoResting": true, "AvoidanceNoIdleDetour": true, "IdleSleepDiag": true, "FixedWakeTrace": true, "WheeledSleepDiag": false, "AvoidanceIdlePairSkip": false, "WakeProbe": false } } } }

@@ -1,0 +1,18 @@
+{
+    "_readme":  "b17_deepprobe (coordinator ~04:20): melee 550, arm P fixed, 240 s, 37 extra PerfProbe methods (ANALYSIS_BATTLE_2.md section 3)",
+    "runs":  [
+                 {
+                     "label":  "b17_deepprobe",
+                     "expect_min":  10,
+                     "timeout_min":  18,
+                     "dll":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\release\\b17\\Si_ServerPerf.dll",
+                     "scenarios":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b16_cfg\\melee_deepprobe.json",
+                     "config":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b16_cfg\\cfg_b17.json",
+                     "runtime":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b16_cfg\\rt16_P.json",
+                     "probe":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b16_cfg\\probe_deep.json",
+                     "reports":  [
+                                     "ab_report.py windows --run {run}"
+                                 ]
+                 }
+             ]
+}

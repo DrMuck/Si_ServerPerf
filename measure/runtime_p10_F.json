@@ -1,0 +1,1 @@
+{ "_readme": "b10 physics F: IdleForceSleep + AvoidanceSkipOntoResting + AvoidanceNoIdleDetour", "items": { "*": true, "Physics.IdleForceSleep": true, "Physics.AvoidanceSkipOntoResting": true, "Physics.AvoidanceNoIdleDetour": true, "Physics.IdleSleepDiag": false }, "dump": true }

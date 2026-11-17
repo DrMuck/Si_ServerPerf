@@ -1,0 +1,21 @@
+{
+  "_readme": "night1 b13 plan B: run 3 (snapshot arms) and run 4 (best: off/def/new on melee plateaus and the quick-check trickle).",
+  "runs": [
+    { "label": "b13_snap", "expect_min": 16, "timeout_min": 28, "dll": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\release\\b13\\Si_ServerPerf.dll",
+      "scenarios": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\melee_snap.json", "config": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\cfg_b13.json", "runtime": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\rt13_A.json",
+      "flips": ["C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\rt13_A.json", "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\rt13_S1.json", "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\rt13_S2.json", "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\rt13_S3.json", "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\rt13_L.json"], "flip_labels": ["A", "S1", "S2", "S3", "L"], "flip_every_s": 30,
+      "reports": ["night1\\step_table.py {run} --arms A,S1,S2,S3,L --settle 5", "ab_report.py windows --run {run}", "night1\\sections_by_step.py {run} --arms A,S1,S2,S3,L --steps 2 --top 40"] },
+    { "label": "b13_snap_check2", "expect_min": 9, "timeout_min": 18, "dll": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\release\\b13\\Si_ServerPerf.dll",
+      "scenarios": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\melee_check450.json", "config": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\cfg_b13_check.json", "runtime": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\rt13_check_seqA.json",
+      "flips": ["C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\rt13_check_seqA.json", "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\rt13_check_seqB.json"], "flip_labels": ["C1", "C2"], "flip_every_s": 45,
+      "reports": ["ab_report.py windows --run {run}"] },
+    { "label": "b13_best_plat", "expect_min": 18, "timeout_min": 30, "dll": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\release\\b13\\Si_ServerPerf.dll",
+      "scenarios": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\melee_best.json", "config": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\cfg_b13.json", "runtime": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\rt13_A.json",
+      "flips": ["C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\rt13_off.json", "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\rt13_A.json", "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\rt13_new.json", "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\rt13_off.json", "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\rt13_new.json", "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\rt13_A.json"], "flip_labels": ["off", "def", "new", "off", "new", "def"], "flip_every_s": 60,
+      "reports": ["night1\\step_table.py {run} --arms off,def,new --settle 20", "ab_report.py windows --run {run}", "night1\\sections_by_step.py {run} --arms off,def,new --steps 2 --top 30 --settle 20"] },
+    { "label": "b13_best_qc", "expect_min": 20, "timeout_min": 40, "dll": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\release\\b13\\Si_ServerPerf.dll",
+      "scenarios": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\scenarios_quickcheck.json", "config": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\cfg_b13.json", "runtime": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\rt13_A.json",
+      "flips": ["C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\rt13_new.json", "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\rt13_off.json", "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\rt13_A.json"], "flip_labels": ["new", "off", "def"], "flip_every_s": 30,
+      "reports": ["night1\\step_table.py {run} --arms off,def,new --settle 10 --bin 25", "ramp_report.py {run} --settle 10 --md {run}\\RAMP.md --csv {run}\\ramp", "ab_report.py windows --run {run}"] }
+  ]
+}

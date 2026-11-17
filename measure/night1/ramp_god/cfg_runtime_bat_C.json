@@ -1,0 +1,1 @@
+{ "_readme": "battle arm C: defaults + SensorPipeline_Rate + LosTopK + FriendlyFire_Cache", "items": { "*": true, "MultiCore.SensorPipeline_Rate": true, "Targeting.LosTopK": true, "Targeting.FriendlyFire_Cache": true }, "dump": true }

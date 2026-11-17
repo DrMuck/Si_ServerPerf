@@ -1,0 +1,22 @@
+{
+  "_readme": "b20 ff_check arm 2nd half: N + FriendlyFire_Flat, FriendlyFire_Grid OFF (seq b)",
+  "items": {
+    "*": true,
+    "Targeting.CollectEnemies_Snapshot": true,
+    "Targeting.CollectEnemies_SnapshotScore": true,
+    "Targeting.CollectEnemies_FastAdd": true,
+    "Targeting.CollectPreFiltered_Snapshot": false,
+    "Targeting.FriendlyFire_Flat": true,
+    "Physics.DeadAgentHalt": true,
+    "Physics.DeadNoUnitContact": false,
+    "Physics.DeadSettle": false,
+    "Physics.DeadDisposeEarly": false,
+    "Physics.WheelJointWriteGuard": false,
+    "Physics.VehicleSolverIterations": false,
+    "MultiCore.ParallelScan": false,
+    "MultiCore.ParallelScan_Prefiltered": false,
+    "Targeting.FriendlyFire_Grid": false
+  },
+  "dump": true,
+  "seq": 712
+}

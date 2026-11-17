@@ -1,0 +1,31 @@
+{
+  "_readme": "rig 2 plan b20d (coordinator 08:20): b20_dispose_paired2 (interleaved repeat at 620)",
+  "runs": [
+    {
+      "label": "b20_dispose_paired2",
+      "expect_min": 15,
+      "timeout_min": 25,
+      "latest_start": "2026-11-17T09:10:00",
+      "dll": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\release\\b20\\Si_ServerPerf.dll",
+      "scenarios": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\melee_disp620.json",
+      "config": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\cfg_b20.json",
+      "runtime": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_all.json",
+      "probe": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\probe_b18.json",
+      "flips": [
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_all.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_allD.json"
+      ],
+      "flip_labels": [
+        "all",
+        "allD"
+      ],
+      "flip_every_s": 90,
+      "reports": [
+        "night1\\step_table.py {run} --arms all,allD --settle 50",
+        "night1\\guard_by_arm.py {run} 50",
+        "night1\\dispose_by_arm.py {run} --settle 50",
+        "ab_report.py windows --run {run}"
+      ]
+    }
+  ]
+}

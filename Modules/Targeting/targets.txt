@@ -1,0 +1,94 @@
+# Targeting.DetectedGrid
+M|Team|DetectTarget|Target,Sensor,System.Boolean|1
+P|Team|DetectedTargets
+P|Team|DetectedTargetIndexes
+P|BaseGameObject|LineOfSightCenter
+# Targeting.CollectEnemies_Grid
+M|TargetFinder|CollectDetectedEnemies|TargetScanParams&|1
+M|TargetFinder|WarnNaNScore|System.Single,Target,TargetScanParams&|1
+F|TargetFinder|m_Candidates|System.Collections.Generic.List`1<Target>
+F|TargetFinder|m_Scores|System.Collections.Generic.List`1<System.Single>
+# Targeting.UrgentClose_Grid
+M|AIAiming|FindUrgentCloseEnemy|Target|1
+F|AIAiming|m_UrgentLookedAt|Target[]
+P|AIAiming|AimTargetIgnorePaused
+# Targeting.NearestTarget_Grid
+M|Team|FindNearestTarget|UnityEngine.Vector3,System.Single,EDamageType,System.Single,System.Boolean,System.Boolean,System.Boolean,System.Boolean|1
+# Targeting.AlarmProximity_Grid
+M|AlarmProximity|OrderedFixedUpdate|System.Single|1
+F|AlarmProximity|Owner|BaseGameObject
+F|AlarmProximity|AlarmEnabled|System.Boolean
+F|AlarmProximity|Time|System.Single
+# Targeting.FriendlyFire_Grid / FriendlyFire_Cache
+M|TargetGrid|Update||1
+M|Target|CheckRiskOfFriendlyFire|UnityEngine.Vector3,UnityEngine.Vector3,System.Single,System.Single,Target,ProjectileData,Team,Target,System.Boolean|1
+F|TargetGrid|CellRanges|Unity.Collections.NativeArray`1<TargetCellRange>
+F|TargetGrid|TargetDataNativeArray|Unity.Collections.NativeArray`1<TargetData>
+F|TargetGrid|LOSPositions|Unity.Collections.NativeArray`1<UnityEngine.Vector3>
+F|TargetGrid|TeamGridCellIndices|System.Collections.Generic.List`1<Unity.Collections.NativeList`1<System.Int32>[0...,0...]>
+F|TargetGrid|GridBounds|UnityEngine.Bounds
+F|TargetGrid|GridCellMult|System.Single
+F|TargetGrid|GridSizeX|System.Int32
+F|TargetGrid|GridSizeZ|System.Int32
+P|Target|Targets
+# Targeting.Rank_Sort
+M|TargetFinder|Rank||1
+F|TargetFinder|m_Ranked|System.Collections.Generic.List`1<System.Int32>
+# Targeting.LosTopK
+M|TargetFinder|CollectCandidates|TargetScanParams&|1
+# Targeting.FriendlyFire_StaleGuard
+F|Target|TargetsToDelete|System.Collections.Generic.List`1<Target>
+# Targeting.CollectEnemies_Snapshot / SnapshotScore / FastAdd (replayed or reflected members)
+M|TargetFinder|AddCandidate|Target,System.Single|1
+M|GameAI|CalculateBestTargetScore|Target,System.Single,Target,System.Single,System.Boolean,System.Boolean,EDamageType,System.Single,System.Boolean,System.Single,System.Boolean,System.Boolean|1
+M|GameAI|GetSelfDefenceScore|Target,System.Single,Target,Unit,ObjectInfo,DamageManager,System.Single,System.Single,System.Boolean,System.Boolean|1
+M|GameAI|ResolveTargetScoreValues||1
+M|GameAI|CalculateTargetScoreTypeValues|Target,Target,DamageManager,System.Single,EDamageType,System.Single&,System.Single&,System.Single&|1
+M|GameAI|GetTargetScoreJitter01|System.Int32,System.Int32|1
+M|Target|GetDamagedBy|System.Int32,System.Single&|1
+F|GameAI|s_TypeValues_ObjectInfoID|System.Int32[]
+F|GameAI|s_TypeValues_DPSToTarget|System.Single[]
+F|GameAI|s_TypeValues_DPSToUs|System.Single[]
+F|GameAI|s_TypeValues_ModulatedDamage|System.Single[]
+F|GameAI|s_TypeValues_Num|System.Int32
+F|GameAI|s_TypeValues_FromObjectInfoID|System.Int32
+F|GameAI|s_TypeValues_Damage|System.Single
+F|GameAI|s_TypeValues_DamageType|EDamageType
+F|GameAI|s_Cfg_TargetScore_AimDirection|System.Single
+F|GameAI|s_Cfg_TargetScore_AlreadyOurTarget|System.Single
+F|GameAI|s_Cfg_TargetScore_Critical|System.Single
+F|GameAI|s_Cfg_TargetScore_DPSToTarget|System.Single
+F|GameAI|s_Cfg_TargetScore_DPSToUs|System.Single
+F|GameAI|s_Cfg_TargetScore_DamageToHealth|System.Single
+F|GameAI|s_Cfg_TargetScore_DamageToUs|System.Single
+F|GameAI|s_Cfg_TargetScore_Distance|System.Single
+F|GameAI|s_Cfg_TargetScore_Functional|System.Single
+F|GameAI|s_Cfg_TargetScore_JitterPct|System.Single
+F|GameAI|s_Cfg_TargetScore_Saturation|System.Single
+F|GameAI|s_Cfg_TargetScore_SaturationSeconds|System.Single
+F|GameAI|s_Cfg_TargetScore_SelfDefence|System.Single
+F|GameAI|s_Cfg_TargetScore_SelfDefenceContactSeconds|System.Single
+F|GameAI|s_Cfg_TargetScore_SelfDefenceThreatSeconds|System.Single
+F|GameAI|s_Cfg_TargetScore_SelfDefenceKillSeconds|System.Single
+F|GameAI|s_Cfg_TargetScore_SelfDefenceMemorySeconds|System.Single
+F|GameAI|s_Cfg_TargetScore_SelfDefenceCloseRange|System.Single
+F|GameAI|s_Cfg_TargetScore_Speed|System.Single
+F|GameAI|s_Cfg_TargetScore_Unit|System.Single
+F|GameAI|s_Cfg_TargetScore_WeAreTarget|System.Single
+F|GameAI|s_Cfg_TargetScore_WithinView|System.Single
+F|GameAI|s_Cfg_TargetValueBase_DPS|System.Single
+F|GameAI|s_Cfg_TargetValueBase_Speed|System.Single
+F|GameAI|s_Cfg_TargetValueBase_WorthMultiplier|System.Single
+# Targeting.Scan_Diag
+M|AIAiming|FindBestTarget||1
+M|TargetFinder|Select||1
+F|TargetFinder|m_BestTarget|Target
+# Targeting.CollectPreFiltered_Snapshot
+M|TargetFinder|CollectPreFilteredEnemies|TargetScanParams&|1
+M|Team|GetBestTargetScores|System.Int32|1
+F|DistanceScoreContainer|score|System.Single
+F|DistanceScoreContainer|index|System.Int32
+# Targeting.FriendlyFire_Flat (TargetGrid.Update postfix, CheckRiskOfFriendlyFire prefix/postfix, reflected TargetsToDelete)
+M|TargetGrid|Update||1
+M|Target|CheckRiskOfFriendlyFire|UnityEngine.Vector3,UnityEngine.Vector3,System.Single,System.Single,Target,ProjectileData,Team,Target,System.Boolean|1
+F|Target|TargetsToDelete|System.Collections.Generic.List`1<Target>

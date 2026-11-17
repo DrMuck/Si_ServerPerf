@@ -1,0 +1,102 @@
+{
+    "_readme":  "night1 plan 3 (04:30): remaining queue qc_fixed20, qcgod1, b15_eveh, b15_snap_check4 (probe_F2/probe_A2/qc3 dropped)",
+    "runs":  [
+                 {
+                     "label":  "qc_fixed20",
+                     "expect_min":  26,
+                     "timeout_min":  40,
+                     "dll":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\release\\b10\\Si_ServerPerf.dll",
+                     "scenarios":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\scenarios_quickcheck.json",
+                     "config":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\fx20_cfg\\cfg_serverperf_fixed20.json",
+                     "runtime":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\fx20_cfg\\runtime_fx_def.json",
+                     "flips":  [
+                                   "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\fx20_cfg\\runtime_fx_def.json",
+                                   "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\fx20_cfg\\runtime_fx_def20.json"
+                               ],
+                     "flip_labels":  [
+                                         "def",
+                                         "def20"
+                                     ],
+                     "flip_every_s":  30,
+                     "reports":  [
+                                     "ramp_report.py {run} --settle 5 --md {run}\\RAMP.md --csv {run}\\ramp",
+                                     "ab_report.py windows --run {run}"
+                                 ]
+                 },
+                 {
+                     "label":  "qcgod1",
+                     "expect_min":  26,
+                     "timeout_min":  40,
+                     "dll":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\release\\b10\\Si_ServerPerf.dll",
+                     "scenarios":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\scenarios_n1_quickcheck_god.json",
+                     "config":  "cfg_serverperf_battle.json",
+                     "runtime":  "runtime_all_default.json",
+                     "flips":  [
+                                   "runtime_all_off.json",
+                                   "runtime_bat_B.json",
+                                   "runtime_bat_C.json"
+                               ],
+                     "flip_labels":  [
+                                         "off",
+                                         "def",
+                                         "agg"
+                                     ],
+                     "flip_every_s":  30,
+                     "reports":  [
+                                     "ramp_report.py {run} --settle 5 --md {run}\\RAMP.md --csv {run}\\ramp",
+                                     "ab_report.py windows --run {run}"
+                                 ]
+                 },
+                 {
+                     "label":  "b15_eveh",
+                     "expect_min":  23,
+                     "timeout_min":  35,
+                     "dll":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\release\\b15\\Si_ServerPerf.dll",
+                     "scenarios":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\melee_dead14.json",
+                     "config":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\cfg_b15_eveh.json",
+                     "runtime":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\rt14_A.json",
+                     "flips":  [
+                                   "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\rt14_A.json",
+                                   "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\rt14_D.json",
+                                   "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\rt14_E.json",
+                                   "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\rt14_A.json",
+                                   "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\rt14_E.json",
+                                   "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\rt14_D.json"
+                               ],
+                     "flip_labels":  [
+                                         "A",
+                                         "D",
+                                         "E",
+                                         "A",
+                                         "E",
+                                         "D"
+                                     ],
+                     "flip_every_s":  60,
+                     "reports":  [
+                                     "night1\\step_table.py {run} --arms A,D,E --settle 20",
+                                     "ab_report.py windows --run {run}"
+                                 ]
+                 },
+                 {
+                     "label":  "b15_snap_check4",
+                     "expect_min":  13,
+                     "timeout_min":  22,
+                     "dll":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\release\\b15\\Si_ServerPerf.dll",
+                     "scenarios":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\scenarios_check4.json",
+                     "config":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\cfg_b15_check4.json",
+                     "runtime":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\rt14_check3_a.json",
+                     "flips":  [
+                                   "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\rt14_check3_a.json",
+                                   "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\rt14_check3_b.json"
+                               ],
+                     "flip_labels":  [
+                                         "C1",
+                                         "C2"
+                                     ],
+                     "flip_every_s":  45,
+                     "reports":  [
+                                     "ab_report.py windows --run {run}"
+                                 ]
+                 }
+             ]
+}

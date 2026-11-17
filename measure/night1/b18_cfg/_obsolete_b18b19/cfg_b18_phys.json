@@ -1,0 +1,23 @@
+{
+  "Modules": {
+    "Physics": {
+      "Items": {
+        "IdleForceSleep": true,
+        "AvoidanceSkipOntoResting": true,
+        "AvoidanceNoIdleDetour": true,
+        "ParkedWheelHold": true,
+        "WheelJointWriteGuard": true,
+        "VehicleSolverIterations": true,
+        "FixedWakeTrace": false,
+        "IdleSleepDiag": false,
+        "WheeledSleepDiag": false,
+        "AvoidanceIdlePairSkip": false,
+        "WakeProbe": false
+      },
+      "Settings": {
+        "VehicleSolverIterations": 4,
+        "VehicleSolverVelocityIterations": 0
+      }
+    }
+  }
+}

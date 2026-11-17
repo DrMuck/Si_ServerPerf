@@ -1,0 +1,10 @@
+<Project>
+  <!-- Offline tests of the Targeting module (FriendlyFlatTests.csproj). bin/obj must NOT land below the mod's project
+       folder (its default compile glob would pick up generated .cs files), so they go to
+       %TEMP%\Si_ServerPerf_TargetingTests\<project>\ unless TargetingTestsOut is given (-p:TargetingTestsOut=<dir>\). -->
+  <PropertyGroup>
+    <TargetingTestsOut Condition="'$(TargetingTestsOut)' == ''">$([System.IO.Path]::GetTempPath())Si_ServerPerf_TargetingTests\</TargetingTestsOut>
+    <BaseIntermediateOutputPath>$(TargetingTestsOut)$(MSBuildProjectName)\obj\</BaseIntermediateOutputPath>
+    <BaseOutputPath>$(TargetingTestsOut)$(MSBuildProjectName)\bin\</BaseOutputPath>
+  </PropertyGroup>
+</Project>

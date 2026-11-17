@@ -1,0 +1,1 @@
+{ "_readme": "all default items on except module Physics", "items": { "*": true, "Physics.*": false }, "dump": true }

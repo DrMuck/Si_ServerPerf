@@ -1,0 +1,114 @@
+{
+    "_readme":  "night1 variant of scenarios_v2_order_probe.json: parking terrain flat -\u003e any (no flat lot on GreatErg near the HQs). Order-response probe (Si_PerfLab 0.2.0): idle units at the three bases (spaced parked vehicles, infantry, creatures), 60 s measured idle, then 4 move orders 30 m out and back (first one 150 s after settle start, 90 s idle between cycles). Per unit: time to first movement (\u003e 0.5 m/s) and to 2 m away, 30 s timeout. order_response.csv / order_response_summary.csv + PROBE RESULT log lines. ~9 min + boot. See SCENARIOS_V2.md.",
+    "auto_run":  true,
+    "start_after_round_start_s":  45,
+    "between_scenarios_s":  10,
+    "max_extra_cleanup_wait_s":  20,
+    "fast_dispose_after_s":  2,
+    "stop_server_when_done":  true,
+    "max_spawned":  1500,
+    "spawn_per_frame":  50,
+    "refuse_with_humans":  true,
+    "fake_player_names":  [
+                              "RTSA_HeadlessBot"
+                          ],
+    "disable_ai_commanders":  true,
+    "suppress_wildlife":  true,
+    "perfprobe_run_tag":  "lab",
+    "exit_on_config_error":  true,
+    "engagement_counters":  false,
+    "runtime_sig_file":  "cfg/Si_ServerPerf/runtime.json",
+    "defaults":  {
+                     "settle_s":  20,
+                     "measure_s":  60,
+                     "team_a":  "sol",
+                     "team_b":  "cent"
+                 },
+    "scenarios":  [
+                      {
+                          "name":  "probe-idle-mixed",
+                          "behaviour":  "idle",
+                          "order_probe":  {
+                                              "after_idle_s":  150,
+                                              "idle_s":  90,
+                                              "cycles":  4,
+                                              "move_m":  30,
+                                              "speed_threshold_mps":  0.5,
+                                              "move_threshold_m":  2,
+                                              "timeout_s":  30
+                                          },
+                          "spawns":  [
+                                         {
+                                             "type":  "unit",
+                                             "layout":  "parking",
+                                             "terrain":  "any",
+                                             "team":  "sol",
+                                             "count":  100,
+                                             "center":  "team_hq",
+                                             "offset_m":  200,
+                                             "prefabs":  [
+                                                             "Sol_Light_LightStriker",
+                                                             "Sol_Light_HeavyStriker",
+                                                             "Sol_Light_AATruck",
+                                                             "Sol_Heavy_BarrageTruck",
+                                                             "Sol_Heavy_PulseTruck"
+                                                         ],
+                                             "per_row":  10,
+                                             "capsule_gap_m":  4,
+                                             "aisle_gap_m":  8,
+                                             "heading_jitter_deg":  35
+                                         },
+                                         {
+                                             "type":  "unit",
+                                             "prefab":  "Sol_Soldier_Rifleman",
+                                             "team":  "sol",
+                                             "count":  50,
+                                             "center":  "team_hq",
+                                             "offset_m":  90
+                                         },
+                                         {
+                                             "type":  "unit",
+                                             "layout":  "parking",
+                                             "terrain":  "any",
+                                             "team":  "cent",
+                                             "count":  60,
+                                             "center":  "team_hq",
+                                             "offset_m":  200,
+                                             "prefabs":  [
+                                                             "Cent_Light_AssaultCar",
+                                                             "Cent_Light_StrikeTank",
+                                                             "Cent_Heavy_CombatTank"
+                                                         ],
+                                             "per_row":  10,
+                                             "capsule_gap_m":  4,
+                                             "aisle_gap_m":  8,
+                                             "heading_jitter_deg":  35
+                                         },
+                                         {
+                                             "type":  "unit",
+                                             "prefab":  "Cent_Soldier_Trooper",
+                                             "team":  "cent",
+                                             "count":  50,
+                                             "center":  "team_hq",
+                                             "offset_m":  90
+                                         },
+                                         {
+                                             "type":  "unit",
+                                             "prefab":  "Crab",
+                                             "team":  "alien",
+                                             "count":  50,
+                                             "center":  "team_hq",
+                                             "offset_m":  150
+                                         },
+                                         {
+                                             "type":  "unit",
+                                             "prefab":  "Hunter",
+                                             "team":  "alien",
+                                             "count":  20,
+                                             "center":  "team_hq",
+                                             "offset_m":  230
+                                         }
+                                     ]
+                      }
+                  ]
+}

@@ -1,0 +1,1 @@
+{ "_readme": "defaults on, MultiCore off", "items": { "*": true, "MultiCore.*": false }, "dump": true }

@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <AssemblyName>Si_ServerPerf</AssemblyName>
+    <RootNamespace>SiServerPerf</RootNamespace>
+    <Version>0.2.0</Version>
+    <Deterministic>true</Deterministic>
+    <MSBuildWarningsAsMessages>MSB3270</MSBuildWarningsAsMessages>
+    <NuGetAudit>false</NuGetAudit>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <!-- Every *.cs under this folder is compiled (default compile items), so a module is added by copying its
+         Modules\<Name>\ folder in; no shared file lists it. measure\ holds scripts, never code. -->
+    <DefaultItemExcludes>$(DefaultItemExcludes);measure\**;tools\**</DefaultItemExcludes>
+
+    <!-- Mono dedicated server, Silica 1.0.17 (Steam test branch) only.
+         Game + Unity assemblies: the archived 1.0.17 server set. MelonLoader + 0Harmony: the net35 copies the
+         Mono server loads (the net6 ones give CS1705). Si_AdminMod: the copy deployed on the live server.
+         Override the root with -p:SilicaRefs=<dir> when building from a copy of the project elsewhere. -->
+    <SilicaRefs Condition="'$(SilicaRefs)' == ''">$(MSBuildThisFileDirectory)..\_silica_refs\</SilicaRefs>
+    <GameRefDir>$(SilicaRefs)versions\1.0.17\server_Managed\</GameRefDir>
+    <LoaderRefDir>$(SilicaRefs)net35\</LoaderRefDir>
+    <AdminRefDir>$(SilicaRefs)test\</AdminRefDir>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MelonLoader"><HintPath>$(LoaderRefDir)MelonLoader.dll</HintPath><Private>False</Private></Reference>
+    <Reference Include="0Harmony"><HintPath>$(LoaderRefDir)0Harmony.dll</HintPath><Private>False</Private></Reference>
+    <Reference Include="Si_AdminMod"><HintPath>$(AdminRefDir)Si_AdminMod.dll</HintPath><Private>False</Private></Reference>
+    <Reference Include="SilicaCore"><HintPath>$(GameRefDir)SilicaCore.dll</HintPath><Private>False</Private></Reference>
+    <Reference Include="Newtonsoft.Json"><HintPath>$(GameRefDir)Newtonsoft.Json.dll</HintPath><Private>False</Private></Reference>
+    <Reference Include="UnityEngine"><HintPath>$(GameRefDir)UnityEngine.dll</HintPath><Private>False</Private></Reference>
+    <Reference Include="UnityEngine.CoreModule"><HintPath>$(GameRefDir)UnityEngine.CoreModule.dll</HintPath><Private>False</Private></Reference>
+    <Reference Include="UnityEngine.AnimationModule"><HintPath>$(GameRefDir)UnityEngine.AnimationModule.dll</HintPath><Private>False</Private></Reference>
+    <Reference Include="UnityEngine.ParticleSystemModule"><HintPath>$(GameRefDir)UnityEngine.ParticleSystemModule.dll</HintPath><Private>False</Private></Reference>
+    <Reference Include="UnityEngine.PhysicsModule"><HintPath>$(GameRefDir)UnityEngine.PhysicsModule.dll</HintPath><Private>False</Private></Reference>
+    <Reference Include="Unity.Collections"><HintPath>$(GameRefDir)Unity.Collections.dll</HintPath><Private>False</Private></Reference>
+    <Reference Include="Unity.Mathematics"><HintPath>$(GameRefDir)Unity.Mathematics.dll</HintPath><Private>False</Private></Reference>
+    <Reference Include="Unity.Burst"><HintPath>$(GameRefDir)Unity.Burst.dll</HintPath><Private>False</Private></Reference>
+    <Reference Include="AstarPathfindingProject"><HintPath>$(GameRefDir)AstarPathfindingProject.dll</HintPath><Private>False</Private></Reference>
+    <Reference Include="com.rlabrecque.steamworks.net"><HintPath>$(GameRefDir)com.rlabrecque.steamworks.net.dll</HintPath><Private>False</Private></Reference>
+  </ItemGroup>
+</Project>

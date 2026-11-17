@@ -1,0 +1,1 @@
+{ "Modules": { "Targeting": { "Items": { "CollectEnemies_Snapshot": true, "CollectEnemies_SnapshotScore": true, "CollectEnemies_FastAdd": true, "LosTopK": true, "Scan_Diag": true }, "Settings": { "SelfCheckFraction": 0.05, "SnapshotPoseOneCall": false } }, "Physics": { "Items": { "DeadSettle": true, "DeadDisposeEarly": true } } } }

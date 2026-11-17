@@ -1,0 +1,13 @@
+{
+  "_readme": "b20 phys A: defaults",
+  "items": {
+    "*": true,
+    "Physics.IdleForceSleep": false,
+    "Physics.AvoidanceSkipOntoResting": false,
+    "Physics.AvoidanceNoIdleDetour": false,
+    "Physics.ParkedWheelHold": false,
+    "Physics.WheelJointWriteGuard": false,
+    "Physics.VehicleSolverIterations": false
+  },
+  "dump": true
+}

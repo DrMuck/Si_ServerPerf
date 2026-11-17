@@ -1,0 +1,1 @@
+{ "_readme": "physics arm C: IdleForceSleep alone", "items": { "*": true, "Physics.AvoidanceIdlePairSkip": false, "Physics.IdleForceSleep": true }, "dump": true }

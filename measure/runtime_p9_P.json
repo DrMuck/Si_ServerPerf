@@ -1,0 +1,1 @@
+{ "_readme": "b9 physics P: AvoidanceIdlePairSkip alone (diagnostic block)", "items": { "*": true, "Physics.IdleForceSleep": false, "Physics.AvoidanceSkipOntoResting": false, "Physics.AvoidanceIdlePairSkip": true }, "dump": true }

@@ -1,0 +1,20 @@
+{
+  "_readme": "b20 allD: all + DeadDisposeEarly (proportional: 5 s at <= 25 fps, 15 s at >= 45, smooth 10 s, slew 0.5 s/s; startup cfg_b20.json)",
+  "items": {
+    "*": true,
+    "Targeting.CollectEnemies_Snapshot": true,
+    "Targeting.CollectEnemies_SnapshotScore": true,
+    "Targeting.CollectEnemies_FastAdd": true,
+    "Targeting.CollectPreFiltered_Snapshot": true,
+    "Targeting.FriendlyFire_Flat": false,
+    "Physics.DeadAgentHalt": true,
+    "Physics.DeadNoUnitContact": false,
+    "Physics.DeadSettle": false,
+    "Physics.DeadDisposeEarly": true,
+    "Physics.WheelJointWriteGuard": false,
+    "Physics.VehicleSolverIterations": false,
+    "MultiCore.ParallelScan": true,
+    "MultiCore.ParallelScan_Prefiltered": true
+  },
+  "dump": true
+}

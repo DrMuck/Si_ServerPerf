@@ -1,0 +1,13 @@
+{
+  "_readme": "b20 phys H: IdleForceSleep + AvoidanceSkipOntoResting + AvoidanceNoIdleDetour + ParkedWheelHold",
+  "items": {
+    "*": true,
+    "Physics.IdleForceSleep": true,
+    "Physics.AvoidanceSkipOntoResting": true,
+    "Physics.AvoidanceNoIdleDetour": true,
+    "Physics.ParkedWheelHold": true,
+    "Physics.WheelJointWriteGuard": false,
+    "Physics.VehicleSolverIterations": false
+  },
+  "dump": true
+}

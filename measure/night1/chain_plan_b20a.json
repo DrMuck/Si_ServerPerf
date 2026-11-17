@@ -1,0 +1,55 @@
+{
+  "_readme": "rig 2 plan b20a on b20 (mk_arms.py --r 1 --j 1 --f 1 --pp 1)",
+  "runs": [
+    {
+      "label": "b20_ff_check",
+      "expect_min": 11,
+      "timeout_min": 20,
+      "dll": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\release\\b20\\Si_ServerPerf.dll",
+      "scenarios": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\melee_ffcheck.json",
+      "config": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\cfg_b20_ffchk.json",
+      "runtime": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_kffa.json",
+      "probe": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\probe_b18.json",
+      "flips": [
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_kffa.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_kffb.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_kffa.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_kffb.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_kffa.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_kffb.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_kffg1.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_kffg2.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_kffg1.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_kffg2.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_kffg1.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_kffg2.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_kffg1.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_kffg2.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_kffg1.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_kffg2.json"
+      ],
+      "flip_labels": [
+        "K1",
+        "K2",
+        "K1",
+        "K2",
+        "K1",
+        "K2",
+        "G1",
+        "G2",
+        "G1",
+        "G2",
+        "G1",
+        "G2",
+        "G1",
+        "G2",
+        "G1",
+        "G2"
+      ],
+      "flip_every_s": 45,
+      "reports": [
+        "ab_report.py windows --run {run}"
+      ]
+    }
+  ]
+}

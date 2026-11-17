@@ -1,0 +1,124 @@
+{
+    "_readme":  "MultiCore smoke + FF-fix check (b5): idle soldiers, soldier fight, vehicle fight, then invulnerable 150v150 vehicle fight measured 180 s; 3-state flip",
+    "auto_run":  true,
+    "start_after_round_start_s":  45,
+    "between_scenarios_s":  8,
+    "max_extra_cleanup_wait_s":  20,
+    "stop_server_when_done":  true,
+    "max_spawned":  1500,
+    "spawn_per_frame":  50,
+    "refuse_with_humans":  true,
+    "fake_player_names":  [
+                              "RTSA_HeadlessBot"
+                          ],
+    "disable_ai_commanders":  true,
+    "suppress_wildlife":  true,
+    "perfprobe_run_tag":  "lab",
+    "fast_dispose_after_s":  2,
+    "defaults":  {
+                     "settle_s":  15,
+                     "measure_s":  40,
+                     "team_a":  "sol",
+                     "team_b":  "cent",
+                     "patrol_dist_m":  60,
+                     "patrol_interval_s":  20,
+                     "fight_gap_m":  200
+                 },
+    "scenarios":  [
+                      {
+                          "name":  "idle-soldiers",
+                          "counts":  [
+                                         300
+                                     ],
+                          "behaviour":  "idle",
+                          "spawns":  [
+                                         {
+                                             "type":  "unit",
+                                             "prefab":  "ObjectInfo_Sol_Soldier_Rifleman",
+                                             "team":  "sol",
+                                             "count":  "n",
+                                             "center":  "team_hq",
+                                             "offset_m":  150
+                                         }
+                                     ]
+                      },
+                      {
+                          "name":  "fight-soldiers",
+                          "counts":  [
+                                         150
+                                     ],
+                          "behaviour":  "fight",
+                          "spawns":  [
+                                         {
+                                             "type":  "unit",
+                                             "prefab":  "ObjectInfo_Sol_Soldier_Rifleman",
+                                             "team":  "sol",
+                                             "side":  "A",
+                                             "count":  "n",
+                                             "center":  "front"
+                                         },
+                                         {
+                                             "type":  "unit",
+                                             "prefab":  "ObjectInfo_Cent_Soldier_Trooper",
+                                             "team":  "cent",
+                                             "side":  "B",
+                                             "count":  "n",
+                                             "center":  "front"
+                                         }
+                                     ]
+                      },
+                      {
+                          "name":  "fight-vehicles",
+                          "counts":  [
+                                         50
+                                     ],
+                          "behaviour":  "fight",
+                          "spawns":  [
+                                         {
+                                             "type":  "unit",
+                                             "prefab":  "ObjectInfo_Sol_Light_LightStriker",
+                                             "team":  "sol",
+                                             "side":  "A",
+                                             "count":  "n",
+                                             "center":  "front"
+                                         },
+                                         {
+                                             "type":  "unit",
+                                             "prefab":  "ObjectInfo_Cent_Light_AssaultCar",
+                                             "team":  "cent",
+                                             "side":  "B",
+                                             "count":  "n",
+                                             "center":  "front"
+                                         }
+                                     ]
+                      },
+                      {
+                          "name":  "flip-fight-vehicles",
+                          "counts":  [
+                                         150
+                                     ],
+                          "behaviour":  "fight",
+                          "spawns":  [
+                                         {
+                                             "type":  "unit",
+                                             "prefab":  "ObjectInfo_Sol_Light_LightStriker",
+                                             "team":  "sol",
+                                             "side":  "A",
+                                             "count":  "n",
+                                             "center":  "front",
+                                             "invulnerable":  true
+                                         },
+                                         {
+                                             "type":  "unit",
+                                             "prefab":  "ObjectInfo_Cent_Light_AssaultCar",
+                                             "team":  "cent",
+                                             "side":  "B",
+                                             "count":  "n",
+                                             "center":  "front",
+                                             "invulnerable":  true
+                                         }
+                                     ],
+                          "measure_s":  180
+                      }
+                  ]
+}

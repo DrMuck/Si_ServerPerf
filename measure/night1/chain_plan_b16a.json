@@ -1,0 +1,60 @@
+{
+    "_readme":  "night1 b16 plan A: b15_halt_guard2 (moved here from chain_plan.json) then b16_pscan_check (b16 check replaced by b17_pscan_check 03:10)",
+    "runs":  [
+                 {
+                     "label":  "b15_halt_guard2",
+                     "expect_min":  14,
+                     "timeout_min":  24,
+                     "dll":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\release\\b15\\Si_ServerPerf.dll",
+                     "scenarios":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\melee_guard2.json",
+                     "config":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\cfg_b15_clear.json",
+                     "runtime":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\rt14_A1.json",
+                     "flips":  [
+                                   "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\rt14_A1.json",
+                                   "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\rt14_D1.json",
+                                   "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\rt14_A2.json",
+                                   "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\rt14_D2.json",
+                                   "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\rt14_A1.json",
+                                   "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\rt14_D1.json",
+                                   "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\rt14_A2.json",
+                                   "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b14_cfg\\rt14_D2.json"
+                               ],
+                     "flip_labels":  [
+                                         "A",
+                                         "D",
+                                         "A",
+                                         "D",
+                                         "A",
+                                         "D",
+                                         "A",
+                                         "D"
+                                     ],
+                     "flip_every_s":  60,
+                     "reports":  [
+                                     "night1\\step_table.py {run} --arms A,D --settle 15",
+                                     "ab_report.py windows --run {run}"
+                                 ]
+                 },
+                 {
+                     "label":  "b17_pscan_check",
+                     "expect_min":  9,
+                     "timeout_min":  18,
+                     "dll":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\release\\b17\\Si_ServerPerf.dll",
+                     "scenarios":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b13_cfg\\melee_check450.json",
+                     "config":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b16_cfg\\cfg_b17_check.json",
+                     "runtime":  "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b16_cfg\\rt16_P_a.json",
+                     "flips":  [
+                                   "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b16_cfg\\rt16_P_a.json",
+                                   "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b16_cfg\\rt16_P_b.json"
+                               ],
+                     "flip_labels":  [
+                                         "P1",
+                                         "P2"
+                                     ],
+                     "flip_every_s":  45,
+                     "reports":  [
+                                     "ab_report.py windows --run {run}"
+                                 ]
+                 }
+             ]
+}

@@ -1,0 +1,8 @@
+{
+  "_readme": "b20 off: every item off except the exception counter",
+  "items": {
+    "*": false,
+    "Headless.Diag_LogExceptions": true
+  },
+  "dump": true
+}

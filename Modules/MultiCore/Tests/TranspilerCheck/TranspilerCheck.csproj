@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Runs the MultiCore patches (production code, from the BUILT Si_ServerPerf.dll) against the real 1.0.17 SilicaCore
+       IL with MelonLoader's net6 HarmonyX, on .NET 6 (MonoMod's runtime detour of this Harmony build crashes on .NET 8):
+       the DetectWithJobsPart1 transpiler output is checked instruction by instruction, then every patch of the item is
+       installed through Harmony (patch-parameter binding, IL generation). No game code runs.
+         dotnet build -c Release [-p:MultiCoreTestsOut=<dir>\] [-p:MelonNet6Dir=<MelonLoader\net6>]
+         dotnet <MultiCoreTestsOut>TranspilerCheck\bin\Release\net6.0\TranspilerCheck.dll <server_Managed> <MelonLoader\net6> <Si_ServerPerf.dll>
+       The source is wrapped in #if MULTICORE_TRANSPILER_CHECK (the mod build compiles every .cs below its folder). -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <DefineConstants>$(DefineConstants);MULTICORE_TRANSPILER_CHECK</DefineConstants>
+    <NuGetAudit>false</NuGetAudit>
+    <MelonNet6Dir Condition="'$(MelonNet6Dir)' == ''">E:\Steam\steamapps\common\Silica Dedicated Server\MelonLoader\net6\</MelonNet6Dir>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony"><HintPath>$(MelonNet6Dir)0Harmony.dll</HintPath></Reference>
+  </ItemGroup>
+</Project>

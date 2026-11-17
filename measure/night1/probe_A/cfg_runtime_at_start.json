@@ -1,0 +1,1 @@
+{ "_readme": "b10 physics A: defaults, diagnostics off", "items": { "*": true, "Physics.IdleForceSleep": false, "Physics.AvoidanceSkipOntoResting": false, "Physics.AvoidanceNoIdleDetour": false, "Physics.IdleSleepDiag": false }, "dump": true }

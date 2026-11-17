@@ -1,0 +1,63 @@
+# Headless.SteamDetails_1Hz
+M|NetworkGameServer|SendUpdatedServerDetailsToSteam||0
+F|NetworkGameServer|m_QueueUpdateGameTags|System.Boolean
+# Headless.PlayerBans_1Hz
+M|NetworkServerSettings|UpdatePlayerBans||0
+F|NetworkServerSettings|BanUpdateDelay|System.Single
+# Headless.Fog_SkipPresentation
+M|FogOfWar|ShowFog|System.Boolean|0
+M|FogOfWar|UpdateFogPixelBlend|System.Single|0
+# Headless.Fog_DetectedTargetLookup
+M|FogOfWar|OnUpdate||0
+P|Team|DetectedTargets
+P|Team|DetectedTargetIndexes
+P|Team|Teams
+P|GameDatabase|Database
+# Headless.Animators_Disable
+M|Soldier|OnInit||1
+M|CreatureDecapod|OnInit||1
+M|UnitAnimator|CheckActivationDistance|System.Single|0
+M|CharacterAnimator|EnsureDeadPose|System.Single|1
+M|UnitAnimator|Dead||1
+M|CharacterAnimator|Dead||1
+M|UnitAnimator|Clear||1
+M|UnitAnimator|ClearAttack|System.Boolean|1
+M|UnitAnimator|Attack|System.Boolean|1
+M|UnitAnimator|AttackEnd|System.Boolean|1
+M|UnitAnimator|Custom|System.Int32|1
+M|UnitAnimator|Jump||1
+M|UnitAnimator|Fall||1
+M|UnitAnimator|Land|EUnitAnimatorLandWeight|1
+M|UnitAnimator|Hit|System.Single,System.Single|1
+M|CharacterAnimator|Clear||1
+M|CharacterAnimator|Climb|System.Boolean|1
+M|CharacterAnimator|SetCrouch|System.Boolean|1
+M|CreatureAnimator|Clear||1
+M|CreatureAnimator|Submerge||1
+M|CreatureAnimator|Emerge||1
+M|CreatureAnimator|SetFlying|System.Boolean|1
+M|CharacterAnimator|SetWeaponLowered|System.Boolean|1
+F|CharacterAnimator|WeaponLowered|System.Boolean
+M|CharacterAnimator|UpdateIKTargets||1
+F|UnitAnimator|Animator|UnityEngine.Animator
+F|Soldier|CharacterAnimator|CharacterAnimator
+F|CreatureDecapod|CreatureAnimator|CreatureAnimator
+# Headless.Particles_Disable
+M|ProjectileData|InstantiateProjectile|UnityEngine.Vector3,UnityEngine.Quaternion|0
+M|BaseGameObject|Awake||1
+# Headless small cosmetics
+M|Structure|UpdateStructureLights||0
+M|StructureMeshCombiner|OrderedLateUpdateAll|System.Single|0
+M|SceneLOD.SceneLODCell|Update||0
+M|LightGrid|Update||0
+M|VehicleEngineVents|OrderedUpdate|System.Single|0
+P|VehicleEngineVents|Vehicle
+M|VehicleCreaking|OrderedFixedUpdate|System.Single|0
+M|ConstructionWarningUI|UpdateUI|System.Single,UnityEngine.Vector3,System.Single,System.Boolean|0
+# Headless.CreatureAttackFX_Skip / CreatureAttackInflate_Skip
+M|CreatureAttackFX|OnAttackStart|System.Boolean|1
+M|CreatureAttackGlowBlob|OnAttackStart|System.Boolean|1
+M|CreatureAttackGlowCurves|OnAttackStart|System.Boolean|1
+M|CreatureAttackGlowEye|OnAttackStart|System.Boolean|1
+M|CreatureAttackGlowTongue|OnAttackStart|System.Boolean|1
+M|CreatureAttackInflate|OnAttackStart|System.Boolean|1

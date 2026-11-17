@@ -1,0 +1,1 @@
+{ "_readme": "b13 S1: defaults + CollectEnemies_Snapshot", "items": { "*": true, "Targeting.CollectEnemies_Snapshot": true, "Targeting.CollectEnemies_SnapshotScore": false, "Targeting.CollectEnemies_FastAdd": false, "Targeting.LosTopK": false, "Physics.DeadSettle": false, "Physics.DeadDisposeEarly": false }, "dump": true }

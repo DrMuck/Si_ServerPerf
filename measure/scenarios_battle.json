@@ -1,0 +1,2873 @@
+{
+ "_readme": "Sustained three-way battles for Si_ServerPerf (make_battle_scenarios.py). Invulnerable units in 4 clusters + transit, ~28 invulnerable structures per team. Flip arms every 30 s during the measure window.",
+ "auto_run": true,
+ "start_after_round_start_s": 45,
+ "between_scenarios_s": 15,
+ "max_extra_cleanup_wait_s": 30,
+ "stop_server_when_done": true,
+ "max_spawned": 1500,
+ "spawn_per_frame": 40,
+ "refuse_with_humans": true,
+ "fake_player_names": [
+  "RTSA_HeadlessBot"
+ ],
+ "disable_ai_commanders": true,
+ "suppress_wildlife": true,
+ "perfprobe_run_tag": "lab",
+ "fast_dispose_after_s": 2,
+ "defaults": {
+  "settle_s": 45,
+  "measure_s": 390,
+  "team_a": "sol",
+  "team_b": "cent",
+  "patrol_dist_m": 60,
+  "patrol_interval_s": 20,
+  "fight_gap_m": 200
+ },
+ "scenarios": [
+  {
+   "name": "battle3-300",
+   "behaviour": "attack_move",
+   "spawns": [
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Soldier_Rifleman",
+     "team": "sol",
+     "count": 10,
+     "center": [
+      -240,
+      -359
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Soldier_Heavy",
+     "team": "sol",
+     "count": 3,
+     "center": [
+      -215,
+      -359
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Light_LightStriker",
+     "team": "sol",
+     "count": 8,
+     "center": [
+      -190,
+      -359
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Light_HeavyStriker",
+     "team": "sol",
+     "count": 4,
+     "center": [
+      -240,
+      -334
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Heavy_PulseTruck",
+     "team": "sol",
+     "count": 5,
+     "center": [
+      -215,
+      -334
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Soldier_Rifleman",
+     "team": "sol",
+     "count": 10,
+     "center": [
+      0,
+      -622
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Soldier_Heavy",
+     "team": "sol",
+     "count": 3,
+     "center": [
+      25,
+      -622
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Light_LightStriker",
+     "team": "sol",
+     "count": 8,
+     "center": [
+      50,
+      -622
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Light_HeavyStriker",
+     "team": "sol",
+     "count": 4,
+     "center": [
+      0,
+      -597
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Heavy_PulseTruck",
+     "team": "sol",
+     "count": 5,
+     "center": [
+      25,
+      -597
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Soldier_Rifleman",
+     "team": "sol",
+     "count": 10,
+     "center": [
+      143,
+      -104
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Soldier_Heavy",
+     "team": "sol",
+     "count": 3,
+     "center": [
+      168,
+      -104
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Light_LightStriker",
+     "team": "sol",
+     "count": 8,
+     "center": [
+      193,
+      -104
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Light_HeavyStriker",
+     "team": "sol",
+     "count": 4,
+     "center": [
+      143,
+      -79
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Heavy_PulseTruck",
+     "team": "sol",
+     "count": 5,
+     "center": [
+      168,
+      -79
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Light_LightStriker",
+     "team": "sol",
+     "count": 10,
+     "center": [
+      59,
+      -439
+     ],
+     "behaviour": "move_patrol",
+     "invulnerable": true,
+     "_cluster": "transit"
+    },
+    {
+     "type": "structure",
+     "prefab": "ObjectInfo_Sol_Silo",
+     "team": "sol",
+     "count": 15,
+     "center": "team_hq",
+     "offset_m": 260,
+     "invulnerable": true
+    },
+    {
+     "type": "structure",
+     "prefab": "ObjectInfo_Sol_Turret_Light",
+     "team": "sol",
+     "count": 10,
+     "center": "team_hq",
+     "offset_m": 260,
+     "invulnerable": true
+    },
+    {
+     "type": "structure",
+     "prefab": "ObjectInfo_Sol_Barracks",
+     "team": "sol",
+     "count": 3,
+     "center": "team_hq",
+     "offset_m": 260,
+     "invulnerable": true
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Soldier_Trooper",
+     "team": "cent",
+     "count": 10,
+     "center": [
+      -349,
+      -386
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Soldier_Juggernaut",
+     "team": "cent",
+     "count": 3,
+     "center": [
+      -324,
+      -386
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Light_AssaultCar",
+     "team": "cent",
+     "count": 8,
+     "center": [
+      -299,
+      -386
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Light_StrikeTank",
+     "team": "cent",
+     "count": 4,
+     "center": [
+      -349,
+      -361
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Heavy_CombatTank",
+     "team": "cent",
+     "count": 5,
+     "center": [
+      -324,
+      -361
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Soldier_Trooper",
+     "team": "cent",
+     "count": 10,
+     "center": [
+      -130,
+      -623
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Soldier_Juggernaut",
+     "team": "cent",
+     "count": 3,
+     "center": [
+      -105,
+      -623
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Light_AssaultCar",
+     "team": "cent",
+     "count": 8,
+     "center": [
+      -80,
+      -623
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Light_StrikeTank",
+     "team": "cent",
+     "count": 4,
+     "center": [
+      -130,
+      -598
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Heavy_CombatTank",
+     "team": "cent",
+     "count": 5,
+     "center": [
+      -105,
+      -598
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Soldier_Trooper",
+     "team": "cent",
+     "count": 10,
+     "center": [
+      -668,
+      -185
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Soldier_Juggernaut",
+     "team": "cent",
+     "count": 3,
+     "center": [
+      -643,
+      -185
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Light_AssaultCar",
+     "team": "cent",
+     "count": 8,
+     "center": [
+      -618,
+      -185
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Light_StrikeTank",
+     "team": "cent",
+     "count": 4,
+     "center": [
+      -668,
+      -160
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Heavy_CombatTank",
+     "team": "cent",
+     "count": 5,
+     "center": [
+      -643,
+      -160
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Light_AssaultCar",
+     "team": "cent",
+     "count": 10,
+     "center": [
+      -529,
+      -584
+     ],
+     "behaviour": "move_patrol",
+     "invulnerable": true,
+     "_cluster": "transit"
+    },
+    {
+     "type": "structure",
+     "prefab": "ObjectInfo_Cent_Silo",
+     "team": "cent",
+     "count": 15,
+     "center": "team_hq",
+     "offset_m": 260,
+     "invulnerable": true
+    },
+    {
+     "type": "structure",
+     "prefab": "ObjectInfo_Cent_Turret_Light",
+     "team": "cent",
+     "count": 10,
+     "center": "team_hq",
+     "offset_m": 260,
+     "invulnerable": true
+    },
+    {
+     "type": "structure",
+     "prefab": "ObjectInfo_Cent_Barracks",
+     "team": "cent",
+     "count": 3,
+     "center": "team_hq",
+     "offset_m": 260,
+     "invulnerable": true
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Crab",
+     "team": "alien",
+     "count": 12,
+     "center": [
+      -352,
+      -299
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_CrabHorned",
+     "team": "alien",
+     "count": 6,
+     "center": [
+      -327,
+      -299
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Hunter",
+     "team": "alien",
+     "count": 4,
+     "center": [
+      -302,
+      -299
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Scorpion",
+     "team": "alien",
+     "count": 4,
+     "center": [
+      -352,
+      -274
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Squid",
+     "team": "alien",
+     "count": 4,
+     "center": [
+      -327,
+      -274
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Crab",
+     "team": "alien",
+     "count": 12,
+     "center": [
+      -719,
+      -72
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_CrabHorned",
+     "team": "alien",
+     "count": 6,
+     "center": [
+      -694,
+      -72
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Hunter",
+     "team": "alien",
+     "count": 4,
+     "center": [
+      -669,
+      -72
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Scorpion",
+     "team": "alien",
+     "count": 4,
+     "center": [
+      -719,
+      -47
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Squid",
+     "team": "alien",
+     "count": 4,
+     "center": [
+      -694,
+      -47
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Crab",
+     "team": "alien",
+     "count": 12,
+     "center": [
+      33,
+      -42
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_CrabHorned",
+     "team": "alien",
+     "count": 6,
+     "center": [
+      58,
+      -42
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Hunter",
+     "team": "alien",
+     "count": 4,
+     "center": [
+      83,
+      -42
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Scorpion",
+     "team": "alien",
+     "count": 4,
+     "center": [
+      33,
+      -17
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Squid",
+     "team": "alien",
+     "count": 4,
+     "center": [
+      58,
+      -17
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Crab",
+     "team": "alien",
+     "count": 10,
+     "center": [
+      -546,
+      -117
+     ],
+     "behaviour": "move_patrol",
+     "invulnerable": true,
+     "_cluster": "transit"
+    },
+    {
+     "type": "structure",
+     "prefab": "ObjectInfo_Alien_Node",
+     "team": "alien",
+     "count": 15,
+     "center": "team_hq",
+     "offset_m": 260,
+     "invulnerable": true
+    },
+    {
+     "type": "structure",
+     "prefab": "ObjectInfo_Alien_Turret_ThornSpire",
+     "team": "alien",
+     "count": 10,
+     "center": "team_hq",
+     "offset_m": 260,
+     "invulnerable": true
+    },
+    {
+     "type": "structure",
+     "prefab": "ObjectInfo_Alien_BioCache",
+     "team": "alien",
+     "count": 3,
+     "center": "team_hq",
+     "offset_m": 260,
+     "invulnerable": true
+    }
+   ]
+  },
+  {
+   "name": "battle3-450",
+   "behaviour": "attack_move",
+   "spawns": [
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Soldier_Rifleman",
+     "team": "sol",
+     "count": 16,
+     "center": [
+      -240,
+      -359
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Soldier_Heavy",
+     "team": "sol",
+     "count": 4,
+     "center": [
+      -215,
+      -359
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Light_LightStriker",
+     "team": "sol",
+     "count": 11,
+     "center": [
+      -190,
+      -359
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Light_HeavyStriker",
+     "team": "sol",
+     "count": 7,
+     "center": [
+      -240,
+      -334
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Heavy_PulseTruck",
+     "team": "sol",
+     "count": 7,
+     "center": [
+      -215,
+      -334
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Soldier_Rifleman",
+     "team": "sol",
+     "count": 16,
+     "center": [
+      0,
+      -622
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Soldier_Heavy",
+     "team": "sol",
+     "count": 4,
+     "center": [
+      25,
+      -622
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Light_LightStriker",
+     "team": "sol",
+     "count": 11,
+     "center": [
+      50,
+      -622
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Light_HeavyStriker",
+     "team": "sol",
+     "count": 7,
+     "center": [
+      0,
+      -597
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Heavy_PulseTruck",
+     "team": "sol",
+     "count": 7,
+     "center": [
+      25,
+      -597
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Soldier_Rifleman",
+     "team": "sol",
+     "count": 16,
+     "center": [
+      143,
+      -104
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Soldier_Heavy",
+     "team": "sol",
+     "count": 4,
+     "center": [
+      168,
+      -104
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Light_LightStriker",
+     "team": "sol",
+     "count": 11,
+     "center": [
+      193,
+      -104
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Light_HeavyStriker",
+     "team": "sol",
+     "count": 7,
+     "center": [
+      143,
+      -79
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Heavy_PulseTruck",
+     "team": "sol",
+     "count": 7,
+     "center": [
+      168,
+      -79
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Light_LightStriker",
+     "team": "sol",
+     "count": 15,
+     "center": [
+      59,
+      -439
+     ],
+     "behaviour": "move_patrol",
+     "invulnerable": true,
+     "_cluster": "transit"
+    },
+    {
+     "type": "structure",
+     "prefab": "ObjectInfo_Sol_Silo",
+     "team": "sol",
+     "count": 15,
+     "center": "team_hq",
+     "offset_m": 260,
+     "invulnerable": true
+    },
+    {
+     "type": "structure",
+     "prefab": "ObjectInfo_Sol_Turret_Light",
+     "team": "sol",
+     "count": 10,
+     "center": "team_hq",
+     "offset_m": 260,
+     "invulnerable": true
+    },
+    {
+     "type": "structure",
+     "prefab": "ObjectInfo_Sol_Barracks",
+     "team": "sol",
+     "count": 3,
+     "center": "team_hq",
+     "offset_m": 260,
+     "invulnerable": true
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Soldier_Trooper",
+     "team": "cent",
+     "count": 16,
+     "center": [
+      -349,
+      -386
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Soldier_Juggernaut",
+     "team": "cent",
+     "count": 4,
+     "center": [
+      -324,
+      -386
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Light_AssaultCar",
+     "team": "cent",
+     "count": 11,
+     "center": [
+      -299,
+      -386
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Light_StrikeTank",
+     "team": "cent",
+     "count": 7,
+     "center": [
+      -349,
+      -361
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Heavy_CombatTank",
+     "team": "cent",
+     "count": 7,
+     "center": [
+      -324,
+      -361
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Soldier_Trooper",
+     "team": "cent",
+     "count": 16,
+     "center": [
+      -130,
+      -623
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Soldier_Juggernaut",
+     "team": "cent",
+     "count": 4,
+     "center": [
+      -105,
+      -623
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Light_AssaultCar",
+     "team": "cent",
+     "count": 11,
+     "center": [
+      -80,
+      -623
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Light_StrikeTank",
+     "team": "cent",
+     "count": 7,
+     "center": [
+      -130,
+      -598
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Heavy_CombatTank",
+     "team": "cent",
+     "count": 7,
+     "center": [
+      -105,
+      -598
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Soldier_Trooper",
+     "team": "cent",
+     "count": 16,
+     "center": [
+      -668,
+      -185
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Soldier_Juggernaut",
+     "team": "cent",
+     "count": 4,
+     "center": [
+      -643,
+      -185
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Light_AssaultCar",
+     "team": "cent",
+     "count": 11,
+     "center": [
+      -618,
+      -185
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Light_StrikeTank",
+     "team": "cent",
+     "count": 7,
+     "center": [
+      -668,
+      -160
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Heavy_CombatTank",
+     "team": "cent",
+     "count": 7,
+     "center": [
+      -643,
+      -160
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Light_AssaultCar",
+     "team": "cent",
+     "count": 15,
+     "center": [
+      -529,
+      -584
+     ],
+     "behaviour": "move_patrol",
+     "invulnerable": true,
+     "_cluster": "transit"
+    },
+    {
+     "type": "structure",
+     "prefab": "ObjectInfo_Cent_Silo",
+     "team": "cent",
+     "count": 15,
+     "center": "team_hq",
+     "offset_m": 260,
+     "invulnerable": true
+    },
+    {
+     "type": "structure",
+     "prefab": "ObjectInfo_Cent_Turret_Light",
+     "team": "cent",
+     "count": 10,
+     "center": "team_hq",
+     "offset_m": 260,
+     "invulnerable": true
+    },
+    {
+     "type": "structure",
+     "prefab": "ObjectInfo_Cent_Barracks",
+     "team": "cent",
+     "count": 3,
+     "center": "team_hq",
+     "offset_m": 260,
+     "invulnerable": true
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Crab",
+     "team": "alien",
+     "count": 18,
+     "center": [
+      -352,
+      -299
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_CrabHorned",
+     "team": "alien",
+     "count": 9,
+     "center": [
+      -327,
+      -299
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Hunter",
+     "team": "alien",
+     "count": 7,
+     "center": [
+      -302,
+      -299
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Scorpion",
+     "team": "alien",
+     "count": 7,
+     "center": [
+      -352,
+      -274
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Squid",
+     "team": "alien",
+     "count": 4,
+     "center": [
+      -327,
+      -274
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Crab",
+     "team": "alien",
+     "count": 18,
+     "center": [
+      -719,
+      -72
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_CrabHorned",
+     "team": "alien",
+     "count": 9,
+     "center": [
+      -694,
+      -72
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Hunter",
+     "team": "alien",
+     "count": 7,
+     "center": [
+      -669,
+      -72
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Scorpion",
+     "team": "alien",
+     "count": 7,
+     "center": [
+      -719,
+      -47
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Squid",
+     "team": "alien",
+     "count": 4,
+     "center": [
+      -694,
+      -47
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Crab",
+     "team": "alien",
+     "count": 18,
+     "center": [
+      33,
+      -42
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_CrabHorned",
+     "team": "alien",
+     "count": 9,
+     "center": [
+      58,
+      -42
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Hunter",
+     "team": "alien",
+     "count": 7,
+     "center": [
+      83,
+      -42
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Scorpion",
+     "team": "alien",
+     "count": 7,
+     "center": [
+      33,
+      -17
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Squid",
+     "team": "alien",
+     "count": 4,
+     "center": [
+      58,
+      -17
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Crab",
+     "team": "alien",
+     "count": 15,
+     "center": [
+      -546,
+      -117
+     ],
+     "behaviour": "move_patrol",
+     "invulnerable": true,
+     "_cluster": "transit"
+    },
+    {
+     "type": "structure",
+     "prefab": "ObjectInfo_Alien_Node",
+     "team": "alien",
+     "count": 15,
+     "center": "team_hq",
+     "offset_m": 260,
+     "invulnerable": true
+    },
+    {
+     "type": "structure",
+     "prefab": "ObjectInfo_Alien_Turret_ThornSpire",
+     "team": "alien",
+     "count": 10,
+     "center": "team_hq",
+     "offset_m": 260,
+     "invulnerable": true
+    },
+    {
+     "type": "structure",
+     "prefab": "ObjectInfo_Alien_BioCache",
+     "team": "alien",
+     "count": 3,
+     "center": "team_hq",
+     "offset_m": 260,
+     "invulnerable": true
+    }
+   ]
+  },
+  {
+   "name": "battle3-600",
+   "behaviour": "attack_move",
+   "spawns": [
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Soldier_Rifleman",
+     "team": "sol",
+     "count": 21,
+     "center": [
+      -240,
+      -359
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Soldier_Heavy",
+     "team": "sol",
+     "count": 6,
+     "center": [
+      -215,
+      -359
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Light_LightStriker",
+     "team": "sol",
+     "count": 15,
+     "center": [
+      -190,
+      -359
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Light_HeavyStriker",
+     "team": "sol",
+     "count": 9,
+     "center": [
+      -240,
+      -334
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Heavy_PulseTruck",
+     "team": "sol",
+     "count": 9,
+     "center": [
+      -215,
+      -334
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Soldier_Rifleman",
+     "team": "sol",
+     "count": 21,
+     "center": [
+      0,
+      -622
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Soldier_Heavy",
+     "team": "sol",
+     "count": 6,
+     "center": [
+      25,
+      -622
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Light_LightStriker",
+     "team": "sol",
+     "count": 15,
+     "center": [
+      50,
+      -622
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Light_HeavyStriker",
+     "team": "sol",
+     "count": 9,
+     "center": [
+      0,
+      -597
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Heavy_PulseTruck",
+     "team": "sol",
+     "count": 9,
+     "center": [
+      25,
+      -597
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Soldier_Rifleman",
+     "team": "sol",
+     "count": 21,
+     "center": [
+      143,
+      -104
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Soldier_Heavy",
+     "team": "sol",
+     "count": 6,
+     "center": [
+      168,
+      -104
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Light_LightStriker",
+     "team": "sol",
+     "count": 15,
+     "center": [
+      193,
+      -104
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Light_HeavyStriker",
+     "team": "sol",
+     "count": 9,
+     "center": [
+      143,
+      -79
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Heavy_PulseTruck",
+     "team": "sol",
+     "count": 9,
+     "center": [
+      168,
+      -79
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Light_LightStriker",
+     "team": "sol",
+     "count": 20,
+     "center": [
+      59,
+      -439
+     ],
+     "behaviour": "move_patrol",
+     "invulnerable": true,
+     "_cluster": "transit"
+    },
+    {
+     "type": "structure",
+     "prefab": "ObjectInfo_Sol_Silo",
+     "team": "sol",
+     "count": 15,
+     "center": "team_hq",
+     "offset_m": 260,
+     "invulnerable": true
+    },
+    {
+     "type": "structure",
+     "prefab": "ObjectInfo_Sol_Turret_Light",
+     "team": "sol",
+     "count": 10,
+     "center": "team_hq",
+     "offset_m": 260,
+     "invulnerable": true
+    },
+    {
+     "type": "structure",
+     "prefab": "ObjectInfo_Sol_Barracks",
+     "team": "sol",
+     "count": 3,
+     "center": "team_hq",
+     "offset_m": 260,
+     "invulnerable": true
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Soldier_Trooper",
+     "team": "cent",
+     "count": 21,
+     "center": [
+      -349,
+      -386
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Soldier_Juggernaut",
+     "team": "cent",
+     "count": 6,
+     "center": [
+      -324,
+      -386
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Light_AssaultCar",
+     "team": "cent",
+     "count": 15,
+     "center": [
+      -299,
+      -386
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Light_StrikeTank",
+     "team": "cent",
+     "count": 9,
+     "center": [
+      -349,
+      -361
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Heavy_CombatTank",
+     "team": "cent",
+     "count": 9,
+     "center": [
+      -324,
+      -361
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Soldier_Trooper",
+     "team": "cent",
+     "count": 21,
+     "center": [
+      -130,
+      -623
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Soldier_Juggernaut",
+     "team": "cent",
+     "count": 6,
+     "center": [
+      -105,
+      -623
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Light_AssaultCar",
+     "team": "cent",
+     "count": 15,
+     "center": [
+      -80,
+      -623
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Light_StrikeTank",
+     "team": "cent",
+     "count": 9,
+     "center": [
+      -130,
+      -598
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Heavy_CombatTank",
+     "team": "cent",
+     "count": 9,
+     "center": [
+      -105,
+      -598
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Soldier_Trooper",
+     "team": "cent",
+     "count": 21,
+     "center": [
+      -668,
+      -185
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Soldier_Juggernaut",
+     "team": "cent",
+     "count": 6,
+     "center": [
+      -643,
+      -185
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Light_AssaultCar",
+     "team": "cent",
+     "count": 15,
+     "center": [
+      -618,
+      -185
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Light_StrikeTank",
+     "team": "cent",
+     "count": 9,
+     "center": [
+      -668,
+      -160
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Heavy_CombatTank",
+     "team": "cent",
+     "count": 9,
+     "center": [
+      -643,
+      -160
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Light_AssaultCar",
+     "team": "cent",
+     "count": 20,
+     "center": [
+      -529,
+      -584
+     ],
+     "behaviour": "move_patrol",
+     "invulnerable": true,
+     "_cluster": "transit"
+    },
+    {
+     "type": "structure",
+     "prefab": "ObjectInfo_Cent_Silo",
+     "team": "cent",
+     "count": 15,
+     "center": "team_hq",
+     "offset_m": 260,
+     "invulnerable": true
+    },
+    {
+     "type": "structure",
+     "prefab": "ObjectInfo_Cent_Turret_Light",
+     "team": "cent",
+     "count": 10,
+     "center": "team_hq",
+     "offset_m": 260,
+     "invulnerable": true
+    },
+    {
+     "type": "structure",
+     "prefab": "ObjectInfo_Cent_Barracks",
+     "team": "cent",
+     "count": 3,
+     "center": "team_hq",
+     "offset_m": 260,
+     "invulnerable": true
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Crab",
+     "team": "alien",
+     "count": 24,
+     "center": [
+      -352,
+      -299
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_CrabHorned",
+     "team": "alien",
+     "count": 12,
+     "center": [
+      -327,
+      -299
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Hunter",
+     "team": "alien",
+     "count": 9,
+     "center": [
+      -302,
+      -299
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Scorpion",
+     "team": "alien",
+     "count": 9,
+     "center": [
+      -352,
+      -274
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Squid",
+     "team": "alien",
+     "count": 6,
+     "center": [
+      -327,
+      -274
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Crab",
+     "team": "alien",
+     "count": 24,
+     "center": [
+      -719,
+      -72
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_CrabHorned",
+     "team": "alien",
+     "count": 12,
+     "center": [
+      -694,
+      -72
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Hunter",
+     "team": "alien",
+     "count": 9,
+     "center": [
+      -669,
+      -72
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Scorpion",
+     "team": "alien",
+     "count": 9,
+     "center": [
+      -719,
+      -47
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Squid",
+     "team": "alien",
+     "count": 6,
+     "center": [
+      -694,
+      -47
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Crab",
+     "team": "alien",
+     "count": 24,
+     "center": [
+      33,
+      -42
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_CrabHorned",
+     "team": "alien",
+     "count": 12,
+     "center": [
+      58,
+      -42
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Hunter",
+     "team": "alien",
+     "count": 9,
+     "center": [
+      83,
+      -42
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Scorpion",
+     "team": "alien",
+     "count": 9,
+     "center": [
+      33,
+      -17
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Squid",
+     "team": "alien",
+     "count": 6,
+     "center": [
+      58,
+      -17
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Crab",
+     "team": "alien",
+     "count": 20,
+     "center": [
+      -546,
+      -117
+     ],
+     "behaviour": "move_patrol",
+     "invulnerable": true,
+     "_cluster": "transit"
+    },
+    {
+     "type": "structure",
+     "prefab": "ObjectInfo_Alien_Node",
+     "team": "alien",
+     "count": 15,
+     "center": "team_hq",
+     "offset_m": 260,
+     "invulnerable": true
+    },
+    {
+     "type": "structure",
+     "prefab": "ObjectInfo_Alien_Turret_ThornSpire",
+     "team": "alien",
+     "count": 10,
+     "center": "team_hq",
+     "offset_m": 260,
+     "invulnerable": true
+    },
+    {
+     "type": "structure",
+     "prefab": "ObjectInfo_Alien_BioCache",
+     "team": "alien",
+     "count": 3,
+     "center": "team_hq",
+     "offset_m": 260,
+     "invulnerable": true
+    }
+   ]
+  },
+  {
+   "name": "battle3-800",
+   "behaviour": "attack_move",
+   "spawns": [
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Soldier_Rifleman",
+     "team": "sol",
+     "count": 28,
+     "center": [
+      -240,
+      -359
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Soldier_Heavy",
+     "team": "sol",
+     "count": 8,
+     "center": [
+      -215,
+      -359
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Light_LightStriker",
+     "team": "sol",
+     "count": 20,
+     "center": [
+      -190,
+      -359
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Light_HeavyStriker",
+     "team": "sol",
+     "count": 12,
+     "center": [
+      -240,
+      -334
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Heavy_PulseTruck",
+     "team": "sol",
+     "count": 11,
+     "center": [
+      -215,
+      -334
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Soldier_Rifleman",
+     "team": "sol",
+     "count": 28,
+     "center": [
+      0,
+      -622
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Soldier_Heavy",
+     "team": "sol",
+     "count": 8,
+     "center": [
+      25,
+      -622
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Light_LightStriker",
+     "team": "sol",
+     "count": 20,
+     "center": [
+      50,
+      -622
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Light_HeavyStriker",
+     "team": "sol",
+     "count": 12,
+     "center": [
+      0,
+      -597
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Heavy_PulseTruck",
+     "team": "sol",
+     "count": 11,
+     "center": [
+      25,
+      -597
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Soldier_Rifleman",
+     "team": "sol",
+     "count": 28,
+     "center": [
+      143,
+      -104
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Soldier_Heavy",
+     "team": "sol",
+     "count": 8,
+     "center": [
+      168,
+      -104
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Light_LightStriker",
+     "team": "sol",
+     "count": 20,
+     "center": [
+      193,
+      -104
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Light_HeavyStriker",
+     "team": "sol",
+     "count": 12,
+     "center": [
+      143,
+      -79
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Heavy_PulseTruck",
+     "team": "sol",
+     "count": 11,
+     "center": [
+      168,
+      -79
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Sol_Light_LightStriker",
+     "team": "sol",
+     "count": 29,
+     "center": [
+      59,
+      -439
+     ],
+     "behaviour": "move_patrol",
+     "invulnerable": true,
+     "_cluster": "transit"
+    },
+    {
+     "type": "structure",
+     "prefab": "ObjectInfo_Sol_Silo",
+     "team": "sol",
+     "count": 15,
+     "center": "team_hq",
+     "offset_m": 260,
+     "invulnerable": true
+    },
+    {
+     "type": "structure",
+     "prefab": "ObjectInfo_Sol_Turret_Light",
+     "team": "sol",
+     "count": 10,
+     "center": "team_hq",
+     "offset_m": 260,
+     "invulnerable": true
+    },
+    {
+     "type": "structure",
+     "prefab": "ObjectInfo_Sol_Barracks",
+     "team": "sol",
+     "count": 3,
+     "center": "team_hq",
+     "offset_m": 260,
+     "invulnerable": true
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Soldier_Trooper",
+     "team": "cent",
+     "count": 28,
+     "center": [
+      -349,
+      -386
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Soldier_Juggernaut",
+     "team": "cent",
+     "count": 8,
+     "center": [
+      -324,
+      -386
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Light_AssaultCar",
+     "team": "cent",
+     "count": 20,
+     "center": [
+      -299,
+      -386
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Light_StrikeTank",
+     "team": "cent",
+     "count": 12,
+     "center": [
+      -349,
+      -361
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Heavy_CombatTank",
+     "team": "cent",
+     "count": 11,
+     "center": [
+      -324,
+      -361
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Soldier_Trooper",
+     "team": "cent",
+     "count": 28,
+     "center": [
+      -130,
+      -623
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Soldier_Juggernaut",
+     "team": "cent",
+     "count": 8,
+     "center": [
+      -105,
+      -623
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Light_AssaultCar",
+     "team": "cent",
+     "count": 20,
+     "center": [
+      -80,
+      -623
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Light_StrikeTank",
+     "team": "cent",
+     "count": 12,
+     "center": [
+      -130,
+      -598
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Heavy_CombatTank",
+     "team": "cent",
+     "count": 11,
+     "center": [
+      -105,
+      -598
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K2"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Soldier_Trooper",
+     "team": "cent",
+     "count": 28,
+     "center": [
+      -668,
+      -185
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Soldier_Juggernaut",
+     "team": "cent",
+     "count": 8,
+     "center": [
+      -643,
+      -185
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Light_AssaultCar",
+     "team": "cent",
+     "count": 20,
+     "center": [
+      -618,
+      -185
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Light_StrikeTank",
+     "team": "cent",
+     "count": 12,
+     "center": [
+      -668,
+      -160
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Heavy_CombatTank",
+     "team": "cent",
+     "count": 11,
+     "center": [
+      -643,
+      -160
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Cent_Light_AssaultCar",
+     "team": "cent",
+     "count": 29,
+     "center": [
+      -529,
+      -584
+     ],
+     "behaviour": "move_patrol",
+     "invulnerable": true,
+     "_cluster": "transit"
+    },
+    {
+     "type": "structure",
+     "prefab": "ObjectInfo_Cent_Silo",
+     "team": "cent",
+     "count": 15,
+     "center": "team_hq",
+     "offset_m": 260,
+     "invulnerable": true
+    },
+    {
+     "type": "structure",
+     "prefab": "ObjectInfo_Cent_Turret_Light",
+     "team": "cent",
+     "count": 10,
+     "center": "team_hq",
+     "offset_m": 260,
+     "invulnerable": true
+    },
+    {
+     "type": "structure",
+     "prefab": "ObjectInfo_Cent_Barracks",
+     "team": "cent",
+     "count": 3,
+     "center": "team_hq",
+     "offset_m": 260,
+     "invulnerable": true
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Crab",
+     "team": "alien",
+     "count": 32,
+     "center": [
+      -352,
+      -299
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_CrabHorned",
+     "team": "alien",
+     "count": 16,
+     "center": [
+      -327,
+      -299
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Hunter",
+     "team": "alien",
+     "count": 12,
+     "center": [
+      -302,
+      -299
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Scorpion",
+     "team": "alien",
+     "count": 12,
+     "center": [
+      -352,
+      -274
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Squid",
+     "team": "alien",
+     "count": 7,
+     "center": [
+      -327,
+      -274
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K1"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Crab",
+     "team": "alien",
+     "count": 32,
+     "center": [
+      -719,
+      -72
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_CrabHorned",
+     "team": "alien",
+     "count": 16,
+     "center": [
+      -694,
+      -72
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Hunter",
+     "team": "alien",
+     "count": 12,
+     "center": [
+      -669,
+      -72
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Scorpion",
+     "team": "alien",
+     "count": 12,
+     "center": [
+      -719,
+      -47
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Squid",
+     "team": "alien",
+     "count": 7,
+     "center": [
+      -694,
+      -47
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K3"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Crab",
+     "team": "alien",
+     "count": 32,
+     "center": [
+      33,
+      -42
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_CrabHorned",
+     "team": "alien",
+     "count": 16,
+     "center": [
+      58,
+      -42
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Hunter",
+     "team": "alien",
+     "count": 12,
+     "center": [
+      83,
+      -42
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Scorpion",
+     "team": "alien",
+     "count": 12,
+     "center": [
+      33,
+      -17
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Squid",
+     "team": "alien",
+     "count": 7,
+     "center": [
+      58,
+      -17
+     ],
+     "behaviour": "attack_move",
+     "invulnerable": true,
+     "_cluster": "K4"
+    },
+    {
+     "type": "unit",
+     "prefab": "ObjectInfo_Alien_Crab",
+     "team": "alien",
+     "count": 29,
+     "center": [
+      -546,
+      -117
+     ],
+     "behaviour": "move_patrol",
+     "invulnerable": true,
+     "_cluster": "transit"
+    },
+    {
+     "type": "structure",
+     "prefab": "ObjectInfo_Alien_Node",
+     "team": "alien",
+     "count": 15,
+     "center": "team_hq",
+     "offset_m": 260,
+     "invulnerable": true
+    },
+    {
+     "type": "structure",
+     "prefab": "ObjectInfo_Alien_Turret_ThornSpire",
+     "team": "alien",
+     "count": 10,
+     "center": "team_hq",
+     "offset_m": 260,
+     "invulnerable": true
+    },
+    {
+     "type": "structure",
+     "prefab": "ObjectInfo_Alien_BioCache",
+     "team": "alien",
+     "count": 3,
+     "center": "team_hq",
+     "offset_m": 260,
+     "invulnerable": true
+    }
+   ]
+  }
+ ]
+}

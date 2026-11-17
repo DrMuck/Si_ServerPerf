@@ -1,0 +1,1 @@
+{ "_readme": "battle arm B: defaults", "items": { "*": true, "MultiCore.SensorPipeline_Rate": false, "Targeting.LosTopK": false, "Targeting.FriendlyFire_Cache": false }, "dump": true }

@@ -1,0 +1,13 @@
+{
+  "_readme": "b20 phys V: defaults + VehicleSolverIterations",
+  "items": {
+    "*": true,
+    "Physics.IdleForceSleep": false,
+    "Physics.AvoidanceSkipOntoResting": false,
+    "Physics.AvoidanceNoIdleDetour": false,
+    "Physics.ParkedWheelHold": false,
+    "Physics.WheelJointWriteGuard": false,
+    "Physics.VehicleSolverIterations": true
+  },
+  "dump": true
+}

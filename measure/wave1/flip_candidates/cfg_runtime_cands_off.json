@@ -1,0 +1,1 @@
+{ "_readme": "defaults on, default-off candidates OFF", "items": { "*": true, "UpdateTiers.Tier_IdleAgents": false, "Physics.RestWriteGuards": false, "Physics.HitZonePoseGuard": false, "Targeting.LosTopK": false, "Targeting.FriendlyFire_Cache": false, "Physics.AvoidanceIdlePairSkip": false, "Physics.IdleForceSleep": false, "Physics.WakeProbe": false }, "dump": true }

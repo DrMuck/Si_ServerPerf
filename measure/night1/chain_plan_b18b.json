@@ -1,0 +1,100 @@
+{
+  "_readme": "rig 2 plan b18b on b20 (mk_arms.py --r 1 --j 1 --f 1 --pp 1)",
+  "runs": [
+    {
+      "label": "b18_items",
+      "expect_min": 20,
+      "timeout_min": 32,
+      "dll": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\release\\b20\\Si_ServerPerf.dll",
+      "scenarios": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\melee_b18.json",
+      "config": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\cfg_b20.json",
+      "runtime": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_N.json",
+      "probe": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\probe_b18.json",
+      "flips": [
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_N.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_R.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_J.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_RJ.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_V.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_N.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_V.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_RJ.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_R.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_J.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_N.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_RJ.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_V.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_J.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20_R.json"
+      ],
+      "flip_labels": [
+        "N",
+        "R",
+        "J",
+        "RJ",
+        "V",
+        "N",
+        "V",
+        "RJ",
+        "R",
+        "J",
+        "N",
+        "RJ",
+        "V",
+        "J",
+        "R"
+      ],
+      "flip_every_s": 30,
+      "reports": [
+        "night1\\step_table.py {run} --arms N,R,J,RJ,V --settle 5",
+        "ab_report.py windows --run {run}",
+        "night1\\methods_by_arm.py {run} --arms N,R,J,RJ,V --methods TargetFinder.CollectPreFilteredEnemies,BehaviorTrees.BTEnemyTargetDetected.ActualExecute,TargetFinder.CollectDetectedEnemies,TargetFinder.RequestScan,Silica.AI.AIBaseAgent.OrderedUpdateAllAgents,VehicleTurret.OrderedUpdateAllTurrets,Target.CheckRiskOfFriendlyFire",
+        "night1\\guard_by_arm.py {run} 5",
+        "night1\\step_table.py {run} --arms N,V --settle 10"
+      ]
+    },
+    {
+      "label": "b18_phys_guard",
+      "expect_min": 12,
+      "timeout_min": 22,
+      "dll": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\release\\b20\\Si_ServerPerf.dll",
+      "scenarios": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\scenarios_b18_move.json",
+      "config": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\cfg_b20_phys.json",
+      "runtime": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20p_A.json",
+      "flips": [
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20p_A.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20p_J.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20p_V.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20p_V.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20p_J.json",
+        "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20p_A.json"
+      ],
+      "flip_labels": [
+        "A",
+        "J",
+        "V",
+        "V",
+        "J",
+        "A"
+      ],
+      "flip_every_s": 60,
+      "reports": [
+        "physics_report.py {run} --settle 20",
+        "ab_report.py flip --run {run} --settle 20",
+        "ab_report.py windows --run {run}"
+      ]
+    },
+    {
+      "label": "b18_phys_guard_idle",
+      "expect_min": 7,
+      "timeout_min": 15,
+      "dll": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\release\\b20\\Si_ServerPerf.dll",
+      "scenarios": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\scenarios_b18_idle.json",
+      "config": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\cfg_b20_phys.json",
+      "runtime": "C:\\Users\\schwe\\Projects\\Si_ServerPerf\\measure\\night1\\b18_cfg\\rt20p_H.json",
+      "reports": [
+        "physics_report.py {run} --settle 20"
+      ]
+    }
+  ]
+}

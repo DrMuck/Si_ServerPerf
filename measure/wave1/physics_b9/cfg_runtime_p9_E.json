@@ -1,0 +1,1 @@
+{ "_readme": "b9 physics E: AvoidanceSkipOntoResting + IdleForceSleep", "items": { "*": true, "Physics.IdleForceSleep": true, "Physics.AvoidanceSkipOntoResting": true, "Physics.AvoidanceIdlePairSkip": false }, "dump": true }

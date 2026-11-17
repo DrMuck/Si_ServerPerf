@@ -1,0 +1,206 @@
+{
+    "Core":  {
+                 "RequireHeadless":  true,
+                 "RuntimeFile":  true,
+                 "RuntimePollSeconds":  1.0,
+                 "ApplyRuntimeFileAtStartup":  true,
+                 "WriteRuntimeState":  true,
+                 "ConsoleCommand":  true,
+                 "ChatCommand":  true
+             },
+    "Modules":  {
+                    "Headless":  {
+                                     "Enabled":  true,
+                                     "Settings":  {
+                                                      "AllowOverlapWithServerOptimizer":  false,
+                                                      "SteamDetailsIntervalSeconds":  1.0,
+                                                      "PlayerBansIntervalSeconds":  1.0,
+                                                      "AnimatorMaxWaitFrames":  30,
+                                                      "DiagMaxDistinctPerRound":  5,
+                                                      "DiagCountAnimatorWarnings":  true
+                                                  },
+                                     "Items":  {
+                                                   "SteamDetails_1Hz":  true,
+                                                   "PlayerBans_1Hz":  true,
+                                                   "Fog_SkipPresentation":  true,
+                                                   "Fog_DetectedTargetLookup":  true,
+                                                   "Animators_Disable":  true,
+                                                   "Particles_Disable":  true,
+                                                   "StructureLights_Skip":  true,
+                                                   "MeshCombiner_Skip":  true,
+                                                   "SceneLOD_Skip":  true,
+                                                   "LightGrid_Skip":  true,
+                                                   "VehicleEngineVents_Skip":  true,
+                                                   "VehicleCreaking_Skip":  true,
+                                                   "ConstructionWarningUI_Skip":  true,
+                                                   "CreatureAttackFX_Skip":  true,
+                                                   "CreatureAttackInflate_Skip":  false,
+                                                   "Diag_LogExceptions":  true
+                                               },
+                                     "ItemHelp":  {
+                                                      "SteamDetails_1Hz":  "Push the Steam server details at most once per interval instead of every frame; tag updates queued by the game go out at once",
+                                                      "PlayerBans_1Hz":  "Walk the temporary-ban list once per interval (vanilla walks it every frame: BanUpdateDelay -= Time.unscaledTime bug); ban checks at connect untouched",
+                                                      "Fog_SkipPresentation":  "Skip FogOfWar.ShowFog (+ its UpdateVisibilityAll sweep) and FogOfWar.UpdateFogPixelBlend; explore pass, pixel data and GetPositionVisible keep running [headless only]",
+                                                      "Fog_DetectedTargetLookup":  "FogOfWar.OnUpdate: DetectedTargets.IndexOf -\u003e Team.DetectedTargetIndexes lookup (same result, O(1))",
+                                                      "Animators_Disable":  "Disable soldier/creature Animator components after init and keep them off (activation distance, dead-pose repair, after death); skip parameter writes while off [headless only]",
+                                                      "Particles_Disable":  "Turn off play-on-awake and stop/clear particle systems on projectiles, units, structures and the loaded scene [startup-only] [headless only]",
+                                                      "StructureLights_Skip":  "Skip Structure.UpdateStructureLights (camera-distance light toggling) [headless only]",
+                                                      "MeshCombiner_Skip":  "Skip StructureMeshCombiner.OrderedLateUpdateAll (camera-distance mesh swaps) [headless only]",
+                                                      "SceneLOD_Skip":  "Skip and disable SceneLOD.SceneLODCell (camera-distance scenery renderer toggling) [headless only]",
+                                                      "LightGrid_Skip":  "Skip LightGrid.Update (light toggling grid; no server reader) [headless only]",
+                                                      "VehicleEngineVents_Skip":  "Skip VehicleEngineVents.OrderedUpdate (vent wobble near the camera); destroyed vehicles still run vanilla [headless only]",
+                                                      "VehicleCreaking_Skip":  "Skip VehicleCreaking.OrderedFixedUpdate (creak sounds on movement changes) [headless only]",
+                                                      "ConstructionWarningUI_Skip":  "Skip ConstructionWarningUI.UpdateUI (warning-sign animation); ConstructionSite.UpdateEffects is NOT touched [headless only]",
+                                                      "CreatureAttackFX_Skip":  "Skip OnAttackStart of CreatureAttackFX / GlowBlob / GlowCurves / GlowEye / GlowTongue (per-attack light + FX registration) [headless only]",
+                                                      "CreatureAttackInflate_Skip":  "Skip CreatureAttackInflate.OnAttackStart (inflate/deflate transform animation). Moves transforms: check hit zones before enabling [headless only] [default off]",
+                                                      "Diag_LogExceptions":  "Hook Application.logMessageReceived: count exceptions (and Animator warnings), log the first distinct ones of each round with a short stack"
+                                                  }
+                                 },
+                    "Physics":  {
+                                    "Enabled":  true,
+                                    "Settings":  {
+                                                     "CensusIntervalSeconds":  1.0,
+                                                     "CensusLogSeconds":  10.0,
+                                                     "MaxCatchUpSteps":  2,
+                                                     "FixedStepHz":  20,
+                                                     "IdleSleepSeconds":  2.0,
+                                                     "IdleLinearSpeed":  0.1,
+                                                     "IdleAngularSpeed":  0.1,
+                                                     "IdleCheckStrideSteps":  5,
+                                                     "AvoidanceIdleSpeed":  0.5
+                                                 },
+                                    "Items":  {
+                                                  "Census":  true,
+                                                  "WakeProbe":  true,
+                                                  "RestWriteGuards":  false,
+                                                  "HitZonePoseGuard":  false,
+                                                  "IdleForceSleep":  false,
+                                                  "AvoidanceIdlePairSkip":  false,
+                                                  "CatchUpCap":  true,
+                                                  "FixedStep_Override":  false,
+                                                  "Interpolation_Off":  false
+                                              },
+                                    "ItemHelp":  {
+                                                     "Census":  "Read-only: 1 Hz rigidbody census per unit kind (awake/asleep/kinematic/interpolated) + 2-step wake window (woke in simulate+frames vs in fixed scripts) + fixed steps per frame; log line every CensusLogSeconds",
+                                                     "WakeProbe":  "Diagnostic: IsSleeping() of the unit body before/after the soldier, creature, wheeled/hover vehicle, anti-flip and avoidance fixed/frame updates; logs woke/slept counts per method every CensusLogSeconds [default off]",
+                                                     "RestWriteGuards":  "Skip same-value writes of detectCollisions/useGravity/position (Soldier fixed updates) and linearVelocity/useGravity (CreatureDecapod.OrderedFixedUpdate) so resting bodies are not re-woken; values identical to vanilla [default off]",
+                                                     "HitZonePoseGuard":  "Skip the per-frame re-pose of HumanModel / SwarmBugModel (carry the kinematic hit-zone body) when the pose is bitwise unchanged; hit-zone capsules, aim points and self-hit exclusion unchanged [default off]",
+                                                     "IdleForceSleep":  "End-of-step Sleep() for idle AI wheeled vehicles (game\u0027s SleepVehicle) and ground creatures after IdleSleepSeconds at rest; woken by the game\u0027s own input/contact/force paths [default off]",
+                                                     "AvoidanceIdlePairSkip":  "CollisionAvoidance: no avoidance impulses / turn writes between two idle AI vehicles (both directions); off-navmesh return push and any pair with a moving or player unit unchanged [default off]",
+                                                     "CatchUpCap":  "Time.maximumDeltaTime = MaxCatchUpSteps x fixedDeltaTime (default 2 -\u003e at most 2 fixed steps per frame; game: 0.1 s = up to 3)",
+                                                     "FixedStep_Override":  "Time.fixedDeltaTime = 1 / FixedStepHz (default 20 Hz; game 25 Hz). Changes everything that counts fixed steps, see TimeStep.cs [default off]",
+                                                     "Interpolation_Off":  "No Rigidbody interpolation on the headless server (Unit/Vehicle.EnableRigidBodyInterpolation forced off, Soldier.OnExitCompartment reset to None) [headless only] [default off]"
+                                                 }
+                                },
+                    "Services":  {
+                                     "Enabled":  true,
+                                     "Settings":  {
+                                                      "CommanderOwnerProbes":  [
+                                                                                   "Si_RTS_AI.ServerPerfInterop.OwnsVanillaCommander"
+                                                                               ],
+                                                      "CommanderOwnerCacheSeconds":  1.0,
+                                                      "NavmeshCutUpdateInterval":  0.5,
+                                                      "ProbeFlushMinIntervalSeconds":  0.5,
+                                                      "DestroyedDisposalEveryNFrames":  4,
+                                                      "VerifyAgainstVanilla":  true,
+                                                      "StatusRefreshSeconds":  1.0
+                                                  },
+                                     "Items":  {
+                                                   "CommanderAI_SkipOwnedTeams":  true,
+                                                   "CommanderAI_ThinkStats":  true,
+                                                   "Astar_CutPollInterval":  true,
+                                                   "Astar_ProbeFlushDebounce":  false,
+                                                   "Detected_IndexLookups":  true,
+                                                   "DestroyedDisposal_EveryN":  true,
+                                                   "TerrainMaterial_Cache":  true,
+                                                   "Net_SkipUpdatesNoClients":  true
+                                               },
+                                     "ItemHelp":  {
+                                                      "CommanderAI_SkipOwnedTeams":  "Skip AICommander.Tick for a team only while a mod declares (Settings.CommanderOwnerProbes) that it needs nothing from that team\u0027s vanilla commander; no probe = vanilla",
+                                                      "CommanderAI_ThinkStats":  "Measurement only: wall time of every AICommander.Think (outermost patch, includes other mods\u0027 Think patches); count / avg / max per round in the status",
+                                                      "Astar_CutPollInterval":  "AstarPath.navmeshUpdates.updateInterval raised to Settings.NavmeshCutUpdateInterval (vanilla 0 = cut dirty-poll every frame); removals, dirty tiles and ForceUpdate stay immediate",
+                                                      "Astar_ProbeFlushDebounce":  "CollisionObstacleManager.ApplyChanges(null) from VehicleBlockerProbe at most once per Settings.ProbeFlushMinIntervalSeconds (pending blockers kept, deferred call from OnUpdate); stuck-recovery calls never delayed [default off]",
+                                                      "Detected_IndexLookups":  "DetectedTargets.IndexOf/Contains -\u003e Team.DetectedTargetIndexes in Team.LostTarget, Target.GetDetectedByTeam, Team.GetTargetDetected, AITask_Attack.Think (same result, O(1))",
+                                                      "DestroyedDisposal_EveryN":  "BaseGameObject.UpdateDestroyedDisposal (walk over all objects to age wrecks) every Settings.DestroyedDisposalEveryNFrames frames with the accumulated dt; wrecks vanish at most N-1 frames later",
+                                                      "TerrainMaterial_Cache":  "GamePhysics.GetTerrainPhysicMaterial(Vector3, Terrain) with TerrainPhysicsMaterials, transform, terrain size and alphamap size cached per Terrain (same result); no TerrainPhysicsMaterials = vanilla",
+                                                      "Net_SkipUpdatesNoClients":  "Skip NetworkComponent.TickNetworkObjects (per-object update serialization) while no remote player is in Player.Players; joins still get the full NetInit"
+                                                  }
+                                 },
+                    "UpdateTiers":  {
+                                        "Enabled":  true,
+                                        "Settings":  {
+                                                         "StructuresInterval":  4,
+                                                         "HealDecayInterval":  4,
+                                                         "OrderProcessorsInterval":  4,
+                                                         "IdleSoldiersInterval":  4,
+                                                         "StaticNetTransformsInterval":  5,
+                                                         "IdleAgentsInterval":  4,
+                                                         "WakeAfterDamageSeconds":  5.0,
+                                                         "WakeOnDetection":  true,
+                                                         "WakeOnDetectRadius":  400.0,
+                                                         "WakeOnDetectSeconds":  3.0,
+                                                         "RegisterVerifyEveryN":  1
+                                                     },
+                                        "Items":  {
+                                                      "Tier_Structures":  true,
+                                                      "Tier_HealDecay":  true,
+                                                      "Tier_OrderProcessors":  true,
+                                                      "Tier_IdleSoldiers":  true,
+                                                      "Tier_StaticNetTransforms":  true,
+                                                      "Tier_IdleAgents":  false,
+                                                      "Register_O1":  true,
+                                                      "FixedLate_StepDt":  false
+                                                  },
+                                        "ItemHelp":  {
+                                                         "Tier_Structures":  "Update list: Structure/HumanStructure/AlienStructure/ConstructionSite.OrderedUpdate every 4 frames while quiet (no production queue, no navmesh requeue, no relink pending); accumulated dt",
+                                                         "Tier_HealDecay":  "Update list: AutoHeal/Decay.OrderedUpdate every 4 frames (dt-scaled 5 s ticks); full rate on player-controlled/occupied units",
+                                                         "Tier_OrderProcessors":  "Update list: AIOrderProcessor.OrderedUpdate every 4 frames while its order queue is empty (body is idempotent then)",
+                                                         "Tier_IdleSoldiers":  "Update list: Soldier.OrderedUpdate every 4 frames for idle AI soldiers (no target/path/order/damage/aim-at, not moving, no view input)",
+                                                         "Tier_StaticNetTransforms":  "Fixed list: NetworkTransformComponent.OrderedFixedUpdate of objects without Rigidbody every 5 steps while no change is pending",
+                                                         "Tier_IdleAgents":  "Prefix AIBaseAgent.OrderedUpdate (inside OrderedUpdateAllAgents): idle AI soldier/ground-vehicle/alien agents every 4 frames with accumulated dt; full rate on any target/path/order/damage/aim-at/nearby detection [default off]",
+                                                         "Register_O1":  "S11: UpdateList.Register/Unregister via a delegate dictionary + binary search (identical order and dup/removal semantics); every 64th call cross-checked against the vanilla scan",
+                                                         "FixedLate_StepDt":  "Fixed-late list once per physics step (run at the next step\u0027s FixedUpdate, dt = fixedDeltaTime) instead of once per frame with the folded dt [default off]"
+                                                     }
+                                    },
+                    "Targeting":  {
+                                      "Enabled":  true,
+                                      "Settings":  {
+                                                       "DetectedCellSize":  100.0,
+                                                       "DetectedMarginMeters":  16.0,
+                                                       "DetectedRebuildSeconds":  0.0,
+                                                       "MaxCellFraction":  0.5,
+                                                       "FriendlyCellSize":  100.0,
+                                                       "LosTopK":  6,
+                                                       "FriendlyFireCacheSeconds":  0.15,
+                                                       "FriendlyFireCacheMoveMeters":  1.0,
+                                                       "FriendlyFireCacheAngleDeg":  2.0,
+                                                       "FriendlyFireCacheDistMeters":  5.0,
+                                                       "SelfCheckFraction":  0.05,
+                                                       "SelfCheckMaxLogsPerRound":  30,
+                                                       "StatusIntervalSeconds":  5.0
+                                                   },
+                                      "Items":  {
+                                                    "DetectedGrid":  true,
+                                                    "CollectEnemies_Grid":  true,
+                                                    "UrgentClose_Grid":  true,
+                                                    "NearestTarget_Grid":  true,
+                                                    "AlarmProximity_Grid":  true,
+                                                    "FriendlyFire_Grid":  true,
+                                                    "Rank_Sort":  true,
+                                                    "LosTopK":  false,
+                                                    "FriendlyFire_Cache":  false
+                                                },
+                                      "ItemHelp":  {
+                                                       "DetectedGrid":  "Per-team grid over Team.DetectedTargets (rebuilt per frame and physics step, additions tracked via Team.DetectTarget); needed by the *_Grid items, off = they run vanilla",
+                                                       "CollectEnemies_Grid":  "TargetFinder.CollectDetectedEnemies visits only DetectedGrid cells within the scan range (same candidates, same order)",
+                                                       "UrgentClose_Grid":  "AIAiming.FindUrgentCloseEnemy visits only DetectedGrid cells within 15 + r + 30 m (same first hit in list order)",
+                                                       "NearestTarget_Grid":  "Team.FindNearestTarget visits only DetectedGrid cells within range (same nearest, same tie-break)",
+                                                       "AlarmProximity_Grid":  "AlarmProximity.OrderedFixedUpdate: \u0027offensive enemy within ProximityDistance\u0027 from DetectedGrid cells (same flag; rest of the method verbatim)",
+                                                       "FriendlyFire_Grid":  "Target.CheckRiskOfFriendlyFire visits only fine-grid cells within maxDist instead of the whole 1 km TargetGrid cell (same answer; snapshot = TargetGrid\u0027s own)",
+                                                       "Rank_Sort":  "TargetFinder.Rank: stable insertion sort instead of the O(C^2) selection sort (identical order, ties included)",
+                                                       "LosTopK":  "APPROXIMATE: TargetFinder issues LOS queries only for the top LosTopK candidates (no target when all of them are blocked) [default off]",
+                                                       "FriendlyFire_Cache":  "APPROXIMATE: reuse a weapon\u0027s CheckRiskOfFriendlyFire answer for FriendlyFireCacheSeconds while its muzzle barely moved [default off]"
+                                                   }
+                                  }
+                }
+}

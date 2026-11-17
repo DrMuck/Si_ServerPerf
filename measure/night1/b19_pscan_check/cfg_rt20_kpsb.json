@@ -1,0 +1,21 @@
+{
+  "_readme": "b20 pscan_check: same (seq b)",
+  "items": {
+    "*": true,
+    "Targeting.CollectEnemies_Snapshot": true,
+    "Targeting.CollectEnemies_SnapshotScore": true,
+    "Targeting.CollectEnemies_FastAdd": true,
+    "Targeting.CollectPreFiltered_Snapshot": true,
+    "Targeting.FriendlyFire_Flat": false,
+    "Physics.DeadAgentHalt": true,
+    "Physics.DeadNoUnitContact": false,
+    "Physics.DeadSettle": false,
+    "Physics.DeadDisposeEarly": false,
+    "Physics.WheelJointWriteGuard": false,
+    "Physics.VehicleSolverIterations": false,
+    "MultiCore.ParallelScan": true,
+    "MultiCore.ParallelScan_Prefiltered": true
+  },
+  "dump": true,
+  "seq": 602
+}

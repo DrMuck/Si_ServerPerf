@@ -1,0 +1,1 @@
+{ "Modules": { "Targeting": { "Settings": { "SelfCheckFraction": 0.05 } }, "MultiCore": { "Items": { "SensorPipeline_Rate": true } } } }
